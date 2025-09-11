@@ -17,48 +17,90 @@ export default function ServicesPage() {
       title: "Portfolio Websites",
       description:
         "Showcase your work and personal brand with a clean, modern portfolio site.",
-      src: "hover_images/1.jpg",
+      src: "/hover_images/1.jpg",
     },
     {
       title: "Agency Websites",
       description:
         "Professional websites designed for agencies and startups to attract clients and build trust.",
-      src: "hover_images/2.jpg",
+      src: "/hover_images/2.jpg",
     },
     {
       title: "UI Transformation",
       description:
         "Revamp your existing website with a modern, responsive, and user-friendly design.",
-      src: "hover_images/3.jpg",
+      src: "/hover_images/3.jpg",
+    },
+    {
+      title: "LMS Websites",
+      description:
+        "Build engaging learning management systems for online education and training programs.",
+      src: "/hover_images/4.jpg",
+    },
+    {
+      title: "F&B Websites",
+      description:
+        "Create attractive websites for food and beverage businesses to showcase menus and attract customers.",
+      src: "/hover_images/5.jpg",
+    },
+    {
+      title: "eCommerce Websites",
+      description:
+        "Develop robust online stores with secure payment integration and inventory management.",
+      src: "/hover_images/6.jpg",
     },
   ]
 
-  const pricing = [
-    {
-      category: "Portfolio Websites",
-      plans: [
-        { name: "Normal", price: "$79.99" },
-        { name: "Animated", price: "$129.99" },
-        { name: "Dark + Light Mode", price: "$159.99" },
-      ],
-    },
-    {
-      category: "Agency Websites",
-      plans: [
-        { name: "Normal", price: "$129.99" },
-        { name: "Animated", price: "$179.99" },
-        { name: "Dark + Light Mode", price: "$229.99" },
-      ],
-    },
-    {
-      category: "UI Transformation",
-      plans: [
-        { name: "Normal", price: "$29.99 / section" },
-        { name: "Animated", price: "$39.99 / section" },
-        { name: "Dark + Light Mode", price: "$49.99  / section" },
-      ],
-    },
-  ]
+const pricing = [
+  {
+    category: "Portfolio Websites",
+    plans: [
+      { name: "Normal", price: "$199" },
+      { name: "Animated", price: "$349" },
+      { name: "Dark + Light Mode", price: "$499" },
+    ],
+  },
+  {
+    category: "Agency Websites",
+    plans: [
+      { name: "Normal", price: "$499" },
+      { name: "Animated", price: "$799" },
+      { name: "Dark + Light Mode", price: "$1,099" },
+    ],
+  },
+  {
+    category: "UI Transformation",
+    plans: [
+      { name: "Normal", price: "$79 / section" },
+      { name: "Animated", price: "$119 / section" },
+      { name: "Dark + Light Mode", price: "$159 / section" },
+    ],
+  },
+  {
+    category: "LMS Websites",
+    plans: [
+      { name: "Normal", price: "$899" },
+      { name: "Animated", price: "$1,299" },
+      { name: "Dark + Light Mode", price: "$1,699" },
+    ],
+  },
+  {
+    category: "F&B Websites",
+    plans: [
+      { name: "Normal", price: "$399" },
+      { name: "Animated", price: "$699" },
+      { name: "Dark + Light Mode", price: "$999" },
+    ],
+  },
+  {
+    category: "eCommerce Websites",
+    plans: [
+      { name: "Normal", price: "$999" },
+      { name: "Animated", price: "$1,799" },
+      { name: "Dark + Light Mode", price: "$2,499" },
+    ],
+  },
+];
 
   // Framer Motion variants
   const fadeInUp = {
@@ -91,8 +133,7 @@ export default function ServicesPage() {
       </motion.p>
 
       <div className="w-full mb-12">
-        <div className="flex flex-col justify-center rounded-lg p-4">
-          <div className="flex flex-wrap items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center rounded-lg p-4">
             {cards.map((card, index) => (
               <motion.div
                 key={index}
@@ -117,7 +158,6 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
-      </div>
 
       {/* Pricing Table */}
       <motion.div

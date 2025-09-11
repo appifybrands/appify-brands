@@ -44,7 +44,7 @@ export default function HoverExpand({
   }, [isModalOpen])
 
   return (
-    <div className="relative">
+    <div className="relative overflow-x-auto">
       <div className="mx-auto flex w-fit gap-1 sm:gap-2 rounded-md">
         {images.slice(0, maxThumbnails).map((imageUrl, i) => (
           <div

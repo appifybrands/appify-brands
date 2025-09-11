@@ -3,7 +3,10 @@
 import { useState, useEffect, useRef } from "react"
 import PortfolioDetail from "../my_components/PortfolioDetail"
 import AgencyDetail from "../my_components/AgencyDetail"
-import UITransformationDetail from "../my_components/LMSDetail"
+import UITransformationDetail from "../my_components/UITransformationDetail"
+import LMSDetail from "../my_components/LMSDetail"
+import FBDetail from "../my_components/FBDetail"
+import ECommerceDetail from "../my_components/eCommerceDetail"
 import Image from 'next/image'
 
 const options = [
@@ -21,6 +24,21 @@ const options = [
     title: "UI Transformation",
     src: "hover_images/3.jpg",
     component: ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) => <UITransformationDetail onPlanSelect={onPlanSelect} />,
+  },
+  {
+    title: "LMS Website",
+    src: "hover_images/4.jpg",
+    component: ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) => <LMSDetail onPlanSelect={onPlanSelect} />,
+  },
+  {
+    title: "F&B Website",
+    src: "hover_images/5.jpg",
+    component: ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) => <FBDetail onPlanSelect={onPlanSelect} />,
+  },
+  {
+    title: "eCommerce Website",
+    src: "hover_images/6.jpg",
+    component: ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) => <ECommerceDetail onPlanSelect={onPlanSelect} />,
   },
 ]
 

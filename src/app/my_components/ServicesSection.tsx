@@ -4,11 +4,11 @@ import { Globe } from "lucide-react";
 import Image from 'next/image';
 
 export default function ServicesSection() {
-  const hover_images = ["/hover_images/1.jpg", "/hover_images/2.jpg", "/hover_images/3.jpg"];
+   const hover_images = ["/hover_images/1.jpg", "/hover_images/2.jpg", "/hover_images/6.jpg", "/hover_images/4.jpg", "/hover_images/5.jpg", "/hover_images/3.jpg"]
 
   return (
     <section id="services" className="flex flex-col items-center justify-center text-center min-h-screen">
-      <div className='scale-[1] sm:scale-[1.1] md:scale-[1.2]'>
+      <div className=''>
         {/* Laptop & Desktop: Hover Expand Component */}
         <div className="hidden lg:block">
           <HoverExpandComponent />
@@ -40,7 +40,7 @@ export default function ServicesSection() {
         </div>
 
         <div className="w-full flex flex-col items-center justify-center">
-          <WrapButton className="mt-5" href="/services" variant='green'>
+          <WrapButton  href="/services" variant='green'>
             <Globe className="animate-spin " />
             View Our Services
           </WrapButton>

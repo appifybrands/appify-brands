@@ -1,15 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import WrapButton from "@/components/ui/wrap-button";
 
-const LMSDetail = ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) => {
+const FBDetail = ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) => {
   return (
     <div className="mt-10 min-h-screen bg-background py-12 px-6 flex flex-col items-center">
       {/* Service Overview */}
       <div className="max-w-3xl text-center mb-12">
-        <h2 className="text-4xl font-bold mb-4">LMS Services</h2>
+        <h2 className="text-4xl font-bold mb-4">F&B Services</h2>
         <p className="text-muted-foreground text-lg">
-          Build engaging learning management systems for online education and training programs.
-          Our LMS services provide comprehensive platforms for course delivery, student management, and progress tracking.
+          Create attractive websites for food and beverage businesses to showcase menus and attract customers.
+          Our F&B services include online ordering, menu display, and reservation systems.
         </p>
       </div>
 
@@ -21,11 +21,11 @@ const LMSDetail = ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) =
             <CardTitle className="text-2xl font-bold">Basic</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground mb-4">For small educational platforms or simple courses.</p>
+            <p className="text-muted-foreground mb-4">For small restaurants or cafes needing a simple online presence.</p>
             <ul className="text-sm space-y-2 mb-6">
-              <li>✔ Course Creation</li>
-              <li>✔ User Registration</li>
-              <li>✔ Basic Progress Tracking</li>
+              <li>✔ Menu Display</li>
+              <li>✔ Contact Information</li>
+              <li>✔ Basic Website Layout</li>
             </ul>
           </CardContent>
           <CardFooter  className="mt-auto">
@@ -39,12 +39,12 @@ const LMSDetail = ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) =
             <CardTitle className="text-2xl font-bold">Plus</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground mb-4">For medium-sized institutions needing interactive learning.</p>
+            <p className="text-muted-foreground mb-4">For medium businesses needing online ordering and reservations.</p>
             <ul className="text-sm space-y-2 mb-6">
-              <li>✔ Interactive Content</li>
-              <li>✔ Assessment Tools</li>
-              <li>✔ Discussion Forums</li>
-              <li>✔ Certificate Generation</li>
+              <li>✔ Online Ordering</li>
+              <li>✔ Reservation System</li>
+              <li>✔ Photo Gallery</li>
+              <li>✔ Customer Reviews</li>
             </ul>
           </CardContent>
           <CardFooter  className="mt-auto">
@@ -58,13 +58,13 @@ const LMSDetail = ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) =
             <CardTitle className="text-2xl font-bold">Pro</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground mb-4">For large-scale educational platforms with advanced features.</p>
+            <p className="text-muted-foreground mb-4">For large chains or premium dining experiences with advanced features.</p>
             <ul className="text-sm space-y-2 mb-6">
-              <li>✔ Multi-Tenant Support</li>
-              <li>✔ Advanced Analytics</li>
-              <li>✔ Mobile Learning</li>
-              <li>✔ Integration with Third-Party Tools</li>
-              <li>✔ Custom Branding</li>
+              <li>✔ Multi-Location Support</li>
+              <li>✔ Advanced Ordering System</li>
+              <li>✔ Loyalty Programs</li>
+              <li>✔ Analytics Dashboard</li>
+              <li>✔ Custom Integrations</li>
             </ul>
           </CardContent>
           <CardFooter >
@@ -76,4 +76,4 @@ const LMSDetail = ({ onPlanSelect }: { onPlanSelect: (plan: string) => void }) =
   );
 };
 
-export default LMSDetail;
+export default FBDetail;
