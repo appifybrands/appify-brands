@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Image from 'next/image'
+import { X } from "lucide-react"
 
 interface HoverExpandProps {
   images: string[]
@@ -86,17 +87,24 @@ export default function HoverExpand({
           >
             <div
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
-              className="cursor-pointer overflow-hidden rounded-2xl bg-black"
+              className="cursor-pointer rounded-2xl bg-black relative"
             >
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 z-10 p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
+              >
+                <X size={24} />
+              </button>
               <motion.div
                 layoutId={`image-${selectedIndex}`}
-                className="relative size-96"
+                className="relative w-full max-w-4xl max-h-[90vh] flex justify-center items-center"
               >
                 <Image
                   src={images[selectedIndex]}
                   alt={`Image ${selectedIndex + 1}`}
-                  fill
-                  className="absolute left-1/2 top-1/2  size-full -translate-x-1/2 -translate-y-1/2 object-cover"
+                  width={800}
+                  height={600}
+                  className="max-w-full max-h-[90vh] object-contain"
                 />
               </motion.div>
             </div>

@@ -76,7 +76,6 @@ export default function WebsitesPage() {
   }
 
   const handleTwitter = () => {
-    const text = encodeURIComponent(fullMessage);
     window.open(
       `https://twitter.com/appifybrands`,
       "_blank"
