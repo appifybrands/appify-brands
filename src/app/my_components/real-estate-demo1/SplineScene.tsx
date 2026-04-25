@@ -6,7 +6,7 @@ import Image from 'next/image';
 import styles from './SplineScene.module.css';
 
 // Load Spline using dynamic import (no SSR)
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
+const Spline = dynamic(() => import('@splinetool/react-spline/next'), {
   ssr: false,
   loading: () => <div className={styles.loader} />,
 });
