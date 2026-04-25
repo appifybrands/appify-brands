@@ -61,3 +61,68 @@ html {
 .animate-slideUp {
   animation: slideUp 0.8s ease-out forwards;
 }
+
+/* ── Real Estate Demo Luxury Styles ──────────────── */
+:root {
+  --brand-chocolate: #2e170a;
+  --brand-chocolate-light: #4a2817;
+  --brand-chocolate-dim: #1e0e06;
+  --gold:         #c9a84c;
+  --gold-light:   #e8c97a;
+  --gold-dim:     #9a7a38;
+  --white:        #f5f2ec;
+  --white-dim:    rgba(245, 242, 236, 0.7);
+  --glass-bg:     rgba(46, 23, 10, 0.35);
+  --glass-border: rgba(201, 168, 76, 0.2);
+}
+
+@utility luxury-heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+@utility luxury-subheading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+}
+
+@utility luxury-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-top: 7.5rem;
+}
+
+@utility luxury-caption {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  font-size: 0.65rem;
+}
+
+.luxury-text-shadow {
+  text-shadow: 0 4px 60px rgba(0,0,0,0.8), 0 2px 20px rgba(0,0,0,0.6);
+}
+
+.gallery-img {
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.gallery-img:hover {
+  transform: scale(1.08);
+}
+

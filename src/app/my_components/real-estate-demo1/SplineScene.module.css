@@ -1,0 +1,300 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background-color 0.8s ease;
+}
+
+.splineWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+.splineActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+}
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.title {
+  font-family: 'Baskervville', serif;
+  font-size: 2.5rem;
+  color: #c9a84c;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(201, 168, 76, 0.1);
+  border-top-color: #c9a84c;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 1.5rem auto;
+}
+
+.fallbackContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  background: #000;
+  padding: 2rem;
+}
+
+.gridContainer {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 4rem;
+}
+
+.fallbackSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.modelImageWrapper {
+  width: 100%;
+  max-width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.modelImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.sectionTitle {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.logoButton {
+  transition: all 0.3s ease;
+  display: block;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+}
+
+.logoButton:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.15);
+}
+
+.logoButton:active {
+  transform: translateY(-4px) scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.logoImage {
+  width: auto;
+  max-width: 180px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.brandFooter {
+  position: absolute;
+  bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.brandFooter:hover {
+  opacity: 0.8;
+}
+
+.demoBy {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.brandLogoWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.brandLogo {
+  height: 40px;
+  width: auto;
+}
+
+.brandName {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.controls {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 30;
+}
+
+.retryButton {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retryButton:hover:not(:disabled) {
+  border-color: #fff;
+  color: #fff;
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.retryButton:active:not(:disabled) {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+.recoveryStatus {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: #c9a84c;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.miniLoader {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid rgba(201, 168, 76, 0.2);
+  border-top-color: #c9a84c;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading {
+  opacity: 0.6;
+  cursor: wait;
+  border-color: #c9a84c !important;
+  color: #c9a84c !important;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .gridContainer {
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .fallbackSection {
+    gap: 1rem;
+  }
+
+  .modelImageWrapper {
+    max-width: 140px;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .logoImage {
+    max-width: 140px;
+    height: 35px;
+  }
+
+  .brandFooter {
+    bottom: 2rem;
+    gap: 1rem;
+  }
+
+  .demoBy, .brandName {
+    font-size: 1rem;
+  }
+
+  .brandLogo {
+    height: 25px;
+  }
+}

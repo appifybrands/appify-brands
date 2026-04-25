@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  transpilePackages: ["@splinetool/react-spline", "@splinetool/runtime"],
 };
 
 export default nextConfig;
+
