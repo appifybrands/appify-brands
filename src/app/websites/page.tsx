@@ -8,6 +8,7 @@ import LMSDetail from "../my_components/LMSDetail"
 import FBDetail from "../my_components/FBDetail"
 import ECommerceDetail from "../my_components/eCommerceDetail"
 import Image from 'next/image'
+import { motion } from "framer-motion"
 
 const options = [
   {
@@ -85,126 +86,124 @@ export default function WebsitesPage() {
 
   const handleInstagram = () => {
     const text = encodeURIComponent(fullMessage);
-    const user = "appifybrands"; // Your Instagram handle (no @)
+    const user = "appifybrands";
     window.open(`https://ig.me/m/${user}?text=${text}`, "_blank");
   };
 
   return (
-    <section className="p-6 py-16 bg-background">
-      <h1 className="text-3xl font-bold text-center mb-8 text-black dark:text-white animate-fadeIn">
-        Choose Your Website
-      </h1>
-
-      {/* Website Options */}
-      <div className="flex flex-wrap justify-center gap-6">
-        {options.map((option, index) => (
-          <div
-            key={index}
-            onClick={() => setActiveIndex(index)}
-            className={`cursor-pointer border rounded-lg shadow-md p-4 w-72 transition-all duration-300 transform
-              ${activeIndex === index
-                ? "border-blue-600 ring-2 ring-blue-400 dark:border-blue-400 dark:ring-blue-500 scale-105"
-                : "border-gray-300 dark:border-gray-700 scale-100"
-              } bg-white dark:bg-gray-800 hover:scale-105 hover:shadow-xl animate-slideUp`}
-          >
-            <Image
-              src={`/${option.src}`}
-              alt={option.title}
-              width={288}
-              height={140}
-              className="rounded-md h-35 w-full object-cover mb-4"
-            />
-            <h2 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">
-              {option.title}
-            </h2>
-          </div>
-        ))}
+    <div className="relative min-h-screen font-sans overflow-x-hidden transition-colors duration-1000 selection:bg-blue-500/30 text-gray-900 dark:text-white pb-32">
+      {/* Dynamic Background Image (Responsive to Light/Dark Mode) */}
+      <div className="fixed inset-0 z-0 bg-black">
+        <div className="absolute inset-0 bg-[url('/assets/bg-light.png')] bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out dark:opacity-0" />
+        <div className="absolute inset-0 bg-[url('/assets/bg-dark.png')] bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out opacity-0 dark:opacity-100" />
       </div>
 
-      {/* Selected Component */}
-      <div className="mt-10 text-center animate-fadeIn">
-        {activeIndex !== null ? (
-          <div className="text-black dark:text-white">
-            {options[activeIndex].component({ onPlanSelect: handlePlanSelect })}
-          </div>
-        ) : (
-          <p className="text-black dark:text-white">
-            Click on a website type to see details...
-          </p>
-        )}
-      </div>
-
-      {/* Message Box */}
-      {message && (
-        <section className="mb-12 max-w-3xl mx-auto animate-slideUp">
-          <h1 ref={messageTitleRef} className="text-3xl font-bold text-center mb-8 text-black dark:text-white">
-            Mail Us Now!
+      <div className="relative z-10 flex flex-col px-4 sm:px-8 py-24 sm:py-32 w-full max-w-7xl mx-auto">
+        <motion.section 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative flex flex-col items-center p-8 sm:p-16 overflow-hidden rounded-[40px] shadow-xl dark:shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-2xl border border-white/60 dark:border-white/10"
+        >
+          <h1 className="text-4xl md:text-6xl font-extrabold text-center mb-12 text-gray-900 dark:text-white tracking-tight">
+            Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Website</span>
           </h1>
-          <div ref={messageBoxRef} className="p-4 bg-blue-100 dark:bg-blue-900 border border-blue-300 dark:border-blue-700 rounded-lg text-black dark:text-white">
-            <p className="mb-4">{message}</p>
-            <textarea
-              value={customMessage}
-              onChange={(e) => setCustomMessage(e.target.value)}
-              placeholder="Add custom message..."
-              className="w-full p-2 mb-4 border rounded bg-white dark:bg-gray-800 text-black dark:text-white focus:ring-2 focus:ring-blue-500"
-              rows={3}
-            />
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={handleGmail}
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
-              >
-                Send Mail
-              </button>
-            </div>
-          </div>
-          <div className="mt-8 text-center">
-            {/* Heading Row */}
-            <h1
-              ref={messageTitleRef}
-              className="text-3xl font-bold mb-6 text-black dark:text-white"
-            >
-              Or Chat With Us On
-            </h1>
 
-            {/* Buttons Row */}
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={handleTwitter}
-                className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+          {/* Website Options */}
+          <div className="flex flex-wrap justify-center gap-8 mb-16">
+            {options.map((option, index) => (
+              <div
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`cursor-pointer rounded-3xl p-4 w-80 transition-all duration-300 transform
+                  ${activeIndex === index
+                    ? "border-blue-500 ring-2 ring-blue-400 dark:border-blue-400 dark:ring-blue-500 scale-[1.02] bg-white/80 dark:bg-white/[0.05]"
+                    : "border-white/60 dark:border-white/10 scale-100 bg-white/40 dark:bg-black/20"
+                  } backdrop-blur-md border hover:scale-[1.02] hover:shadow-xl hover:border-blue-500/50`}
               >
-                {/* Twitter / X icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.563l-5.146-6.701-5.89 6.701H1.593l7.73-8.798L1.5 2.25h6.75l4.67 6.157L18.244 2.25z" />
-                </svg>
-                Chat on X
-              </button>
-
-              <button
-                onClick={handleInstagram}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
-              >
-                {/* Instagram icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path d="M7.5 2h9A5.5 5.5 0 0122 7.5v9A5.5 5.5 0 0116.5 22h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm9 1.5h-9A4 4 0 003.5 7.5v9A4 4 0 007.5 20.5h9a4 4 0 004-4v-9a4 4 0 00-4-4zm-4.5 4.25a5.25 5.25 0 110 10.5 5.25 5.25 0 010-10.5zm0 1.5a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zm5.25-.875a.875.875 0 11-1.75 0 .875.875 0 011.75 0z" />
-                </svg>
-                Chat on Instagram
-              </button>
-            </div>
+                <Image
+                  src={`/${option.src}`}
+                  alt={option.title}
+                  width={288}
+                  height={160}
+                  className="rounded-2xl h-40 w-full object-cover mb-6 shadow-sm"
+                />
+                <h2 className="text-xl font-bold text-center text-gray-900 dark:text-white">
+                  {option.title}
+                </h2>
+              </div>
+            ))}
           </div>
 
-        </section>
-      )}
-    </section>
+          {/* Selected Component */}
+          <div className="w-full mt-10 text-center animate-fadeIn rounded-3xl bg-white/30 dark:bg-white/[0.02] backdrop-blur-xl border border-white/80 dark:border-white/10 shadow-lg dark:shadow-none p-8">
+            {activeIndex !== null ? (
+              <div className="text-gray-900 dark:text-white">
+                {options[activeIndex].component({ onPlanSelect: handlePlanSelect })}
+              </div>
+            ) : (
+              <p className="text-gray-500 dark:text-gray-400 text-lg">
+                Click on a website type above to see details and pricing options.
+              </p>
+            )}
+          </div>
+
+          {/* Message Box */}
+          {message && (
+            <section className="mt-16 w-full max-w-3xl mx-auto animate-slideUp">
+              <h2 ref={messageTitleRef} className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+                Mail Us Now!
+              </h2>
+              <div ref={messageBoxRef} className="p-8 bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur-xl border border-blue-200 dark:border-blue-500/30 rounded-3xl shadow-lg">
+                <p className="mb-6 text-lg text-blue-900 dark:text-blue-100 font-medium">{message}</p>
+                <textarea
+                  value={customMessage}
+                  onChange={(e) => setCustomMessage(e.target.value)}
+                  placeholder="Add custom message..."
+                  className="w-full p-4 mb-6 border border-blue-200 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-black/40 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 dark:placeholder-gray-500"
+                  rows={4}
+                />
+                <div className="flex justify-center">
+                  <button
+                    onClick={handleGmail}
+                    className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-md shadow-red-600/20"
+                  >
+                    Send via Gmail
+                  </button>
+                </div>
+              </div>
+              
+              <div className="mt-16 text-center">
+                <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">
+                  Or Chat With Us On
+                </h2>
+
+                <div className="flex justify-center gap-6">
+                  <button
+                    onClick={handleTwitter}
+                    className="flex items-center gap-3 px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.563l-5.146-6.701-5.89 6.701H1.593l7.73-8.798L1.5 2.25h6.75l4.67 6.157L18.244 2.25z" />
+                    </svg>
+                    X (Twitter)
+                  </button>
+
+                  <button
+                    onClick={handleInstagram}
+                    className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg shadow-pink-500/20"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M7.5 2h9A5.5 5.5 0 0122 7.5v9A5.5 5.5 0 0116.5 22h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm9 1.5h-9A4 4 0 003.5 7.5v9A4 4 0 007.5 20.5h9a4 4 0 004-4v-9a4 4 0 00-4-4zm-4.5 4.25a5.25 5.25 0 110 10.5 5.25 5.25 0 010-10.5zm0 1.5a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zm5.25-.875a.875.875 0 11-1.75 0 .875.875 0 011.75 0z" />
+                    </svg>
+                    Instagram
+                  </button>
+                </div>
+              </div>
+            </section>
+          )}
+        </motion.section>
+      </div>
+    </div>
   )
 }
