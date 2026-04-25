@@ -100,7 +100,7 @@ export default function RealEstateDemo1() {
         <div id="property" className="relative w-full h-0 pointer-events-none" aria-hidden="true" />
 
         <section
-          className="sticky top-0 z-10 min-h-screen w-full bg-[#f5f4f3] overflow-hidden flex flex-col items-center justify-center pt-32 pb-12"
+          className="sticky top-0 z-10 h-[100dvh] w-full bg-[#f5f4f3] overflow-hidden flex flex-col items-center justify-center pt-24 pb-6 md:pt-32 md:pb-12"
         >
           <div className="w-full max-w-6xl mx-auto text-center px-4 mb-10">
             <AnimatedBaskervville
@@ -111,7 +111,7 @@ export default function RealEstateDemo1() {
               Award-winning Stellare floor plan
             </p>
           </div>
-          <div className="w-full h-[60vh] flex items-center justify-center">
+          <div className="w-full flex-1 min-h-0 md:max-h-[60vh] flex items-center justify-center">
             {/* Desktop View */}
             <div className="hidden md:flex w-full h-full items-center justify-center">
               <HoverExpand_001 images={[
