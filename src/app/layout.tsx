@@ -16,11 +16,9 @@ export const metadata: Metadata = {
   description: "AppifyBrands engineers premium digital experiences and transforms brands into powerful, high-converting applications.",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/new_logos/appifybrands_dark_logo_circular.png" },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: "/new_logos/appifybrands_dark_logo_circular.png",
   },
   manifest: "/site.webmanifest",
 };

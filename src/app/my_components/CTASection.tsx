@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
 export default function CTASection() {
   return (
     <section id="contact" className="relative flex w-full flex-col items-center justify-center gap-2 overflow-hidden py-10 sm:py-20">
@@ -43,49 +45,51 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: EASE }}
           className="relative z-20 flex w-full max-w-3xl flex-col items-center justify-start gap-8 overflow-hidden px-6 py-5 md:py-8"
         >
-          <div className="flex flex-col items-center justify-start gap-4 self-stretch">
+          <div className="flex flex-col items-center justify-start gap-5 self-stretch">
+            <span 
+              className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase"
+              style={{ 
+                background: "var(--bg-secondary)", 
+                color: "var(--text-primary)",
+                border: "1px solid var(--border-medium)"
+              }}
+            >
+              Get Started
+            </span>
+
             <h2 
-              className="flex flex-col justify-center self-stretch text-center font-black tracking-tight uppercase"
+              className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
               style={{
                 fontSize: "clamp(2rem, 5vw, 4rem)",
                 lineHeight: 1.1,
                 color: "var(--text-primary)",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               Ready to elevate your digital presence?
             </h2>
             <p 
-              className="self-stretch text-center text-base sm:text-lg leading-relaxed font-light max-w-xl mx-auto"
+              className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-xl mx-auto font-light"
               style={{ color: "var(--text-secondary)" }}
             >
-              Let’s design experiences that captivate users,
-              <br className="hidden sm:block" />
-              strengthen your brand, and drive meaningful growth.
+              Let&apos;s engineer a high-performance digital ecosystem that captivates your audience and drives measurable results for your business.
             </p>
           </div>
           
-          <Link
-            href="mailto:hello@appifybrands.com"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 overflow-hidden rounded-full font-semibold tracking-wider uppercase text-sm transition-all duration-300"
-            style={{ 
-              background: "var(--text-primary)", 
-              color: "var(--bg-primary)" 
-            }}
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-4 mt-4"
+            style={{ color: "var(--text-secondary)" }}
           >
-            <span className="relative z-10 flex items-center gap-2">
-              Start Your Project
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
-                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
-            <div 
-              className="absolute inset-0 z-0 scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100"
-              style={{ background: "rgba(255,255,255,0.2)" }}
-            />
-          </Link>
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-50">Scroll to Explore</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <path d="M7 13l5 5 5-5M12 6v12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </motion.div>
         </motion.div>
       </div>
     </section>

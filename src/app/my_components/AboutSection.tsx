@@ -24,7 +24,8 @@ const pillars = [
 
 const techStack = [
   "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion",
-  "GSAP", "shadcn/ui", "Node.js", "React Native", "Figma",
+  "Spline", "Rive", "GSAP", "MERN Stack", "Antigravity", "Claude AI",
+  "shadcn/ui", "Node.js", "React Native", "Figma",
 ];
 
 export default function AboutSection() {
@@ -36,54 +37,47 @@ export default function AboutSection() {
     >
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
 
-        {/* Header — asymmetric two-column */}
-        <div className="mb-16 sm:mb-24">
-          <span className="section-number block mb-4">— 04 / About</span>
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className="flex w-full flex-col items-center justify-start gap-5 overflow-hidden mb-16 sm:mb-24"
+        >
+          <span 
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase"
+            style={{ 
+              background: "var(--bg-secondary)", 
+              color: "var(--text-primary)",
+              border: "1px solid var(--border-medium)"
+            }}
+          >
+            About Us
+          </span>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "110%" }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.9, ease: EASE }}
-                className="font-black uppercase"
-                style={{
-                  fontSize: "clamp(2.5rem, 8vw, 7rem)",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 0.9,
-                  fontFamily: "'Inter', sans-serif",
-                }}
-              >
-                <span style={{ color: "var(--text-primary)" }}>Who</span>
-                <br />
-                <span style={{ color: "transparent", WebkitTextStroke: "1.5px var(--border-strong)" }}>
-                  We Are
-                </span>
-              </motion.h2>
-            </div>
+          <h2 
+            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              lineHeight: 1.1,
+              color: "var(--text-primary)",
+              fontFamily: "'Inter', sans-serif",
+            }}
+          >
+            Engineering Digital Excellence
+          </h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-              className="text-base sm:text-lg font-light leading-relaxed"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              We&apos;re a boutique digital agency specializing in building modern frontend experiences
-              using{" "}
-              <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>React</span> and{" "}
-              <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>Next.js</span>.
-              Our projects are meticulously crafted with{" "}
-              <span style={{ color: "var(--text-accent)", fontWeight: 500 }}>Tailwind CSS</span> and
-              enhanced with powerful UI libraries like{" "}
-              <span style={{ color: "var(--text-accent)", fontWeight: 500 }}>shadcn/ui</span> and{" "}
-              <span style={{ color: "var(--text-accent)", fontWeight: 500 }}>Skiper UI</span>,
-              ensuring beautiful, highly responsive, and unforgettable digital experiences.
-            </motion.p>
-          </div>
-        </div>
+          <p 
+            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            We&apos;re a boutique digital agency specializing in building modern frontend experiences using 
+            <span className="font-semibold text-[var(--text-primary)]"> React</span> and 
+            <span className="font-semibold text-[var(--text-primary)]"> Next.js</span>. 
+            Our projects are meticulously crafted to ensure beautiful, highly responsive, and unforgettable digital experiences.
+          </p>
+        </motion.div>
 
         {/* Three pillars */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-0">

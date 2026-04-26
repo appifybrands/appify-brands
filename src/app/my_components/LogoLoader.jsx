@@ -28,7 +28,7 @@ export default function LogoLoader() {
       `}</style>
       <div className="loader-container">
         <Image
-          src="/appify_brands_glow_logo2.png"
+          src="/new_logos/appifybrands_dark_logo_circular.png"
           alt="Appify Brands Logo"
           width={100}
           height={100}

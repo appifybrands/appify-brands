@@ -72,18 +72,22 @@ export { Skiper48 };
 const Carousel_002 = ({
   images,
   className,
+  swiperClassName,
   showPagination = false,
   showNavigation = false,
   loop = true,
   autoplay = false,
+  autoplayDelay = 3000,
   spaceBetween = 40,
 }: {
   images: { src: string; alt: string }[];
   className?: string;
+  swiperClassName?: string;
   showPagination?: boolean;
   showNavigation?: boolean;
   loop?: boolean;
   autoplay?: boolean;
+  autoplayDelay?: number;
   spaceBetween?: number;
 }) => {
   const css = `
@@ -108,7 +112,7 @@ const Carousel_002 = ({
         autoplay={
           autoplay
             ? {
-                delay: 1000,
+                delay: autoplayDelay,
                 disableOnInteraction: false,
               }
             : false
@@ -131,7 +135,7 @@ const Carousel_002 = ({
               }
             : false
         }
-        className="Carousal_002 h-[380px] w-[260px]"
+        className={cn("Carousal_002", swiperClassName || "h-[380px] w-[260px]")}
         modules={[EffectCards, Autoplay, Pagination, Navigation]}
       >
         {images.map((image, index) => (

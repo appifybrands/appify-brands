@@ -26,7 +26,7 @@ export default function SelectedWorkSection() {
   ];
 
   return (
-    <section className="relative flex w-full flex-col items-center justify-center pt-24 pb-12 sm:pt-32 sm:pb-16 transition-colors duration-500">
+    <section id="works" className="relative flex w-full flex-col items-center justify-center pt-24 pb-12 sm:pt-32 sm:pb-16 transition-colors duration-500">
       {/* Background gradients similar to alimam_landing_page but using appify-brands tokens */}
       <div
         className="absolute inset-0 -z-10"

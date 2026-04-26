@@ -10,8 +10,7 @@ const projects = [
     title: "Apple Vision Pro",
     category: "Spatial Computing",
     description: "A futuristic, immersive landing page experience designed for the next era of computing.",
-    video: "/hover_videos/1.mp4",
-    image: "/hover_images/1.jpg",
+    video: "/premium_shocase_videos/avp_demo.mp4",
     href: "#",
   },
   {
@@ -19,8 +18,7 @@ const projects = [
     title: "Luxury Real Estate",
     category: "High-End Property",
     description: "Cinematic transitions and immersive galleries tailored for multi-million dollar listings.",
-    video: "/hover_videos/2.mp4",
-    image: "/hover_images/2.jpg",
+    video: "/premium_shocase_videos/realestate_demo.mp4",
     href: "/real-estate/demo1",
   },
   {
@@ -28,13 +26,12 @@ const projects = [
     title: "Larq Bottle",
     category: "Premium E-Commerce",
     description: "A clean, conversion-focused product showcase for sustainable technology and design.",
-    video: "/hover_videos/3.mp4",
-    image: "/hover_images/3.jpg",
+    video: "/premium_shocase_videos/larq_demo.mp4",
     href: "#",
   },
 ];
 
-const EASE = [0.16, 1, 0.3, 1];
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export default function PremiumShowcaseSection() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -44,29 +41,43 @@ export default function PremiumShowcaseSection() {
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
         
         {/* Header */}
-        <div className="flex flex-col gap-6 mb-16">
-          <span className="section-number block">— 03 / Showcase</span>
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "110%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: EASE }}
-              className="font-black uppercase"
-              style={{
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
-                letterSpacing: "-0.04em",
-                lineHeight: 1,
-                color: "var(--text-primary)",
-              }}
-            >
-              Premium Experiences
-            </motion.h2>
-          </div>
-          <p className="max-w-xl text-sm sm:text-base font-light leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            We build state-of-the-art digital interfaces that push the boundaries of what&apos;s possible on the web.
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className="flex w-full flex-col items-center justify-start gap-5 overflow-hidden mb-16 sm:mb-24"
+        >
+          <span 
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase"
+            style={{ 
+              background: "var(--bg-secondary)", 
+              color: "var(--text-primary)",
+              border: "1px solid var(--border-medium)"
+            }}
+          >
+            Case Studies
+          </span>
+
+          <h2 
+            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              lineHeight: 1.1,
+              color: "var(--text-primary)",
+              fontFamily: "'Inter', sans-serif",
+            }}
+          >
+            Premium Design Showcase
+          </h2>
+
+          <p 
+            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            Discover the high-performance digital ecosystems and boutique storefronts we&apos;ve engineered to elevate global brands and redefine user expectations.
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -83,22 +94,14 @@ export default function PremiumShowcaseSection() {
             >
               <Link href={project.href} className="relative aspect-[4/5] overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border-subtle)" }}>
                 {/* Image Placeholder */}
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                
-                {/* Video on Hover */}
+                {/* Video Content */}
                 <video
                   src={project.video}
                   autoPlay
                   muted
                   loop
                   playsInline
-                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                    hoveredId === project.id ? "opacity-100" : "opacity-0"
-                  }`}
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
 
                 {/* Gradient Overlay */}
@@ -112,23 +115,29 @@ export default function PremiumShowcaseSection() {
                 </div>
               </Link>
 
-              <div className="flex flex-col gap-2">
-                <h3 className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
-                  {project.title}
-                </h3>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
+                    {project.title}
+                  </h3>
+                  <div 
+                    className="flex items-center gap-2 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-colors duration-300 group-hover:bg-white group-hover:text-black"
+                    style={{ borderColor: "var(--border-medium)", color: "var(--text-secondary)" }}
+                  >
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                    </span>
+                    Live View
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
                 <p className="text-sm font-light leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {project.description}
                 </p>
-                <Link 
-                  href={project.href}
-                  className="inline-flex items-center gap-2 mt-2 text-xs font-bold tracking-widest uppercase group-hover:underline transition-all"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  View Case Study
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </Link>
+
               </div>
             </motion.div>
           ))}

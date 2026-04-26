@@ -46,72 +46,94 @@ export default function FeatureCardsSection() {
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
         
         {/* Header */}
-        <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
-          <div>
-            <span className="section-number block mb-4">— 02 / Services</span>
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "110%" }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="font-black uppercase"
-                style={{
-                  fontSize: "clamp(2.5rem, 7vw, 6rem)",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1,
-                  color: "var(--text-primary)",
-                  fontFamily: "'Inter', sans-serif",
-                }}
-              >
-                Our Capabilities
-              </motion.h2>
-            </div>
-          </div>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex w-full flex-col items-center justify-start gap-5 overflow-hidden mb-16 sm:mb-24"
+        >
+          <span 
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase"
+            style={{ 
+              background: "var(--bg-secondary)", 
+              color: "var(--text-primary)",
+              border: "1px solid var(--border-medium)"
+            }}
+          >
+            Our Expertise
+          </span>
+
+          <h2 
+            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              lineHeight: 1.1,
+              color: "var(--text-primary)",
+              fontFamily: "'Inter', sans-serif",
+            }}
+          >
+            Strategic Digital Solutions
+          </h2>
+
+          <p 
+            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            We specialize in building bespoke, high-performance applications that bridge the gap between complex business logic and exceptional user experience.
+          </p>
+        </motion.div>
 
         <div className="relative z-5 my-8 flex w-full flex-col items-center justify-center gap-2">
           <div 
-            className="flex h-[400px] sm:h-[520px] w-full max-w-5xl flex-col items-start justify-start overflow-hidden rounded-xl border shadow-2xl transition-all duration-500"
-            style={{ borderColor: "var(--border-medium)" }}
+            className="flex h-[400px] sm:h-[520px] w-full max-w-5xl flex-col items-center justify-center overflow-hidden transition-all duration-500"
           >
-            <div className="flex flex-1 items-start justify-start self-stretch">
-              <div className="flex h-full w-full items-center justify-center bg-black/5">
-                <div className="relative h-full w-full overflow-hidden">
+            <div className="flex flex-1 items-center justify-center self-stretch">
+              <div className="flex h-full w-full items-center justify-center">
+                <div className="relative h-full w-full overflow-hidden flex items-center justify-center">
                   <div
-                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out ${
                       activeCard === 0
-                        ? "blur-0 scale-100 opacity-100 z-10"
-                        : "scale-95 opacity-0 blur-sm z-0"
+                        ? "scale-100 opacity-100 z-10"
+                        : "scale-110 opacity-0 z-0"
                     }`}
                   >
-                    <div className="h-full w-full bg-gradient-to-br from-indigo-900/40 to-black flex items-center justify-center text-4xl font-black text-white/10 uppercase">
-                      Custom Web Apps
-                    </div>
+                    <img 
+                      src="/services/1_Landing_page.jpg" 
+                      alt="High-Converting Landing Pages"
+                      className="max-h-full max-w-full object-contain rounded-2xl border shadow-2xl"
+                      style={{ borderColor: "var(--border-medium)" }}
+                    />
                   </div>
 
                   <div
-                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out ${
                       activeCard === 1
-                        ? "blur-0 scale-100 opacity-100 z-10"
-                        : "scale-95 opacity-0 blur-sm z-0"
+                        ? "scale-100 opacity-100 z-10"
+                        : "scale-110 opacity-0 z-0"
                     }`}
                   >
-                    <div className="h-full w-full bg-gradient-to-tr from-emerald-900/40 to-black flex items-center justify-center text-4xl font-black text-white/10 uppercase">
-                      E-Commerce
-                    </div>
+                    <img 
+                      src="/services/2_ecommerce_website.jpg" 
+                      alt="Premium E-Commerce Solutions"
+                      className="max-h-full max-w-full object-contain rounded-2xl border shadow-2xl"
+                      style={{ borderColor: "var(--border-medium)" }}
+                    />
                   </div>
 
                   <div
-                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out ${
                       activeCard === 2
-                        ? "blur-0 scale-100 opacity-100 z-10"
-                        : "scale-95 opacity-0 blur-sm z-0"
+                        ? "scale-100 opacity-100 z-10"
+                        : "scale-110 opacity-0 z-0"
                     }`}
                   >
-                    <div className="h-full w-full bg-gradient-to-tl from-purple-900/40 to-black flex items-center justify-center text-4xl font-black text-white/10 uppercase">
-                      SaaS Platforms
-                    </div>
+                    <img 
+                      src="/services/3_ecommerce_website.jpg" 
+                      alt="Advanced Admin Dashboards"
+                      className="max-h-full max-w-full object-contain rounded-2xl border shadow-2xl"
+                      style={{ borderColor: "var(--border-medium)" }}
+                    />
                   </div>
                 </div>
               </div>
@@ -134,22 +156,22 @@ export default function FeatureCardsSection() {
 
           <div className="flex flex-1 flex-col items-stretch justify-center gap-0 px-0 md:flex-row">
             <FeatureCard
-              title="Custom Web Apps"
-              description="Create scalable, high-performance applications tailored to your unique business logic."
+              title="High-Converting Landing Pages"
+              description="Engineered for maximum impact, blending cinematic motion with strategic storytelling to turn visitors into loyal customers."
               isActive={activeCard === 0}
               progress={activeCard === 0 ? progress : 0}
               onClick={() => handleCardClick(0)}
             />
             <FeatureCard
-              title="E-Commerce Platforms"
-              description="Drive sales with next-generation storefronts featuring seamless checkout flows."
+              title="Premium E-Commerce Solutions"
+              description="Bespoke digital storefronts designed for luxury brands, featuring seamless checkout flows and immersive product experiences."
               isActive={activeCard === 1}
               progress={activeCard === 1 ? progress : 0}
               onClick={() => handleCardClick(1)}
             />
             <FeatureCard
-              title="SaaS Dashboards"
-              description="Empower your users with intuitive interfaces, real-time data, and advanced analytics."
+              title="Advanced Admin Dashboards"
+              description="Powerful, data-driven interfaces that streamline complex business operations with real-time analytics and intuitive controls."
               isActive={activeCard === 2}
               progress={activeCard === 2 ? progress : 0}
               onClick={() => handleCardClick(2)}

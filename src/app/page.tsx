@@ -9,7 +9,7 @@ const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 import AboutSection from '@/app/my_components/AboutSection';
 import TestimonialsSection from '@/app/my_components/TestimonialsSection';
-import DemosSection from '@/app/my_components/DemosSection';
+
 import SelectedWorkSection from '@/app/my_components/SelectedWorkSection';
 import PremiumShowcaseSection from '@/app/my_components/PremiumShowcaseSection';
 import FeatureCardsSection from '@/app/my_components/FeatureCardsSection';
@@ -117,7 +117,6 @@ export default function Home() {
       <div className="relative z-10">
         <SelectedWorkSection />
         <PremiumShowcaseSection />
-        <DemosSection />
         <FeatureCardsSection />
         <TestimonialsSection />
         <AboutSection />

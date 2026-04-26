@@ -11,7 +11,7 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     question: "What types of projects do you take on?",
-    answer: "We specialize in premium web applications, high-converting e-commerce storefronts, and complex SaaS dashboards using React and Next.js.",
+    answer: "We specialize in High-Converting Landing Pages, Premium E-Commerce Solutions, and Advanced Admin Dashboards. We leverage the MERN stack along with Next.js and TypeScript to build scalable, high-performance digital ecosystems.",
   },
   {
     question: "What is your typical timeline for a project?",
@@ -23,9 +23,11 @@ const faqData: FAQItem[] = [
   },
   {
     question: "What is your design approach?",
-    answer: "We focus on minimalist, highly interactive, and performant designs. We prioritize the user experience while ensuring your brand stands out with unique visual flair.",
+    answer: "We focus on immersive, highly interactive experiences. By integrating Spline for 3D, Rive for state-machine animations, and GSAP for cinematic motion, we create unforgettable interfaces. We also utilize AI tools like Claude and Antigravity to accelerate our engineering and design workflows.",
   },
 ];
+
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -37,23 +39,46 @@ export default function FAQSection() {
   return (
     <section className="relative z-10 py-20 sm:py-24" style={{ borderTop: "1px solid var(--border-subtle)" }}>
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start">
-          
-          <div className="flex w-full flex-col gap-4 lg:flex-1">
-            <h2 
-              className="text-4xl leading-tight font-black tracking-tight uppercase"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Frequently Asked Questions
-            </h2>
-            <p className="text-sm sm:text-base leading-relaxed font-light" style={{ color: "var(--text-secondary)" }}>
-              Everything you need to know about our process,
-              <br className="hidden md:block" />
-              capabilities, and how we work with brands.
-            </p>
-          </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className="flex w-full flex-col items-center justify-start gap-5 overflow-hidden mb-16 sm:mb-24"
+        >
+          <span 
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase"
+            style={{ 
+              background: "var(--bg-secondary)", 
+              color: "var(--text-primary)",
+              border: "1px solid var(--border-medium)"
+            }}
+          >
+            Support
+          </span>
 
-          <div className="w-full lg:flex-1 flex flex-col">
+          <h2 
+            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              lineHeight: 1.1,
+              color: "var(--text-primary)",
+              fontFamily: "'Inter', sans-serif",
+            }}
+          >
+            Common Inquiries
+          </h2>
+
+          <p 
+            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            Everything you need to know about our high-performance digital engineering process and how we help brands scale.
+          </p>
+        </motion.div>
+
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start">
+          <div className="w-full flex flex-col">
             {faqData.map((item, index) => {
               const isOpen = openIndex === index;
               return (

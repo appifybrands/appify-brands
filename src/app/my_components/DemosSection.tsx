@@ -56,39 +56,43 @@ export default function DemosSection() {
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
 
         {/* Header */}
-        <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
-          <div>
-            <span className="section-number block mb-4">— 01 / Demos</span>
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "110%" }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="font-black uppercase"
-                style={{
-                  fontSize: "clamp(2.5rem, 7vw, 6rem)",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1,
-                  color: "var(--text-primary)",
-                  fontFamily: "'Inter', sans-serif",
-                }}
-              >
-                Our Demos
-              </motion.h2>
-            </div>
-          </div>
-          <motion.p
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="max-w-xs text-sm font-light leading-relaxed text-right"
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className="flex w-full flex-col items-center justify-start gap-5 overflow-hidden mb-16 sm:mb-24"
+        >
+          <span 
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase"
+            style={{ 
+              background: "var(--bg-secondary)", 
+              color: "var(--text-primary)",
+              border: "1px solid var(--border-medium)"
+            }}
+          >
+            Interactive Demos
+          </span>
+
+          <h2 
+            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              lineHeight: 1.1,
+              color: "var(--text-primary)",
+              fontFamily: "'Inter', sans-serif",
+            }}
+          >
+            Industry-Leading Prototypes
+          </h2>
+
+          <p 
+            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
             style={{ color: "var(--text-secondary)" }}
           >
-            Explore our high-converting, interactive landing page experiences tailored for different industries.
-          </motion.p>
-        </div>
+            Explore our collection of high-converting, interactive landing page experiences tailored for luxury real estate, e-commerce, and high-growth SaaS platforms.
+          </p>
+        </motion.div>
 
         {/* List */}
         <motion.div

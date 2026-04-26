@@ -9,15 +9,14 @@ type SubItem = { label: string; icon: React.ElementType; href: string };
 type NavLink = { label: string; href: string; subItems?: SubItem[] };
 
 const navLinks: NavLink[] = [
-  { label: "Demos",        href: "#demos" },
+  { label: "Works",        href: "#works" },
   { 
     label: "Services",     
     href: "#services",
     subItems: [
-      { label: "In Progress", icon: Loader2, href: "#in-progress" },
-      { label: "Completed", icon: CheckCircle2, href: "#completed" },
-      { label: "Failed", icon: X, href: "#failed" },
-      { label: "Cancelled", icon: Ban, href: "#cancelled" },
+      { label: "Landing Pages", icon: CheckCircle2, href: "#services" },
+      { label: "E-Commerce", icon: CheckCircle2, href: "#services" },
+      { label: "Admin Panels", icon: CheckCircle2, href: "#services" },
     ]
   },
   { label: "Testimonials", href: "#testimonials" },
@@ -200,17 +199,16 @@ export default function Navbar() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-black/5"
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/10 active:scale-90"
               style={{
-                border: "1px solid var(--border-medium)",
                 background: "transparent",
                 color: "var(--text-secondary)",
               }}
             >
               {mounted ? (
                 isDark
-                  ? <SunIcon size={16} strokeWidth={1.5} />
-                  : <MoonIcon size={16} strokeWidth={1.5} />
+                  ? <SunIcon size={18} strokeWidth={1.5} style={{ color: "var(--navy)" }} />
+                  : <MoonIcon size={18} strokeWidth={1.5} style={{ color: "var(--navy)" }} />
               ) : (
                 <div className="w-4 h-4" />
               )}
@@ -222,13 +220,12 @@ export default function Navbar() {
               onClick={(e) => handleNav(e, "#contact")}
               className="hidden md:inline-flex relative items-center justify-center px-7 py-2.5 text-[0.7rem] font-bold tracking-[0.15em] uppercase transition-all duration-300 rounded-full hover:scale-105"
               style={{
-                background: "#000000",
+                background: "var(--navy)",
                 color: "#ffffff",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255,255,255,0.2)",
               }}
             >
               Contact
-              <span className="absolute top-[6px] right-[8px] w-2 h-2 bg-[#D4FF00] rounded-full shadow-[0_0_8px_rgba(212,255,0,0.6)]"></span>
             </a>
 
             {/* Hamburger — mobile */}
