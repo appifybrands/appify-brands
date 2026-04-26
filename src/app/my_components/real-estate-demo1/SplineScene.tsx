@@ -5,13 +5,13 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import styles from './SplineScene.module.css';
 
-// Load Spline dynamically (no SSR) — requires Node.js 18+ on Amplify
+// Load Spline using dynamic import (no SSR) - Standard import as per old project
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
   loading: () => <div className={styles.loader} />,
 });
 
-type SceneStatus = '3D_ACTIVE' | 'TRANSITION' | '2D_FALLBACK';
+type SceneStatus = 'LOADING' | '3D_ACTIVE' | 'TRANSITION' | '2D_FALLBACK';
 
 interface SplineSceneProps {
   scene: string;
@@ -42,14 +42,14 @@ class SplineErrorBoundary extends React.Component<{ children: React.ReactNode; o
 }
 
 export default function SplineScene({ scene }: SplineSceneProps) {
-  const [status, setStatus] = useState<SceneStatus>('TRANSITION');
+  const [status, setStatus] = useState<SceneStatus>('LOADING');
   const [retryKey, setRetryKey] = useState(0);
   const [lastAttemptTime, setLastAttemptTime] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isUrlValid, setIsUrlValid] = useState(true);
   const [isRecovering, setIsRecovering] = useState(false);
 
-  const lastStatusRef = useRef<SceneStatus>('TRANSITION');
+  const lastStatusRef = useRef<SceneStatus>('LOADING');
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -115,37 +115,24 @@ export default function SplineScene({ scene }: SplineSceneProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Pre-flight Fetch Check & URL Validation
   useEffect(() => {
     if (isMobile) return;
 
-    // Attempt to ping the URL to check for 404 or DNS errors (like 'designn')
-    const checkUrl = async () => {
-      // Synchronous checks moved here to avoid cascading render warning in effect body
-      if (!scene || !scene.includes('spline.design')) {
-        console.error('Spline: Invalid scene URL');
-        setIsUrlValid(false);
-        switchToFallback();
-        return;
-      }
+    if (!scene || (!scene.includes('spline.design') && !scene.endsWith('.splinecode'))) {
+      console.error('Spline: Invalid scene URL');
+      setIsUrlValid(false);
+      switchToFallback();
+      return;
+    }
 
-      try {
-        await fetch(scene, { method: 'HEAD', mode: 'no-cors' });
-        // Note: no-cors will always return status 0, but it will throw if DNS fails or fetch fails
-        setIsUrlValid(true);
-      } catch (err) {
-        console.error('Spline: URL Pre-flight check failed', err);
-        setIsUrlValid(false);
-        switchToFallback();
-      }
-    };
-
-    checkUrl();
+    setIsUrlValid(true);
   }, [scene, switchToFallback, isMobile]);
 
   // Signal: Canvas visibility & WebGL Context
   useEffect(() => {
     const checkCanvas = () => {
+      // CRITICAL: Only monitor canvas if it has already loaded. 
+      // Otherwise, the 2s interval will trigger a fallback before Spline finishes initializing.
       if (status !== '3D_ACTIVE') return;
 
       const canvas = containerRef.current?.querySelector('canvas');
@@ -162,7 +149,7 @@ export default function SplineScene({ scene }: SplineSceneProps) {
         canvas.addEventListener('webglcontextlost', handleContextLost);
         return () => canvas.removeEventListener('webglcontextlost', handleContextLost);
       } else {
-        // Signal: Canvas disappears
+        // Signal: Canvas disappears after it was once active
         switchToFallback();
       }
     };
@@ -204,7 +191,7 @@ export default function SplineScene({ scene }: SplineSceneProps) {
     <div className={styles.container} ref={containerRef}>
       {/* 3D Scene Layer */}
       {!isMobile && isUrlValid && (
-        <div className={`${styles.splineWrapper} ${activeStatus === '3D_ACTIVE' ? styles.splineActive : ''}`}>
+        <div className={`${styles.splineWrapper} ${(status === '3D_ACTIVE' || status === 'LOADING') ? styles.splineActive : ''}`}>
           <Suspense fallback={<div className={styles.loader} />}>
             <SplineErrorBoundary onError={handleError}>
               <Spline
@@ -303,7 +290,7 @@ export default function SplineScene({ scene }: SplineSceneProps) {
             <span className={styles.demoBy}>Demo By</span>
             <div className={styles.brandLogoWrapper}>
               <Image
-                src="/appify_brands_logo.png"
+                src="/new_logos/appifybrands_dark_logo_circular.png"
                 alt="Appify Brands"
                 width={50}
                 height={50}
@@ -337,7 +324,7 @@ export default function SplineScene({ scene }: SplineSceneProps) {
 
       {/* Watermark Protection (Only when 3D is active) */}
       {activeStatus === '3D_ACTIVE' && (
-        <div className="absolute bottom-0 right-0 w-40 h-24 bg-[#050505] z-50 pointer-events-none" />
+        <div className={styles.watermarkHider} />
       )}
     </div>
   );

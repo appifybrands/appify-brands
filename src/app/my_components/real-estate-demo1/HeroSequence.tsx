@@ -8,28 +8,21 @@ import { AnimatedBaskervville } from "./AnimatedBaskervville";
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── Frame configuration ───────────────────────── */
-const OUTDOOR_TO_DOOR_COUNT = 240;
-const DOOR_TO_PASSAGE_COUNT = 240;
-const PASSAGE_TO_DRAWINGROOM_COUNT = 240;
-const TOTAL_FRAMES = OUTDOOR_TO_DOOR_COUNT + DOOR_TO_PASSAGE_COUNT + PASSAGE_TO_DRAWINGROOM_COUNT;
+const SET1_COUNT = 300;
+const SET2_COUNT = 98;
+const TOTAL_FRAMES = SET1_COUNT + SET2_COUNT;
 
 function frameSrc(index: number): string {
   const n = index + 1;
 
-  if (index < OUTDOOR_TO_DOOR_COUNT) {
+  if (index < SET1_COUNT) {
     const padded = String(n).padStart(3, "0");
-    return `/outdoor_to_door/ezgif-frame-${padded}.jpg`;
+    return `/real-estate-demo1/frames_set1/ezgif-frame-${padded}.jpg`;
   }
 
-  if (index < OUTDOOR_TO_DOOR_COUNT + DOOR_TO_PASSAGE_COUNT) {
-    const innerIndex = index - OUTDOOR_TO_DOOR_COUNT + 1;
-    const innerPadded = String(innerIndex).padStart(3, "0");
-    return `/door_to_passage/ezgif-frame-${innerPadded}.jpg`;
-  }
-
-  const finalIndex = index - (OUTDOOR_TO_DOOR_COUNT + DOOR_TO_PASSAGE_COUNT) + 1;
+  const finalIndex = index - SET1_COUNT + 1;
   const finalPadded = String(finalIndex).padStart(3, "0");
-  return `/passage_to_drawingroom/ezgif-frame-${finalPadded}.jpg`;
+  return `/real-estate-demo1/frames_set2/ezgif-frame-${finalPadded}.jpg`;
 }
 
 /* ── Text overlay data ─────────────────────────── */
