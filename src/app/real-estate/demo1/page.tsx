@@ -202,7 +202,7 @@ export default function RealEstateDemo1() {
 
         {/* Spline Footer */}
         <footer className="relative z-50 w-full h-screen bg-[#050505] overflow-hidden">
-          <SplineScene scene="https://prod.spline.design/lq1DeK3CIWZugINN/scene.splinecode" />
+          <SplineScene scene="/scene.splinecode" />
         </footer>
       </main>
     </>
