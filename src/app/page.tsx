@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion } from "framer-motion";
-import { ArrowRight, Globe, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Lenis from 'lenis';
+
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 import AboutSection from '@/app/my_components/AboutSection';
 import ServicesSection from '@/app/my_components/ServicesSection';
@@ -14,8 +15,15 @@ import DemosSection from '@/app/my_components/DemosSection';
 import Navbar from "./my_components/Navbar";
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY       = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
   useEffect(() => {
-    // Initialize Lenis for buttery smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -30,117 +38,214 @@ export default function Home() {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
 
-    // Smooth scroll for anchor links via Lenis
-    const links = document.querySelectorAll('a[href^="#"]');
-    const handleAnchorClick = (e: Event) => {
-      e.preventDefault();
-      const target = e.currentTarget as HTMLAnchorElement;
-      const targetId = target.getAttribute('href');
-      if (targetId && targetId !== '#') {
-        lenis.scrollTo(targetId, { duration: 1.5 });
-      }
-    };
-
-    links.forEach(link => link.addEventListener('click', handleAnchorClick));
-
-    return () => {
-      links.forEach(link => link.removeEventListener('click', handleAnchorClick));
-      lenis.destroy();
-    };
+    return () => { lenis.destroy(); };
   }, []);
 
   return (
-    <div className="relative min-h-screen font-sans overflow-x-hidden transition-colors duration-1000 selection:bg-blue-500/30 text-gray-900 dark:text-white">
-      {/* Dynamic Background Image (Responsive to Light/Dark Mode) */}
-      <div className="fixed inset-0 z-0 bg-black">
-        <div className="absolute inset-0 bg-[url('/assets/bg-light.png')] bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out dark:opacity-0" />
-        <div className="absolute inset-0 bg-[url('/assets/bg-dark.png')] bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out opacity-0 dark:opacity-100" />
+    <div
+      className="relative min-h-screen overflow-x-hidden grid-overlay transition-colors duration-500"
+      style={{ background: "var(--bg-primary)", color: "var(--text-primary)" }}
+    >
+      {/* ── Background radial accents ── */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full transition-all duration-500"
+          style={{ background: "radial-gradient(circle, var(--bg-secondary) 0%, transparent 70%)", opacity: 0.55 }}
+        />
+        <div
+          className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full transition-all duration-500"
+          style={{ background: "radial-gradient(circle, var(--bg-card) 0%, transparent 70%)", opacity: 0.6 }}
+        />
       </div>
 
       <Navbar />
 
-      <div className="relative z-10 flex flex-col gap-12 sm:gap-24 px-4 sm:px-8 py-24 sm:py-32 w-full max-w-7xl mx-auto">
-        {/* Hero Section */}
-        <motion.main
-          id="main"
-          className="relative flex flex-col items-center justify-center text-center p-8 sm:p-16 rounded-[40px] shadow-xl dark:shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-2xl border border-white/60 dark:border-white/10"
-          initial="hidden"
-          animate="show"
-          variants={{
-            hidden: { opacity: 0 },
-            show: { opacity: 1, transition: { staggerChildren: 0.2 } }
-          }}
-        >
-          {/* Subtle Glowing Badge - Pops from left */}
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-            }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-md mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-            <span className="text-sm font-medium text-gray-800 dark:text-gray-200 tracking-wide uppercase">Digital Excellence</span>
-          </motion.div>
+      {/* ─────────────────────────────────────────── */}
+      {/* HERO                                        */}
+      {/* ─────────────────────────────────────────── */}
+      <section id="main" ref={heroRef} className="relative z-10 min-h-screen flex flex-col" style={{ paddingTop: "64px" }}>
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="flex flex-col flex-1">
 
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, x: 50 },
-              show: { opacity: 1, x: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
-            }}
-            className="flex flex-col items-center justify-center"
-          >
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter mb-4 flex flex-col items-center">
-              <span className="text-gray-500 dark:text-white/40 font-light text-3xl sm:text-4xl md:text-5xl mb-2 tracking-widest uppercase">Welcome to</span>
-              <div className="flex items-center justify-center gap-4">
-                <span className="bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-500 dark:to-purple-500 bg-clip-text text-transparent drop-shadow-2xl">
-                  AppifyBrands
-                </span>
-                <Image
-                  src="/appify_brands_glow_logo2.png"
-                  alt="AppifyBrands Logo"
-                  width={100}
-                  height={100}
-                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 object-contain animate-pulse drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] dark:drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]"
-                />
-              </div>
-            </h1>
-            
-            <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-400 font-light max-w-2xl mt-6 leading-relaxed">
-              We engineer <span className="text-blue-600 dark:text-blue-400 font-medium">premium digital experiences</span> and transform brands into powerful applications.
-            </p>
-          </motion.div>
+          {/* Top rule + tag */}
+          <div className="section-rule" />
+          <div className="flex items-center justify-between px-6 sm:px-10 py-4 max-w-screen-xl mx-auto w-full">
+            <span className="section-number">— 00 / Hero</span>
+            <span className="tag-chip">Digital Agency</span>
+          </div>
 
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] } }
-            }}
-            className="mt-12 flex flex-col sm:flex-row items-center gap-6"
-          >
-            <a href="#demos" className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full font-semibold text-lg overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(59,130,246,0.3)]">
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
-              <span className="relative flex items-center gap-2">
-                View Demos <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </a>
-            
-            <a href="#services" className="group px-8 py-4 rounded-full font-medium text-lg text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors border border-transparent hover:border-black/10 dark:hover:border-white/10 flex items-center gap-2">
-              <Globe className="w-5 h-5 opacity-50 group-hover:opacity-100 group-hover:animate-spin group-hover:text-blue-500 dark:group-hover:text-blue-400" />
-              Our Services
-            </a>
-          </motion.div>
-        </motion.main>
+          {/* Hero content */}
+          <div className="flex-1 flex flex-col justify-between max-w-screen-xl mx-auto w-full px-6 sm:px-10 pb-16">
 
-        {/* The sections are now placed back-to-back inside the global sky background */}
+            <div className="mt-8 sm:mt-16">
+              {/* Eyebrow */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: EASE }}
+                className="text-xs sm:text-sm font-medium tracking-[0.3em] uppercase mb-6"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                We Engineer Digital Excellence
+              </motion.p>
+
+              {/* Giant stacked heading */}
+              {["Appify", "Brands"].map((word, wi) => (
+                <div key={word} className="overflow-hidden">
+                  <motion.h1
+                    initial={{ y: "110%", skewY: 7 }}
+                    animate={{ y: 0, skewY: 0 }}
+                    transition={{ duration: 1, delay: wi * 0.15, ease: EASE }}
+                    className="font-black uppercase"
+                    style={{
+                      fontSize: "clamp(4rem, 16vw, 14rem)",
+                      letterSpacing: "-0.04em",
+                      lineHeight: 0.9,
+                      fontFamily: "'Inter', sans-serif",
+                      color: wi === 0 ? "var(--text-primary)" : "transparent",
+                      WebkitTextStroke: wi === 1 ? "1.5px var(--border-strong)" : "none",
+                    }}
+                  >
+                    {word}
+                  </motion.h1>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom 3-col row */}
+            <div className="mt-12 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
+              >
+                <p className="text-sm font-light leading-relaxed max-w-xs" style={{ color: "var(--text-secondary)" }}>
+                  We transform brands into powerful applications — crafting premium digital experiences with React, Next.js, and meticulous attention to every pixel.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.65, ease: EASE }}
+                className="flex flex-col gap-3 md:items-center"
+              >
+                <a
+                  href="#demos"
+                  className="group inline-flex items-center gap-3 text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:gap-5"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  <span
+                    className="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 group-hover:w-10 group-hover:h-10"
+                    style={{ borderColor: "var(--border-medium)" }}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  View Our Work
+                </a>
+                <a
+                  href="#services"
+                  className="inline-flex items-center gap-3 text-xs font-medium tracking-wider uppercase opacity-50 hover:opacity-80 transition-opacity"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Explore Services
+                </a>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.7, ease: EASE }}
+                className="flex items-end justify-end gap-10"
+              >
+                <div className="text-right">
+                  <p className="text-3xl font-black" style={{ color: "var(--text-primary)" }}>10+</p>
+                  <p className="text-xs tracking-widest uppercase" style={{ color: "var(--text-secondary)" }}>Projects</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-3xl font-black" style={{ color: "var(--text-primary)" }}>100%</p>
+                  <p className="text-xs tracking-widest uppercase" style={{ color: "var(--text-secondary)" }}>Satisfaction</p>
+                </div>
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center"
+                  style={{ border: "1px solid var(--border-medium)" }}
+                >
+                  <Image
+                    src="/appify_brands_glow_logo2.png"
+                    alt="AppifyBrands"
+                    width={40}
+                    height={40}
+                    className="object-contain opacity-80"
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4 }}
+            className="flex items-center gap-4 px-6 sm:px-10 pb-10 max-w-screen-xl mx-auto w-full"
+          >
+            <div
+              className="w-[1px] h-12 animate-pulse-slow"
+              style={{ background: `linear-gradient(to bottom, var(--text-secondary), transparent)` }}
+            />
+            <span className="text-xs tracking-[0.25em] uppercase" style={{ color: "var(--text-secondary)", opacity: 0.5 }}>
+              Scroll to explore
+            </span>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ── All sections ── */}
+      <div className="relative z-10">
         <DemosSection />
         <ServicesSection />
         <TestimonialsSection />
         <AboutSection />
         <ContactSection />
+
+        {/* ── Footer ── */}
+        <footer
+          className="px-6 sm:px-10 py-12 max-w-screen-xl mx-auto"
+          style={{ borderTop: "1px solid var(--border-subtle)" }}
+        >
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/appify_brands_glow_logo2.png"
+                alt="AppifyBrands"
+                width={28}
+                height={28}
+                className="object-contain opacity-60"
+              />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "var(--text-secondary)" }}>
+                AppifyBrands
+              </span>
+            </div>
+            <p className="text-xs" style={{ color: "var(--text-secondary)", opacity: 0.5 }}>
+              © 2025 AppifyBrands. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6">
+              {["Gmail", "Twitter", "Instagram"].map((s) => (
+                <span
+                  key={s}
+                  className="text-xs tracking-widest uppercase cursor-pointer hover:opacity-80 transition-opacity"
+                  style={{ color: "var(--text-secondary)", opacity: 0.5 }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

@@ -2,54 +2,156 @@
 
 import { motion } from "framer-motion";
 
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+const pillars = [
+  {
+    num: "01",
+    title: "Performance",
+    desc: "Every millisecond matters. We obsess over Core Web Vitals, bundle sizes, and rendering performance.",
+  },
+  {
+    num: "02",
+    title: "Design Craft",
+    desc: "Pixel-perfect execution. We treat visual design as a discipline — every detail is deliberate.",
+  },
+  {
+    num: "03",
+    title: "Innovation",
+    desc: "Cutting-edge tech stack. We leverage the latest tools to give your product a competitive edge.",
+  },
+];
+
+const techStack = [
+  "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion",
+  "GSAP", "shadcn/ui", "Node.js", "React Native", "Figma",
+];
+
 export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative flex flex-col items-center justify-center text-center py-16 sm:py-24 overflow-hidden rounded-[40px] shadow-xl dark:shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-2xl border border-white/60 dark:border-white/10"
+      className="relative z-10 py-20 sm:py-24 transition-colors duration-500"
+      style={{ borderTop: "1px solid var(--border-subtle)" }}
     >
-      {/* Decorative gradient */}
-      <div className="absolute bottom-0 left-[-10%] w-[500px] h-[500px] bg-blue-500/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
 
-      <div className="container relative z-10 max-w-4xl mx-auto px-4 sm:px-8">
+        {/* Header — asymmetric two-column */}
+        <div className="mb-16 sm:mb-24">
+          <span className="section-number block mb-4">— 04 / About</span>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+            <div className="overflow-hidden">
+              <motion.h2
+                initial={{ y: "110%" }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.9, ease: EASE }}
+                className="font-black uppercase"
+                style={{
+                  fontSize: "clamp(2.5rem, 8vw, 7rem)",
+                  letterSpacing: "-0.04em",
+                  lineHeight: 0.9,
+                  fontFamily: "'Inter', sans-serif",
+                }}
+              >
+                <span style={{ color: "var(--text-primary)" }}>Who</span>
+                <br />
+                <span style={{ color: "transparent", WebkitTextStroke: "1.5px var(--border-strong)" }}>
+                  We Are
+                </span>
+              </motion.h2>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
+              className="text-base sm:text-lg font-light leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              We&apos;re a boutique digital agency specializing in building modern frontend experiences
+              using{" "}
+              <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>React</span> and{" "}
+              <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>Next.js</span>.
+              Our projects are meticulously crafted with{" "}
+              <span style={{ color: "var(--text-accent)", fontWeight: 500 }}>Tailwind CSS</span> and
+              enhanced with powerful UI libraries like{" "}
+              <span style={{ color: "var(--text-accent)", fontWeight: 500 }}>shadcn/ui</span> and{" "}
+              <span style={{ color: "var(--text-accent)", fontWeight: 500 }}>Skiper UI</span>,
+              ensuring beautiful, highly responsive, and unforgettable digital experiences.
+            </motion.p>
+          </div>
+        </div>
+
+        {/* Three pillars */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0">
+          {pillars.map((pillar, i) => (
+            <motion.div
+              key={pillar.num}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
+              className="relative py-10 sm:py-14 group"
+              style={{
+                borderLeft: i === 0 ? "none" : "1px solid var(--border-subtle)",
+                paddingLeft: i === 0 ? 0 : "2rem",
+                paddingRight: "2rem",
+              }}
+            >
+              <span
+                className="text-xs font-mono block mb-6"
+                style={{ color: "var(--text-secondary)", opacity: 0.4 }}
+              >
+                {pillar.num}
+              </span>
+              <h3
+                className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-4"
+                style={{ color: "var(--text-primary)", letterSpacing: "-0.03em" }}
+              >
+                {pillar.title}
+              </h3>
+              <p
+                className="text-sm font-light leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                {pillar.desc}
+              </p>
+
+              {/* Animated bottom line */}
+              <div
+                className="absolute bottom-0 left-0 h-[1px] w-0 transition-all duration-500 group-hover:w-full"
+                style={{ background: `linear-gradient(90deg, var(--text-secondary), transparent)` }}
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-[1px]" style={{ background: "var(--border-subtle)" }} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Tech stack marquee */}
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="inline-block mb-12 relative"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-20 overflow-hidden"
+          style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: "20px" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-600/20 blur-xl rounded-full" />
-          <h2 className="relative text-5xl md:text-7xl font-extrabold tracking-tighter text-gray-900 dark:text-white">
-            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-400 dark:to-indigo-400">Us</span>
-          </h2>
+          <div className="marquee-inner">
+            {[...techStack, ...techStack].map((tech, i) => (
+              <span
+                key={i}
+                className="mx-6 text-xs font-medium tracking-[0.2em] uppercase whitespace-nowrap"
+                style={{ color: "var(--text-secondary)", opacity: 0.45 }}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </motion.div>
-
-        <motion.p 
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-xl md:text-3xl font-light leading-relaxed text-gray-700 dark:text-gray-400"
-        >
-          We specialize in building modern frontend experiences using{" "}
-          <span className="font-medium text-gray-900 dark:text-white relative whitespace-nowrap">
-            <span className="relative z-10">React</span>
-            <span className="absolute bottom-1 left-0 w-full h-2 bg-blue-500/30 -z-0 rounded-sm" />
-          </span>{" "}
-          and{" "}
-          <span className="font-medium text-gray-900 dark:text-white relative whitespace-nowrap">
-            <span className="relative z-10">Next.js</span>
-            <span className="absolute bottom-1 left-0 w-full h-2 bg-indigo-500/30 -z-0 rounded-sm" />
-          </span>.  
-          Our projects are meticulously crafted with{" "}
-          <span className="font-medium text-blue-500 dark:text-blue-400">Tailwind CSS</span> and enhanced
-          with powerful UI libraries like{" "}
-          <span className="font-medium text-indigo-500 dark:text-indigo-400">shadcn/ui</span> and{" "}
-          <span className="font-medium text-purple-500 dark:text-purple-400">Skiper UI</span>, ensuring
-          beautiful, highly responsive, and unforgettable digital experiences.
-        </motion.p>
       </div>
     </section>
-  )
+  );
 }

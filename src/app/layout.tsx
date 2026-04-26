@@ -1,23 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import ThemeToggleWrapper from "./my_components/ThemeToggleWrapper";
+
 import ClientLayout from "./my_components/ClientLayout";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "AppifyBrands",
-  description: "We turn brands into apps",
+  title: "AppifyBrands — We Turn Brands Into Apps",
+  description: "AppifyBrands engineers premium digital experiences and transforms brands into powerful, high-converting applications.",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -39,15 +35,19 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased`}
+        style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <ClientLayout>{children}</ClientLayout>
-          <ThemeToggleWrapper />
+
         </ThemeProvider>
       </body>
     </html>
