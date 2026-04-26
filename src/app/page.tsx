@@ -73,20 +73,9 @@ export default function Home() {
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="flex flex-col flex-1">
 
           {/* Hero content */}
-          <div className="flex-1 flex flex-col justify-between max-w-screen-xl mx-auto w-full px-6 sm:px-10 pb-16">
+          <div className="flex-1 flex flex-col justify-center max-w-screen-xl mx-auto w-full px-6 sm:px-10 pb-16">
 
-            <div className="mt-8 sm:mt-16">
-              {/* Eyebrow */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: EASE }}
-                className="text-xs sm:text-sm font-medium tracking-[0.3em] uppercase mb-6"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                We Turn Brands Into Apps
-              </motion.p>
-
+            <div>
               {/* Giant stacked heading */}
               {["Appify", "Brands"].map((word, wi) => (
                 <div key={word} className="overflow-hidden">
@@ -108,6 +97,17 @@ export default function Home() {
                   </motion.h1>
                 </div>
               ))}
+
+              {/* Eyebrow */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
+                className="text-xs sm:text-sm font-medium tracking-[0.3em] uppercase mt-8"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                We Turn Brands Into Apps
+              </motion.p>
             </div>
           </div>
         </motion.div>
