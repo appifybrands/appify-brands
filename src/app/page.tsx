@@ -68,13 +68,6 @@ export default function Home() {
       <section id="main" ref={heroRef} className="relative z-10 min-h-screen flex flex-col" style={{ paddingTop: "64px" }}>
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="flex flex-col flex-1">
 
-          {/* Top rule + tag */}
-          <div className="section-rule" />
-          <div className="flex items-center justify-between px-6 sm:px-10 py-4 max-w-screen-xl mx-auto w-full">
-            <span className="section-number">— 00 / Hero</span>
-            <span className="tag-chip">Digital Agency</span>
-          </div>
-
           {/* Hero content */}
           <div className="flex-1 flex flex-col justify-between max-w-screen-xl mx-auto w-full px-6 sm:px-10 pb-16">
 
