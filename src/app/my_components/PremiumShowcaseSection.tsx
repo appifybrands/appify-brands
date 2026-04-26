@@ -11,7 +11,7 @@ const projects = [
     category: "Spatial Computing",
     description: "A futuristic, immersive landing page experience designed for the next era of computing.",
     video: "/premium_shocase_videos/avp_demo.mp4",
-    href: "#",
+    href: "https://apple-vision-pro-3d-landing-page.vercel.app/",
   },
   {
     id: "real-estate",
@@ -27,7 +27,7 @@ const projects = [
     category: "Premium E-Commerce",
     description: "A clean, conversion-focused product showcase for sustainable technology and design.",
     video: "/premium_shocase_videos/larq_demo.mp4",
-    href: "#",
+    href: "https://larq-gray.vercel.app/",
   },
 ];
 
