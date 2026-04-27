@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { SunIcon, MoonIcon, Loader2, CheckCircle2, X, Ban, ChevronDown } from "lucide-react";
+import { SunIcon, MoonIcon, CheckCircle2, ChevronDown } from "lucide-react";
 
 type SubItem = { label: string; icon: React.ElementType; href: string };
 type NavLink = { label: string; href: string; subItems?: SubItem[] };
@@ -21,7 +21,6 @@ const navLinks: NavLink[] = [
   },
   { label: "Testimonials", href: "#testimonials" },
   { label: "About",        href: "#about" },
-  { label: "Contact",      href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -41,6 +40,12 @@ export default function Navbar() {
     if (href.startsWith('#')) {
       e.preventDefault();
       setMenuOpen(false);
+      
+      if (href === '#bottom') {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        return;
+      }
+
       const target = document.querySelector(href);
       if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -101,42 +106,6 @@ export default function Navbar() {
             </div>
 
             {/* AppifyBrands — per-letter rolling effect */}
-            <span
-              className="hidden sm:flex items-center gap-0 pointer-events-none"
-              style={{ color: "var(--text-primary)" }}
-            >
-              {"AppifyBrands".split("").map((char, i) => (
-                <span
-                  key={i}
-                  className="relative inline-block overflow-hidden"
-                  style={{ height: "1.2em", lineHeight: "1.2em" }}
-                >
-                  <span
-                    className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full"
-                    style={{ 
-                      transitionDelay: `${i * 25}ms`,
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      letterSpacing: "0.08em",
-                    }}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </span>
-                  <span
-                    className="absolute top-full left-0 inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full"
-                    style={{ 
-                      transitionDelay: `${i * 25}ms`,
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      letterSpacing: "0.08em",
-                      color: "var(--text-accent)"
-                    }}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </span>
-                </span>
-              ))}
-            </span>
           </a>
 
           {/* Desktop nav links with Dropdown Support */}
@@ -216,8 +185,8 @@ export default function Navbar() {
 
             {/* CTA — desktop only (Styled like the black pill in the reference image) */}
             <a
-              href="#contact"
-              onClick={(e) => handleNav(e, "#contact")}
+              href="#bottom"
+              onClick={(e) => handleNav(e, "#bottom")}
               className="hidden md:inline-flex relative items-center justify-center px-7 py-2.5 text-[0.7rem] font-bold tracking-[0.15em] uppercase transition-all duration-300 rounded-full hover:scale-105"
               style={{
                 background: "var(--navy)",

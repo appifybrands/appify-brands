@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { motion, useScroll, useTransform } from "framer-motion";
 import Lenis from 'lenis';
 
@@ -17,6 +16,7 @@ import FAQSection from '@/app/my_components/FAQSection';
 import CTASection from '@/app/my_components/CTASection';
 import Navbar from "./my_components/Navbar";
 import SplineScene from "@/app/my_components/real-estate-demo1/SplineScene";
+import ParticlesComponent from "@/components/ui/particles-bg";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -69,8 +69,12 @@ export default function Home() {
       {/* ─────────────────────────────────────────── */}
       {/* HERO                                        */}
       {/* ─────────────────────────────────────────── */}
-      <section id="main" ref={heroRef} className="relative z-10 min-h-screen flex flex-col" style={{ paddingTop: "64px" }}>
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="flex flex-col flex-1">
+      <section id="main" ref={heroRef} className="relative z-10 min-h-screen flex flex-col overflow-hidden" style={{ paddingTop: "64px" }}>
+        
+        {/* ── Particles background ── */}
+        <ParticlesComponent />
+
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 flex flex-col flex-1">
 
           {/* Hero content */}
           <div className="flex-1 flex flex-col justify-center max-w-screen-xl mx-auto w-full px-6 sm:px-10 pb-16">
@@ -82,7 +86,7 @@ export default function Home() {
                   <motion.h1
                     initial={{ y: "110%", skewY: 7 }}
                     animate={{ y: 0, skewY: 0 }}
-                    transition={{ duration: 1, delay: wi * 0.15, ease: EASE }}
+                    transition={{ duration: 1.5, delay: 0.8 + wi * 0.2, ease: EASE }}
                     className="font-black uppercase"
                     style={{
                       fontSize: "clamp(4rem, 16vw, 14rem)",
@@ -90,7 +94,7 @@ export default function Home() {
                       lineHeight: 0.9,
                       fontFamily: "'Inter', sans-serif",
                       color: wi === 0 ? "var(--text-primary)" : "transparent",
-                      WebkitTextStroke: wi === 1 ? "1.5px var(--border-strong)" : "none",
+                      WebkitTextStroke: wi === 1 ? "2.5px var(--border-strong)" : "none",
                     }}
                   >
                     {word}
@@ -102,7 +106,7 @@ export default function Home() {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
+                transition={{ duration: 1, delay: 1.4, ease: EASE }}
                 className="text-xs sm:text-sm font-medium tracking-[0.3em] uppercase mt-8"
                 style={{ color: "var(--text-secondary)" }}
               >

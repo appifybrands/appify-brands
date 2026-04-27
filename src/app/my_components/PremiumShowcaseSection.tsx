@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
 import Link from "next/link";
 
 const projects = [
@@ -34,7 +33,6 @@ const projects = [
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export default function PremiumShowcaseSection() {
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
     <section className="relative z-10 py-24 sm:py-32 overflow-hidden" style={{ borderTop: "1px solid var(--border-subtle)" }}>
@@ -88,57 +86,60 @@ export default function PremiumShowcaseSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: idx * 0.1, ease: EASE }}
-              onMouseEnter={() => setHoveredId(project.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              className="group relative flex flex-col gap-6"
+              className="group relative"
             >
-              <Link href={project.href} className="relative aspect-[4/5] overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border-subtle)" }}>
-                {/* Image Placeholder */}
-                {/* Video Content */}
-                <video
-                  src={project.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
+              <Link 
+                href={project.href} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col gap-6"
+              >
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border-subtle)" }}>
+                  {/* Video Content */}
+                  <video
+                    src={project.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80" />
-                
-                {/* Category Badge */}
-                <div className="absolute top-6 left-6">
-                  <span className="px-3 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full border bg-black/20 backdrop-blur-md text-white" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
-                    {project.category}
-                  </span>
-                </div>
-              </Link>
-
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
-                    {project.title}
-                  </h3>
-                  <div 
-                    className="flex items-center gap-2 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-colors duration-300 group-hover:bg-white group-hover:text-black"
-                    style={{ borderColor: "var(--border-medium)", color: "var(--text-secondary)" }}
-                  >
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80" />
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-6 left-6">
+                    <span className="px-3 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full border bg-black/20 backdrop-blur-md text-white" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
+                      {project.category}
                     </span>
-                    Live View
-                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                      <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
                   </div>
                 </div>
-                <p className="text-sm font-light leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                  {project.description}
-                </p>
 
-              </div>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
+                      {project.title}
+                    </h3>
+                    <div 
+                      className="flex items-center gap-2 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-colors duration-300 group-hover:bg-[var(--text-primary)] group-hover:text-[var(--bg-primary)]"
+                      style={{ borderColor: "var(--border-medium)", color: "var(--text-secondary)" }}
+                    >
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                      </span>
+                      Live View
+                      <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                        <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="text-sm font-light leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    {project.description}
+                  </p>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>

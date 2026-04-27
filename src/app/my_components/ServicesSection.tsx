@@ -63,13 +63,13 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="relative z-10 py-20 sm:py-24 transition-colors duration-500"
+      className="relative z-10 py-8 sm:py-24 transition-colors duration-500"
       style={{ borderTop: "1px solid var(--border-subtle)" }}
     >
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
 
         {/* Header */}
-        <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
+        <div className="flex items-end justify-between mb-4 sm:mb-16 flex-wrap gap-4">
           <div>
             <span className="section-number block mb-4">— 02 / Services</span>
             <div className="overflow-hidden">
@@ -237,7 +237,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Mobile: image cards */}
-        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-3 mt-0">
           {services.map((service, i) => (
             <motion.div
               key={service.index}
@@ -257,7 +257,7 @@ export default function ServicesSection() {
                 />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, var(--bg-primary) 0%, transparent 60%)", opacity: 0.8 }} />
               </div>
-              <div className="p-5">
+              <div className="px-4 py-0">
                 <span className="text-[10px] tracking-widest uppercase" style={{ color: "var(--text-secondary)", opacity: 0.6 }}>
                   {service.subtitle}
                 </span>
@@ -283,7 +283,7 @@ export default function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-16 flex justify-center"
+          className="mt-10 sm:mt-24 flex justify-center"
         >
           <a
             href="/services"
