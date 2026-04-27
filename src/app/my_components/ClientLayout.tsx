@@ -13,13 +13,89 @@ export default function ClientLayout({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // Disable right-click
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // Disable common inspection shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // F12
+      if (e.key === "F12") {
+        e.preventDefault();
+      }
+      // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+      if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) {
+        e.preventDefault();
+      }
+      // Ctrl+U (View Source)
+      if (e.ctrlKey && e.key === "u") {
+        e.preventDefault();
+      }
+      // Cmd+Option+I (Mac)
+      if (e.metaKey && e.altKey && e.key === "i") {
+        e.preventDefault();
+      }
+      // Cmd+Option+J (Mac)
+      if (e.metaKey && e.altKey && e.key === "j") {
+        e.preventDefault();
+      }
+      // Cmd+Option+C (Mac)
+      if (e.metaKey && e.altKey && e.key === "c") {
+        e.preventDefault();
+      }
+      // Cmd+U (Mac)
+      if (e.metaKey && e.key === "u") {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("contextmenu", handleContextMenu);
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Advanced deterrent: debugger loop
+    // This will pause the execution if DevTools is open
+    const clear = () => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      setInterval(() => {
+        (function() {
+          // eslint-disable-next-line no-debugger
+          return (function(a) {
+            return (function(a) {
+              return (function() {
+                debugger;
+                return Array.prototype.slice.call(arguments);
+              })();
+            })(a);
+          })(function() {
+            return (function() {
+              return (function() {
+                return true;
+              })();
+            })();
+          });
+        })();
+      }, 1000);
+    };
+
+    if (process.env.NODE_ENV === "production") {
+      clear();
+    }
+
+    return () => {
+      window.removeEventListener("contextmenu", handleContextMenu);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
     setLoading(true);
     const timeout = setTimeout(() => setLoading(false), 700); // adjust timing
     return () => clearTimeout(timeout);
   }, [pathname]);
 
   return (
-    <div>
+    <div className="select-none pointer-events-auto">
       {loading && <LogoLoader />}
       {children}
     </div>
