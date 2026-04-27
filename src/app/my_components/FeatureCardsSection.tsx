@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Image from 'next/image';
 
 export default function FeatureCardsSection() {
   const [activeCard, setActiveCard] = useState(0);
@@ -42,7 +43,7 @@ export default function FeatureCardsSection() {
   };
 
   return (
-    <section id="services" className="relative z-10 py-24 sm:py-32 overflow-hidden" style={{ borderTop: "1px solid var(--border-subtle)" }}>
+    <section id="services" className="relative z-10 py-16 sm:py-32 overflow-hidden" style={{ borderTop: "1px solid var(--border-subtle)" }}>
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
         
         {/* Header */}
@@ -84,9 +85,9 @@ export default function FeatureCardsSection() {
           </p>
         </motion.div>
 
-        <div className="relative z-5 my-8 flex w-full flex-col items-center justify-center gap-2">
+        <div className="relative z-5 my-2 sm:my-8 flex w-full flex-col items-center justify-center gap-2">
           <div 
-            className="flex h-[400px] sm:h-[520px] w-full max-w-5xl flex-col items-center justify-center overflow-hidden transition-all duration-500"
+            className="flex h-[320px] sm:h-[520px] w-full max-w-5xl flex-col items-center justify-center overflow-hidden transition-all duration-500"
           >
             <div className="flex flex-1 items-center justify-center self-stretch">
               <div className="flex h-full w-full items-center justify-center">
@@ -98,11 +99,13 @@ export default function FeatureCardsSection() {
                         : "scale-110 opacity-0 z-0"
                     }`}
                   >
-                    <img 
+                    <Image 
                       src="/services/1_Landing_page.jpg" 
                       alt="High-Converting Landing Pages"
-                      className="max-h-full max-w-full object-contain rounded-2xl border shadow-2xl"
+                      fill
+                      className="object-contain rounded-2xl border shadow-2xl"
                       style={{ borderColor: "var(--border-medium)" }}
+                      sizes="(max-width: 1024px) 100vw, 1024px"
                     />
                   </div>
 
@@ -113,11 +116,13 @@ export default function FeatureCardsSection() {
                         : "scale-110 opacity-0 z-0"
                     }`}
                   >
-                    <img 
+                    <Image 
                       src="/services/2_ecommerce_website.jpg" 
                       alt="Premium E-Commerce Solutions"
-                      className="max-h-full max-w-full object-contain rounded-2xl border shadow-2xl"
+                      fill
+                      className="object-contain rounded-2xl border shadow-2xl"
                       style={{ borderColor: "var(--border-medium)" }}
+                      sizes="(max-width: 1024px) 100vw, 1024px"
                     />
                   </div>
 
@@ -128,11 +133,13 @@ export default function FeatureCardsSection() {
                         : "scale-110 opacity-0 z-0"
                     }`}
                   >
-                    <img 
+                    <Image 
                       src="/services/3_ecommerce_website.jpg" 
                       alt="Advanced Admin Dashboards"
-                      className="max-h-full max-w-full object-contain rounded-2xl border shadow-2xl"
+                      fill
+                      className="object-contain rounded-2xl border shadow-2xl"
                       style={{ borderColor: "var(--border-medium)" }}
+                      sizes="(max-width: 1024px) 100vw, 1024px"
                     />
                   </div>
                 </div>
@@ -141,7 +148,7 @@ export default function FeatureCardsSection() {
           </div>
         </div>
 
-        <div className="mt-10 flex items-start justify-center self-stretch border-y" style={{ borderColor: "var(--border-subtle)" }}>
+        <div className="mt-6 sm:mt-20 flex items-start justify-center self-stretch border-y" style={{ borderColor: "var(--border-subtle)" }}>
           <div className="relative w-4 self-stretch overflow-hidden sm:w-6 md:w-8 lg:w-12">
             <div className="absolute -top-30 -left-4 flex w-40 flex-col items-start justify-start">
               {Array.from({ length: 50 }).map((_, i) => (

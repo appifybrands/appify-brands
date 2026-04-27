@@ -19,9 +19,9 @@ export default function ClientLayout({
   }, [pathname]);
 
   return (
-    <>
+    <div>
       {loading && <LogoLoader />}
       {children}
-    </>
+    </div>
   );
 }
