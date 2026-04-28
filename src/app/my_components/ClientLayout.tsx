@@ -56,23 +56,14 @@ export default function ClientLayout({
     // Advanced deterrent: debugger loop
     // This will pause the execution if DevTools is open
     const clear = () => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       setInterval(() => {
         (function() {
-          // eslint-disable-next-line no-debugger
-          return (function(a) {
-            return (function(a) {
-              return (function() {
-                debugger;
-                return Array.prototype.slice.call(arguments);
-              })();
-            })(a);
-          })(function() {
-            return (function() {
-              return (function() {
-                return true;
-              })();
-            })();
+          const deterrent = function(...args: unknown[]) {
+            debugger;
+            return args;
+          };
+          deterrent(function() {
+            return true;
           });
         })();
       }, 1000);
