@@ -22,11 +22,11 @@ const demos = [
   },
   {
     index: "03",
-    title: "SaaS Dashboard",
-    category: "SaaS",
-    description: "Data-rich, intuitive dashboard interface with real-time analytics, custom charts, and advanced user management.",
-    href: "#",
-    status: "soon",
+    title: "Azure Heights Reality",
+    category: "Real Estate",
+    description: "An immersive zoom-parallax showcase featuring cinematic architectural perspectives and fluid scroll-driven transitions.",
+    href: "/real-estate/demo3",
+    status: "live",
   },
 ];
 

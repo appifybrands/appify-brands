@@ -13,6 +13,8 @@ export default function ClientLayout({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // SECURITY FEATURES TEMPORARILY DISABLED FOR INSPECTION
+    /*
     // Disable right-click
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
@@ -77,6 +79,7 @@ export default function ClientLayout({
       window.removeEventListener("contextmenu", handleContextMenu);
       window.removeEventListener("keydown", handleKeyDown);
     };
+    */
   }, []);
 
   useEffect(() => {
