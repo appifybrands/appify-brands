@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     ],
     apple: "/new_logos/appifybrands_dark_logo_circular.png",
   },
-  manifest: "/site.webmanifest",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
