@@ -4,6 +4,15 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "@/app/my_components/real-estate-demo1/RealEstateNavbar";
+import { Home, Building, Waves, MessageSquare, ArrowDown } from "lucide-react";
+import { AnimatedBaskervville } from "@/app/my_components/real-estate-demo1/AnimatedBaskervville";
+
+const demo3NavItems = [
+  { id: "home", label: "Home", icon: Home, href: "#home" },
+  { id: "details", label: "Details", icon: Building, href: "#property" },
+  { id: "spa", label: "SPA & Pool", icon: Waves, href: "#spa" },
+  { id: "gallery", label: "Testimonials", icon: MessageSquare, href: "#gallery" },
+];
 
 const images = [
     { src: "/real-estate-demo3/Demo3front.png", alt: "The Grand Estate Front View" },
@@ -27,6 +36,7 @@ const layoutClasses = [
 
 import { CircularTestimonials } from "@/app/my_components/real-estate-demo3/CircularTestimonials";
 import { SmoothScrollHero } from "@/app/my_components/real-estate-demo3/SmoothScrollHero";
+import SplineScene from "@/app/my_components/real-estate-demo1/SplineScene";
 
 const testimonialsData = [
     {
@@ -108,6 +118,26 @@ export default function RealEstateDemo3() {
         };
         window.addEventListener('resize', handleResize);
 
+        const handleAnchorClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            const anchor = target.closest('a');
+            if (!anchor) return;
+
+            const href = anchor.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                if (href === '#home') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }
+        };
+        document.addEventListener('click', handleAnchorClick);
+
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -164,7 +194,7 @@ export default function RealEstateDemo3() {
             }, 3);
 
             // Frame Texts Fade In/Out during the Canvas scrub (from time 3.0 to 6.0)
-            
+
             // Text 1: 3.2s to 4.0s
             tl.fromTo(".frame-text-1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, 3.2);
             tl.to(".frame-text-1", { opacity: 0, y: -20, duration: 0.3 }, 3.8);
@@ -182,15 +212,16 @@ export default function RealEstateDemo3() {
         return () => {
             ctx.revert();
             window.removeEventListener('resize', handleResize);
+            document.removeEventListener('click', handleAnchorClick);
         };
     }, []);
 
     return (
         <main className="bg-[#faf9f6] text-[#1a1a1a] relative">
-            <Navbar />
+            <Navbar items={demo3NavItems} />
 
             {/* GSAP Pinned Hero Section */}
-            <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[#faf9f6]">
+            <section id="home" ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[#faf9f6]">
 
                 {/* Parallax Gallery (Hidden initially, zooms in from the center) */}
                 <div className="gallery-wrapper absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-auto">
@@ -248,7 +279,7 @@ export default function RealEstateDemo3() {
             </section>
 
             {/* Content Spacer / Outro */}
-            <section className="min-h-[60vh] flex flex-col items-center justify-center px-4 py-32 text-center bg-[#f0eee4] relative z-10">
+            <section id="property" className="min-h-[60vh] flex flex-col items-center justify-center px-4 py-32 text-center bg-[#f0eee4] relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase mb-8">
                         Beyond <span className="text-[#c9a84c]">Imagination</span>
@@ -261,6 +292,8 @@ export default function RealEstateDemo3() {
                     </p>
                     <a
                         href="mailto:appifybrands@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center justify-center px-8 py-4 bg-[#c9a84c] text-black text-sm font-bold tracking-widest uppercase rounded-full hover:bg-[#d4b55c] transition-all duration-300"
                     >
                         Inquire Privately
@@ -269,23 +302,25 @@ export default function RealEstateDemo3() {
             </section>
 
             {/* Smooth Scroll Hero for the Pool */}
-            <SmoothScrollHero 
-                desktopImage="/real-estate-demo3/Demo3pool.png"
-                mobileImage="/real-estate-demo3/Demo3pool.png"
-            >
-                <div className="max-w-2xl mx-auto space-y-6">
-                    <h2 className="text-4xl md:text-6xl font-black tracking-tight uppercase">
-                        The Infinity <span className="text-[#c9a84c]">Edge</span>
-                    </h2>
-                    <div className="w-16 h-[2px] bg-[#c9a84c] mx-auto" />
-                    <p className="text-lg md:text-xl font-light leading-relaxed">
-                        Immerse yourself in crystal clear waters that blend seamlessly with the horizon. Our signature infinity pool offers an unparalleled sanctuary of relaxation, perfect for sunset gazing or morning laps.
-                    </p>
-                </div>
-            </SmoothScrollHero>
+            <div id="spa">
+                <SmoothScrollHero
+                    desktopImage="/real-estate-demo3/Demo3pool.png"
+                    mobileImage="/real-estate-demo3/Demo3pool.png"
+                >
+                    <div className="max-w-2xl mx-auto space-y-6">
+                        <h2 className="text-4xl md:text-6xl font-black tracking-tight uppercase">
+                            The Infinity <span className="text-[#c9a84c]">Edge</span>
+                        </h2>
+                        <div className="w-16 h-[2px] bg-[#c9a84c] mx-auto" />
+                        <p className="text-lg md:text-xl font-light leading-relaxed">
+                            Immerse yourself in crystal clear waters that blend seamlessly with the horizon. Our signature infinity pool offers an unparalleled sanctuary of relaxation, perfect for sunset gazing or morning laps.
+                        </p>
+                    </div>
+                </SmoothScrollHero>
+            </div>
 
             {/* Circular Testimonials Section */}
-            <section className="py-24 bg-[#faf9f6] relative z-10 overflow-hidden">
+            <section id="gallery" className="py-24 bg-[#faf9f6] relative z-10 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight uppercase mb-4">
@@ -307,11 +342,35 @@ export default function RealEstateDemo3() {
                 </div>
             </section>
 
-            {/* Simple Footer */}
-            <footer className="py-12 border-t border-black/10 bg-[#f0eee4] text-center relative z-10">
-                <p className="text-[10px] text-[#a0a0a0] tracking-[0.5em] uppercase">
-                    © 2026 AppifyBrands · Private Portfolio
-                </p>
+            {/* Outro Section (CTA) */}
+            <section className="relative z-40 w-full min-h-[50vh] flex flex-col items-center justify-center bg-[#faf9f6] text-[#1a1a1a] pt-24 pb-20">
+                <div className="w-full max-w-4xl mx-auto text-center px-4">
+                    <AnimatedBaskervville
+                        text="LIKED THE DEMO?"
+                        className="text-[#c9a84c] text-4xl md:text-6xl justify-center mb-6"
+                    />
+                    <p className="text-[#4a4a4a] max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-8">
+                        We design high-converting, interactive landing pages for real estate.
+                    </p>
+                    <p className="text-[#c9a84c] text-sm md:text-base tracking-widest font-medium uppercase">
+                        Choose how you&apos;d like to connect
+                    </p>
+                </div>
+
+                {/* Arrows pointing to contact options */}
+                <div className="w-full flex mt-12">
+                    <div className="w-1/2 flex justify-center">
+                        <ArrowDown className="text-[#c9a84c] animate-bounce w-10 h-10" />
+                    </div>
+                    <div className="w-1/2 flex justify-center">
+                        <ArrowDown className="text-[#c9a84c] animate-bounce w-10 h-10" />
+                    </div>
+                </div>
+            </section>
+
+            {/* Spline Footer */}
+            <footer className="relative z-50 w-full h-screen bg-[#050505] overflow-hidden">
+                <SplineScene scene="/scene.splinecode" />
             </footer>
         </main>
     );

@@ -2,21 +2,28 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Building, Waves, Image as ImageIcon, Mail } from "lucide-react";
+import { Home, Building, Waves, Image as ImageIcon, Mail, LucideIcon } from "lucide-react";
 
-const navItems = [
+export type NavItem = {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  href: string;
+};
+
+const defaultNavItems: NavItem[] = [
   { id: "home", label: "Home", icon: Home, href: "#home" },
   { id: "details", label: "Details", icon: Building, href: "#property" },
   { id: "spa", label: "SPA & Pool", icon: Waves, href: "#spa" },
   { id: "gallery", label: "Gallery", icon: ImageIcon, href: "#gallery" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ items = defaultNavItems }: { items?: NavItem[] }) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-[200] flex items-center p-2 gap-2 bg-[#050505]/40 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl">
-      {navItems.map((item) => {
+      {items.map((item) => {
         const Icon = item.icon;
         const isHovered = hoveredItem === item.id;
         
