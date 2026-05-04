@@ -13,6 +13,7 @@ import { HoverExpand_002 } from "@/app/my_components/real-estate-demo1/skiper53"
 import { Skiper16 } from "@/app/my_components/real-estate-demo1/skiper16";
 import { AnimatedBaskervville } from "@/app/my_components/real-estate-demo1/AnimatedBaskervville";
 import SplineScene from "@/app/my_components/real-estate-demo1/SplineScene";
+import OutroSequence from "@/app/my_components/real-estate-demo1/OutroSequence";
 import { ArrowDown } from "lucide-react";
 
 // Register ScrollTrigger
@@ -102,12 +103,12 @@ export default function RealEstateDemo1() {
         <section
           className="sticky top-0 z-10 h-[100dvh] w-full bg-[#f5f4f3] overflow-hidden flex flex-col items-center justify-center pt-24 pb-6 md:pt-32 md:pb-12"
         >
-          <div className="w-full max-w-6xl mx-auto text-center px-4 mb-10">
+          <div className="relative z-20 shrink-0 w-full max-w-6xl mx-auto text-center px-4 mb-8 md:mb-16">
             <AnimatedBaskervville
               text="Soaring 12 Foot Ceilings"
               className="luxury-heading text-[#2e170a] text-5xl md:text-7xl justify-center"
             />
-            <p className="luxury-subheading text-[#2e170a]/60 text-sm mt-6">
+            <p className="luxury-subheading text-[#2e170a]/60 text-sm mt-6 md:mt-8 bg-[#f5f4f3]/80 backdrop-blur-sm inline-block px-4 py-1 rounded-full">
               Award-winning Stellare floor plan
             </p>
           </div>
@@ -199,6 +200,9 @@ export default function RealEstateDemo1() {
             </div>
           </div>
         </section>
+
+        {/* Upscaled Frames Sequence */}
+        <OutroSequence />
 
         {/* Spline Footer */}
         <footer className="relative z-50 w-full h-screen bg-[#050505] overflow-hidden">
