@@ -17,12 +17,12 @@ function frameSrc(index: number): string {
 
   if (index < SET1_COUNT) {
     const padded = String(n).padStart(3, "0");
-    return `/real-estate-demo1/frames_set1/ezgif-frame-${padded}.jpg`;
+    return `/demo1_assets/upscaled-frames-1/ezgif-frame-${padded}.jpg`;
   }
 
   const finalIndex = index - SET1_COUNT + 1;
   const finalPadded = String(finalIndex).padStart(3, "0");
-  return `/real-estate-demo1/frames_set2/ezgif-frame-${finalPadded}.jpg`;
+  return `/demo1_assets/upscales-frames-2/ezgif-frame-${finalPadded}.jpg`;
 }
 
 /* ── Text overlay data ─────────────────────────── */
