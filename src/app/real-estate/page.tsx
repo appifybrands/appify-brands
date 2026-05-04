@@ -8,27 +8,28 @@ import Lenis from 'lenis';
 import Navbar from "@/app/my_components/Navbar";
 import ParticlesComponent from "@/components/ui/particles-bg";
 import SplineScene from "@/app/my_components/real-estate-demo1/SplineScene";
+import CTASection from '@/app/my_components/CTASection';
 
 const demos = [
   {
     id: "demo1",
-    title: "The Stellare Estate",
+    title: "Luxury Villa",
     subtitle: "A masterclass in luxury living with 12-foot ceilings and a resort oasis.",
-    image: "https://content.mediastg.net/dyna_images/mls/103801/1781187/1781187-2.jpgx",
+    image: "/real-estate-demos/demo1-luxury-villa.png",
     href: "/real-estate/demo1"
   },
   {
     id: "demo2",
-    title: "Modern Minimalist Villa",
-    subtitle: "Sleek lines, open spaces, and panoramic views of the city skyline.",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=2000",
+    title: "Kashmir Nature Villa",
+    subtitle: "Experience the pristine beauty of nature with seamless day and night mode transitions.",
+    image: "/real-estate-demos/demo2-kashmir-nature-villa-with-day-and-night-mode.png",
     href: "/real-estate/demo2"
   },
   {
     id: "demo3",
-    title: "Coastal Retreat",
-    subtitle: "Beachfront property blending natural elements with modern luxury.",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=2000",
+    title: "Private Sanctuary",
+    subtitle: "A secluded retreat featuring a unique talent for creating captivating interactivity.",
+    image: "/real-estate-demos/demo3-private-sanctuary-withunique-talent-to-create-interactivity.png",
     href: "/real-estate/demo3"
   }
 ];
@@ -100,51 +101,64 @@ export default function RealEstateDemos() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {demos.map((demo, index) => (
-            <Link href={demo.href} key={demo.id} className={index === 0 ? "lg:col-span-2" : ""}>
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative block overflow-hidden rounded-3xl border border-white/5 bg-black/20 backdrop-blur-md"
+            <motion.div 
+              key={demo.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className={`group flex flex-col ${index === 0 ? "lg:col-span-2" : ""}`}
+            >
+              <Link 
+                href={demo.href} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block w-full overflow-hidden rounded-2xl border border-white/5 bg-black/20 backdrop-blur-md mb-6"
               >
-                <div className={`relative w-full overflow-hidden ${index === 0 ? "h-[60vh]" : "h-[45vh]"}`}>
+                <div className={`relative w-full ${index === 0 ? "h-[60vh]" : "h-[40vh]"}`}>
                   <motion.div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
                     style={{ backgroundImage: `url(${demo.image})` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80" />
-                  
-                  <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
-                    <div className="overflow-hidden mb-3">
-                      <motion.h3 
-                        className="text-3xl md:text-5xl font-bold text-white tracking-tight"
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                      >
-                        {demo.title}
-                      </motion.h3>
-                    </div>
-                    <p className="text-white/70 text-base md:text-lg max-w-2xl transition-all duration-500 group-hover:text-white">
-                      {demo.subtitle}
-                    </p>
-                    
-                    <div className="mt-8 overflow-hidden h-6">
-                      <span className="inline-flex items-center text-sm font-semibold tracking-widest uppercase opacity-0 translate-y-6 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0" style={{ color: "var(--text-primary)" }}>
-                        View Experience
-                        <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
+                  {/* Subtle hover overlay for the image link */}
+                  <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/0" />
                 </div>
-              </motion.div>
-            </Link>
+              </Link>
+              
+              <div className="flex flex-col px-2">
+                <Link href={demo.href} target="_blank" rel="noopener noreferrer" className="inline-block w-fit">
+                  <h3 
+                    className="text-3xl md:text-4xl font-bold tracking-tight hover:opacity-80 transition-opacity duration-300"
+                    style={{ fontFamily: "'Inter', sans-serif", color: "var(--text-primary)" }}
+                  >
+                    {demo.title}
+                  </h3>
+                </Link>
+                <p className="text-lg md:text-xl mt-4 max-w-3xl leading-relaxed font-medium" style={{ color: "var(--text-secondary)" }}>
+                  {demo.subtitle}
+                </p>
+                <div className="mt-6">
+                  <Link 
+                    href={demo.href} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-8 py-4 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:scale-105 hover:shadow-xl bg-[#1A2D42] text-white shadow-md" 
+                  >
+                    View Experience
+                    <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </main>
 
+      <CTASection />
+
       {/* Footer / Spline Scene */}
-      <footer className="relative z-50 w-full h-[60vh] min-h-[400px] overflow-hidden mt-10">
+      <footer className="relative z-50 w-full h-screen overflow-hidden">
         <SplineScene scene="/scene.splinecode" />
       </footer>
     </div>

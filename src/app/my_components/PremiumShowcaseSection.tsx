@@ -21,22 +21,6 @@ const projects = [
     href: "/real-estate/demo1",
   },
   {
-    id: "real-estate-2",
-    title: "Modern Villa Showcase",
-    category: "High-End Property",
-    description: "An elegant, minimalist real estate landing page focusing on clean lines and spacious layouts.",
-    video: "/premium_shocase_videos/realestate_demo.mp4",
-    href: "/real-estate/demo2",
-  },
-  {
-    id: "real-estate-3",
-    title: "The Haven Resort",
-    category: "High-End Property",
-    description: "A cinematic, GSAP-powered experience showcasing a private sanctuary with seamless indoor-outdoor living.",
-    video: "/premium_shocase_videos/realestate_demo.mp4",
-    href: "/real-estate/demo3",
-  },
-  {
     id: "larq",
     title: "Larq Bottle",
     category: "Premium E-Commerce",
@@ -53,19 +37,19 @@ export default function PremiumShowcaseSection() {
   return (
     <section className="relative z-10 py-24 sm:py-32 overflow-hidden" style={{ borderTop: "1px solid var(--border-subtle)" }}>
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
-        
+
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
           className="flex w-full flex-col items-center justify-start gap-5 overflow-hidden mb-16 sm:mb-24"
         >
-          <span 
+          <span
             className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase"
-            style={{ 
-              background: "var(--bg-secondary)", 
+            style={{
+              background: "var(--bg-secondary)",
               color: "var(--text-primary)",
               border: "1px solid var(--border-medium)"
             }}
@@ -73,7 +57,7 @@ export default function PremiumShowcaseSection() {
             Case Studies
           </span>
 
-          <h2 
+          <h2
             className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
             style={{
               fontSize: "clamp(2rem, 5vw, 4rem)",
@@ -85,7 +69,7 @@ export default function PremiumShowcaseSection() {
             Premium Design Showcase
           </h2>
 
-          <p 
+          <p
             className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
             style={{ color: "var(--text-secondary)" }}
           >
@@ -104,8 +88,8 @@ export default function PremiumShowcaseSection() {
               transition={{ duration: 0.8, delay: idx * 0.1, ease: EASE }}
               className="group relative"
             >
-              <Link 
-                href={project.href} 
+              <Link
+                href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col gap-6"
@@ -123,7 +107,7 @@ export default function PremiumShowcaseSection() {
 
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80" />
-                  
+
                   {/* Category Badge */}
                   <div className="absolute top-6 left-6">
                     <span className="px-3 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full border bg-black/20 backdrop-blur-md text-white" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
@@ -137,7 +121,7 @@ export default function PremiumShowcaseSection() {
                     <h3 className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
                       {project.title}
                     </h3>
-                    <div 
+                    <div
                       className="flex items-center gap-2 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-colors duration-300 group-hover:bg-[var(--text-primary)] group-hover:text-[var(--bg-primary)]"
                       style={{ borderColor: "var(--border-medium)", color: "var(--text-secondary)" }}
                     >
@@ -147,7 +131,7 @@ export default function PremiumShowcaseSection() {
                       </span>
                       Live View
                       <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                        <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   </div>
@@ -159,7 +143,50 @@ export default function PremiumShowcaseSection() {
             </motion.div>
           ))}
         </div>
+        {/* Banner for Real Estate Showcase */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
+          className="mt-20 group relative overflow-hidden rounded-3xl border border-[#c9a84c]/30 bg-black/60 backdrop-blur-xl"
+        >
+          {/* Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 opacity-50 mix-blend-overlay"
+            style={{ backgroundImage: 'url(/real-estate-demos/demo1-luxury-villa.png)' }}
+          />
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent pointer-events-none" />
 
+          <Link href="/real-estate" className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-8 relative z-10">
+            <div className="flex flex-col gap-4 max-w-xl text-center md:text-left">
+              <span className="inline-flex items-center px-3 py-1 text-[10px] font-bold tracking-[0.2em] uppercase rounded-full border w-fit mx-auto md:mx-0" style={{ borderColor: "rgba(201, 168, 76, 0.4)", background: "rgba(201, 168, 76, 0.1)", color: "#c9a84c" }}>
+                Premium Collection
+              </span>
+              <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                Real Estate <br className="hidden md:block" /> Showcase
+              </h3>
+              <p className="text-sm md:text-lg leading-relaxed font-light text-white/80">
+                Discover our specialized collection of immersive landing pages designed specifically for high-end real estate listings and luxury property management.
+              </p>
+            </div>
+            
+            <div className="flex items-center justify-center">
+              <div 
+                className="px-10 py-5 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 group-hover:scale-105 bg-[#c9a84c] text-black shadow-[0_0_30px_rgba(201,168,76,0.3)] hover:shadow-[0_0_40px_rgba(201,168,76,0.5)] flex items-center gap-3"
+              >
+                Explore More
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </div>
+          </Link>
+          
+          {/* Subtle background glow */}
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#c9a84c] opacity-20 blur-[120px] pointer-events-none group-hover:opacity-30 transition-opacity duration-500" />
+        </motion.div>
       </div>
     </section>
   );

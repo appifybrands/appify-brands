@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon, CheckCircle2, ChevronDown } from "lucide-react";
 
@@ -80,7 +81,7 @@ export default function Navbar() {
         <div className="mx-auto flex items-center justify-between h-16 pr-6 sm:pr-8 pl-2 sm:pl-3">
 
           {/* Logo */}
-          <a href="#main" onClick={(e) => handleNav(e, "#main")} className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
             <div className="relative flex items-center justify-center w-[40px] h-[40px] rounded-full group cursor-pointer overflow-hidden shadow-lg"
                  style={{ boxShadow: "0 0 15px rgba(26, 45, 66, 0.2)" }}>
               {/* Spinning liquid gradient background */}
@@ -104,9 +105,7 @@ export default function Navbar() {
                 className="relative z-10 object-contain rounded-full scale-[1.05] group-hover:scale-[1.10] transition-transform duration-300"
               />
             </div>
-
-            {/* AppifyBrands — per-letter rolling effect */}
-          </a>
+          </Link>
 
           {/* Desktop nav links with Dropdown Support */}
           <nav className="hidden md:flex items-center gap-8">

@@ -12,7 +12,7 @@ export type NavItem = {
 };
 
 const defaultNavItems: NavItem[] = [
-  { id: "home", label: "Home", icon: Home, href: "#home" },
+  { id: "home", label: "Home", icon: Home, href: "/" },
   { id: "details", label: "Details", icon: Building, href: "#property" },
   { id: "spa", label: "SPA & Pool", icon: Waves, href: "#spa" },
   { id: "gallery", label: "Gallery", icon: ImageIcon, href: "#gallery" },
