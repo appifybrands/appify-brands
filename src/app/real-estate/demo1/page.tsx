@@ -13,7 +13,6 @@ import { HoverExpand_002 } from "@/app/my_components/real-estate-demo1/skiper53"
 import { Skiper16 } from "@/app/my_components/real-estate-demo1/skiper16";
 import { AnimatedBaskervville } from "@/app/my_components/real-estate-demo1/AnimatedBaskervville";
 import SplineScene from "@/app/my_components/real-estate-demo1/SplineScene";
-import OutroSequence from "@/app/my_components/real-estate-demo1/OutroSequence";
 import { ArrowDown } from "lucide-react";
 
 // Register ScrollTrigger
@@ -200,9 +199,6 @@ export default function RealEstateDemo1() {
             </div>
           </div>
         </section>
-
-        {/* Upscaled Frames Sequence */}
-        <OutroSequence />
 
         {/* Spline Footer */}
         <footer className="relative z-50 w-full h-screen bg-[#050505] overflow-hidden">
