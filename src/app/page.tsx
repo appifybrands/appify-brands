@@ -15,6 +15,7 @@ import FeatureCardsSection from '@/app/my_components/FeatureCardsSection';
 import FAQSection from '@/app/my_components/FAQSection';
 import CTASection from '@/app/my_components/CTASection';
 import Navbar from "./my_components/Navbar";
+import Footer from "./my_components/Footer";
 import SplineScene from "@/app/my_components/real-estate-demo1/SplineScene";
 import ParticlesComponent from "@/components/ui/particles-bg";
 
@@ -131,6 +132,7 @@ export default function Home() {
         <footer className="relative z-50 w-full h-screen overflow-hidden">
           <SplineScene scene="/scene.splinecode" />
         </footer>
+        <Footer />
       </div>
     </div>
   );

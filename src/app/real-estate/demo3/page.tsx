@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import NextImage from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "@/app/my_components/real-estate-demo1/RealEstateNavbar";
 import { Home, Building, Waves, MessageSquare, ArrowDown } from "lucide-react";
@@ -237,10 +238,12 @@ export default function RealEstateDemo3() {
                                         className="video-layer absolute top-0 left-0 h-full w-full object-cover rounded-lg shadow-2xl opacity-0"
                                     />
                                 )}
-                                <img
+                                <NextImage
                                     src={src}
                                     alt={alt || "Gallery image"}
-                                    className={`h-full w-full object-cover rounded-lg shadow-2xl ${index === 0 ? "front-image" : ""}`}
+                                    fill
+                                    className={`object-cover rounded-lg shadow-2xl ${index === 0 ? "front-image" : ""}`}
+                                    sizes="(max-width: 768px) 50vw, 25vw"
                                 />
                             </div>
                         </div>

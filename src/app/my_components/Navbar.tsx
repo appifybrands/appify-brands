@@ -10,18 +10,19 @@ type SubItem = { label: string; icon: React.ElementType; href: string };
 type NavLink = { label: string; href: string; subItems?: SubItem[] };
 
 const navLinks: NavLink[] = [
-  { label: "Works",        href: "#works" },
+  { label: "Pricing",      href: "/pricing" },
+  { label: "Works",        href: "/#works" },
   { 
     label: "Services",     
-    href: "#services",
+    href: "/#services",
     subItems: [
-      { label: "Landing Pages", icon: CheckCircle2, href: "#services" },
-      { label: "E-Commerce", icon: CheckCircle2, href: "#services" },
-      { label: "Admin Panels", icon: CheckCircle2, href: "#services" },
+      { label: "Landing Pages", icon: CheckCircle2, href: "/#services" },
+      { label: "E-Commerce", icon: CheckCircle2, href: "/#services" },
+      { label: "Admin Panels", icon: CheckCircle2, href: "/#services" },
     ]
   },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "About",        href: "#about" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "About",        href: "/#about" },
 ];
 
 export default function Navbar() {
@@ -38,17 +39,22 @@ export default function Navbar() {
   }, []);
 
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      setMenuOpen(false);
-      
-      if (href === '#bottom') {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-        return;
-      }
+    if (href.includes('#')) {
+      const [path, hash] = href.split('#');
+      const currentPath = window.location.pathname;
 
-      const target = document.querySelector(href);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (currentPath === path || (path === '/' && currentPath === '') || (path === '' && currentPath === '/')) {
+        e.preventDefault();
+        setMenuOpen(false);
+        
+        if (hash === 'bottom') {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          return;
+        }
+
+        const target = document.querySelector(`#${hash}`);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   };
 
@@ -111,7 +117,7 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <div key={link.href} className="relative group">
-                <a
+                <Link
                   href={link.href}
                   onClick={(e) => !link.subItems && handleNav(e, link.href)}
                   className="flex items-center gap-1 cursor-pointer"
@@ -124,7 +130,7 @@ export default function Navbar() {
                   {link.subItems && (
                     <ChevronDown size={12} className="opacity-60 group-hover:opacity-100 transition-opacity" />
                   )}
-                </a>
+                </Link>
 
                 {/* Apple Glass Dropdown */}
                 {link.subItems && (
@@ -142,7 +148,7 @@ export default function Navbar() {
                       {link.subItems.map((sub, i) => {
                         const Icon = sub.icon;
                         return (
-                          <a
+                          <Link
                             key={i}
                             href={sub.href}
                             onClick={(e) => handleNav(e, sub.href)}
@@ -151,7 +157,7 @@ export default function Navbar() {
                           >
                             <Icon size={16} strokeWidth={1.5} />
                             <span className="text-[0.95rem] font-medium tracking-tight normal-case">{sub.label}</span>
-                          </a>
+                          </Link>
                         );
                       })}
                     </div>
@@ -183,9 +189,9 @@ export default function Navbar() {
             </button>
 
             {/* CTA — desktop only (Styled like the black pill in the reference image) */}
-            <a
-              href="#bottom"
-              onClick={(e) => handleNav(e, "#bottom")}
+            <Link
+              href="/#bottom"
+              onClick={(e) => handleNav(e, "/#bottom")}
               className="hidden md:inline-flex relative items-center justify-center px-7 py-2.5 text-[0.7rem] font-bold tracking-[0.15em] uppercase transition-all duration-300 rounded-full hover:scale-105"
               style={{
                 background: "var(--navy)",
@@ -194,7 +200,7 @@ export default function Navbar() {
               }}
             >
               Contact
-            </a>
+            </Link>
 
             {/* Hamburger — mobile */}
             <button
@@ -238,7 +244,7 @@ export default function Navbar() {
         <nav className="flex flex-col gap-8">
           {navLinks.map((link, i) => (
             <div key={link.href} className="flex flex-col gap-4">
-              <a
+              <Link
                 href={link.href}
                 onClick={(e) => handleNav(e, link.href)}
                 className="text-4xl font-black tracking-tighter transition-all duration-300 hover:opacity-50"
@@ -250,7 +256,7 @@ export default function Navbar() {
                 }}
               >
                 {link.label}
-              </a>
+              </Link>
               {link.subItems && (
                 <div className="flex flex-col gap-3 pl-4 border-l border-[var(--border-medium)]"
                      style={{
@@ -259,9 +265,9 @@ export default function Navbar() {
                        transform: menuOpen ? "translateX(0)" : "translateX(-10px)",
                      }}>
                   {link.subItems.map((sub, j) => (
-                    <a key={j} href={sub.href} onClick={(e) => handleNav(e, sub.href)} className="text-lg font-medium text-[var(--text-secondary)]">
+                    <Link key={j} href={sub.href} onClick={(e) => handleNav(e, sub.href)} className="text-lg font-medium text-[var(--text-secondary)]">
                       {sub.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
