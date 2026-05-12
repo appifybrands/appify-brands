@@ -36,7 +36,8 @@ export default function CafeNavbar() {
   }, []);
 
   return (
-    <nav className="brew-nav" data-scrolled={scrolled}>
+    <>
+      <nav className="brew-nav" data-scrolled={scrolled} data-menu-open={mobileOpen}>
       <div className="brew-nav-inner">
         {/* Logo */}
         <Link href="/cafe/demo1" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
@@ -91,26 +92,59 @@ export default function CafeNavbar() {
         </div>
       </div>
 
-      {/* Mobile Dropdown */}
-      {mobileOpen && (
-        <div style={{
-          background: 'var(--brew-white)',
-          borderTop: '2px solid var(--brew-gray)',
-          padding: '24px',
-          display: 'flex', flexDirection: 'column', gap: '16px'
-        }}>
-          {navLinks.map(l => (
-            <Link
-              key={l.label} href={l.href}
-              onClick={() => setMobileOpen(false)}
-              className="brew-nav-link"
-              style={{ borderBottom: '2px solid var(--brew-gray)', paddingBottom: '16px' }}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-      )}
     </nav>
+
+    {/* Full-Screen Mobile Menu */}
+    <div 
+      className="brew-mobile-menu"
+      style={{
+        position: 'fixed',
+        top: 0, left: 0, right: 0, bottom: 0,
+        backgroundColor: 'var(--brew-dark)',
+        zIndex: 999, // Just below the 1000 z-index navbar
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '32px',
+        opacity: mobileOpen ? 1 : 0,
+        pointerEvents: mobileOpen ? 'auto' : 'none',
+        transition: 'opacity 0.4s ease',
+      }}
+    >
+      {navLinks.map((l, i) => (
+        <Link
+          key={l.label} href={l.href}
+          onClick={() => setMobileOpen(false)}
+          style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontSize: '2.5rem',
+            fontWeight: 900,
+            textTransform: 'uppercase',
+            color: 'var(--brew-cream)',
+            textDecoration: 'none',
+            transform: mobileOpen ? 'translateY(0)' : 'translateY(20px)',
+            opacity: mobileOpen ? 1 : 0,
+            transition: `all 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${0.1 * i}s`,
+          }}
+        >
+          {l.label}
+        </Link>
+      ))}
+      <Link 
+        href="/cafe/demo1/menu" 
+        className="brew-btn brew-btn-teal" 
+        style={{ 
+          marginTop: '20px', padding: '16px 40px', fontSize: '1.2rem',
+          transform: mobileOpen ? 'translateY(0)' : 'translateY(20px)',
+          opacity: mobileOpen ? 1 : 0,
+          transition: `all 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${0.1 * navLinks.length}s`,
+        }}
+        onClick={() => setMobileOpen(false)}
+      >
+        View Menu
+      </Link>
+    </div>
+    </>
   );
 }

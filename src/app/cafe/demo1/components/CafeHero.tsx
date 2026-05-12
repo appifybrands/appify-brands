@@ -34,6 +34,39 @@ export default function CafeHero() {
       {/* Dark Overlay for text readability */}
       <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(13, 30, 31, 0.4)', zIndex: 1 }} />
 
+      {/* Mobile Only CTAs - Centered */}
+      <div className="brew-mobile-only" style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        width: '85%',
+        maxWidth: '320px'
+      }}>
+        <Link 
+          href="#takeaway" 
+          className="brew-btn brew-btn-teal" 
+          style={{ padding: '16px 20px', fontSize: '1.2rem', width: '100%', justifyContent: 'center', transition: 'background-color 0.3s ease, transform 0.2s ease' }}
+          onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--brew-teal-dark)'}
+          onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--brew-teal)'}
+        >
+          TakeAway
+        </Link>
+        <Link 
+          href="#delivery" 
+          className="brew-btn brew-btn-sand" 
+          style={{ padding: '16px 20px', fontSize: '1.2rem', width: '100%', justifyContent: 'center', transition: 'background-color 0.3s ease, transform 0.2s ease' }}
+          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#B89960'}
+          onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--brew-sand)'}
+        >
+          Delivery
+        </Link>
+      </div>
+
       {/* Bottom Overlay Image */}
       <div className="hero-overlay-container">
         <img 

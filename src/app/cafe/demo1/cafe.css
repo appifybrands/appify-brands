@@ -232,14 +232,25 @@
   border-bottom: 2px solid var(--brew-gray);
 }
 
-/* Dynamic text colors when transparent over dark hero */
-.brew-nav[data-scrolled="false"] .brew-nav-link {
+/* Dynamic text colors when transparent over dark hero OR menu is open */
+.brew-nav[data-scrolled="false"] .brew-nav-link,
+.brew-nav[data-menu-open="true"] .brew-nav-link {
   color: var(--brew-white);
 }
 
 .brew-nav[data-scrolled="false"] .brew-logo-text-main,
-.brew-nav[data-scrolled="false"] .brew-logo-text-sub {
+.brew-nav[data-scrolled="false"] .brew-logo-text-sub,
+.brew-nav[data-menu-open="true"] .brew-logo-text-main,
+.brew-nav[data-menu-open="true"] .brew-logo-text-sub {
   color: var(--brew-white) !important;
+}
+
+/* Override scrolled background if menu is open to match the full-screen dark overlay */
+.brew-nav[data-menu-open="true"] {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 2px solid transparent !important;
 }
 
 .brew-nav-inner {
@@ -349,12 +360,12 @@
   }
 
   .rive-btn-link {
-    position: relative;
-    bottom: auto;
-    right: auto;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
     width: 210px;
     height: 70px;
-    margin-top: -80px;
+    margin-top: 0;
     z-index: 12;
   }
 }
