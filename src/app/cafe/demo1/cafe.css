@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&family=Outfit:wght@400;600;700;800;900&display=swap');
+
+/* ── Brew Cup Brand Root (Happy Italy Style) ───────────── */
+.cafe-root {
+  --brew-teal:          #2A7D8C;
+  --brew-teal-dark:     #1F5F6B;
+  --brew-cream:         #F5F0E8;
+  --brew-sand:          #C9A86C;
+  --brew-brown:         #8B6845;
+  --brew-dark:          #0D1E1F;
+  --brew-black:         #000000;
+  --brew-white:         #FFFFFF;
+  --brew-gray:          #E5E5E5;
+
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--brew-white);
+  color: var(--brew-dark);
+  overflow-x: hidden;
+}
+
+/* ── Typography ────────────────────────────────────────── */
+.brew-heading {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--brew-dark);
+  text-transform: uppercase;
+}
+.brew-heading-italic {
+  font-style: italic;
+  font-weight: 900;
+}
+.brew-subheading {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brew-teal);
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.brew-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 36px;
+  border-radius: 100px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  border: none;
+  white-space: nowrap;
+}
+.brew-btn:hover {
+  transform: scale(1.05);
+}
+.brew-btn-teal {
+  background-color: var(--brew-teal);
+  color: var(--brew-white);
+}
+.brew-btn-sand {
+  background-color: var(--brew-sand);
+  color: var(--brew-dark);
+}
+.brew-btn-dark {
+  background-color: var(--brew-dark);
+  color: var(--brew-white);
+}
+
+/* ── Image Placeholder (Blocky Style) ──────────────────── */
+.brew-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brew-gray);
+  color: var(--brew-dark);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  border: 4px dashed var(--brew-dark);
+  padding: 20px;
+}
+
+/* ── Section & Layout ──────────────────────────────────── */
+.brew-section {
+  padding: 80px 20px;
+}
+.brew-section-full {
+  width: 100%;
+}
+.brew-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Menu List Styles ──────────────────────────────────── */
+.brew-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.brew-menu-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+.brew-menu-item-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+.brew-menu-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--brew-dark);
+  background-color: var(--brew-white);
+  padding-right: 12px;
+  z-index: 1;
+}
+.brew-menu-price {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--brew-teal);
+  background-color: var(--brew-white);
+  padding-left: 12px;
+  z-index: 1;
+}
+.brew-menu-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  border-bottom: 3px dotted var(--brew-gray);
+  z-index: 0;
+}
+.brew-menu-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--brew-brown);
+  margin-top: 4px;
+  max-width: 80%;
+}
+
+/* ── Helpers ───────────────────────────────────────────── */
+.bg-teal { background-color: var(--brew-teal); color: var(--brew-white); }
+.bg-cream { background-color: var(--brew-cream); color: var(--brew-dark); }
+.bg-sand { background-color: var(--brew-sand); color: var(--brew-dark); }
+.bg-dark { background-color: var(--brew-dark); color: var(--brew-white); }
+.bg-white { background-color: var(--brew-white); color: var(--brew-dark); }
+
+.text-teal { color: var(--brew-teal); }
+.text-cream { color: var(--brew-cream); }
+.text-sand { color: var(--brew-sand); }
+.text-dark { color: var(--brew-dark); }
+.text-white { color: var(--brew-white); }
+
+/* ── Nav ───────────────────────────────────────────────── */
+.brew-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background-color: transparent;
+  border-bottom: 2px solid transparent;
+  padding: 0 24px;
+  transition: all 0.4s ease;
+}
+
+.brew-nav[data-scrolled="true"] {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--brew-gray);
+}
+
+/* Dynamic text colors when transparent over dark hero */
+.brew-nav[data-scrolled="false"] .brew-nav-link {
+  color: var(--brew-white);
+}
+.brew-nav[data-scrolled="false"] .brew-logo-text-main,
+.brew-nav[data-scrolled="false"] .brew-logo-text-sub {
+  color: var(--brew-white) !important;
+}
+
+.brew-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+}
+.brew-nav-link {
+  padding: 10px 16px;
+  color: var(--brew-dark);
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+.brew-nav-link:hover {
+  color: var(--brew-teal);
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .brew-desktop-only { display: none !important; }
+  .brew-nav-inner { height: 70px; }
+  .brew-menu-name, .brew-menu-price { font-size: 1.1rem; }
+  .brew-menu-desc { max-width: 100%; }
+}
+@media (min-width: 769px) {
+  .brew-mobile-only { display: none !important; }
+}
