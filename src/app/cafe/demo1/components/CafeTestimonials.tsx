@@ -52,7 +52,7 @@ export default function CafeTestimonials() {
                 fontStyle: 'italic', marginBottom: '28px',
                 borderLeft: '3px solid var(--brew-teal)', paddingLeft: '16px',
               }}>
-                "{r.quote}"
+                &quot;{r.quote}&quot;
               </p>
 
               {/* Author */}

@@ -29,7 +29,7 @@ export default function CafeFeatures() {
           </h2>
           <div className="brew-divider" style={{ margin: '0 auto 20px' }} />
           <p style={{ color: 'var(--brew-white-dim)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7, fontFamily: 'Inter, sans-serif', fontWeight: 300 }}>
-            We don't just make coffee. We craft experiences — rooted in nature, driven by flavour, and delivered with warmth.
+            We don&apos;t just make coffee. We craft experiences — rooted in nature, driven by flavour, and delivered with warmth.
           </p>
         </div>
 

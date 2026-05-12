@@ -66,7 +66,7 @@ export default function CafeNewsletterCTA() {
         )}
 
         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', marginTop: '16px', fontFamily: 'Inter, sans-serif' }}>
-          No spam. Unsubscribe anytime. We promise it's only good stuff. 🌿
+          No spam. Unsubscribe anytime. We promise it&apos;s only good stuff. 🌿
         </p>
       </div>
     </section>

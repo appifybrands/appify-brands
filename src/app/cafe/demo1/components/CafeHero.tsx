@@ -69,11 +69,21 @@ export default function CafeHero() {
 
       {/* Bottom Overlay Image */}
       <div className="hero-overlay-container">
-        <img 
-          src="/cafe_demo1_assets/overlays/main_paper_overlay_brew_cup_cafe2.png" 
-          alt="Paper Overlay"
-          className="hero-overlay-img"
-        />
+        <picture style={{ width: '100%', display: 'block' }}>
+          <source 
+            media="(max-width: 550px)" 
+            srcSet="/cafe_demo1_assets/overlays/main_paper_overlay_brew_cup_cafe2_mobile_550.png" 
+          />
+          <source 
+            media="(max-width: 925px)" 
+            srcSet="/cafe_demo1_assets/overlays/main_paper_overlay_brew_cup_cafe2_mobile_tablet.png" 
+          />
+          <img 
+            src="/cafe_demo1_assets/overlays/main_paper_overlay_brew_cup_cafe2.png" 
+            alt="Paper Overlay"
+            className="hero-overlay-img"
+          />
+        </picture>
         
         {/* Rive Button Container */}
         <Link href="/cafe/demo1/menu" className="rive-btn-link">

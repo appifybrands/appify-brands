@@ -335,7 +335,7 @@
 }
 
 /* Desktop, Laptop & Tablet Horizontal (Natural Scaling) */
-@media (min-width: 769px) {
+@media (min-width: 926px) {
   .rive-btn-link {
     bottom: 3vh;
     right: 2vw;
@@ -348,11 +348,11 @@
 }
 
 /* Mobile & Tablet Vertical: Different Layout */
-@media (max-width: 768px) {
+@media (max-width: 925px) {
   .hero-overlay-container {
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 30px;
+    padding-bottom: 0;
   }
 
   .hero-overlay-img {
@@ -361,11 +361,31 @@
 
   .rive-btn-link {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 210px;
-    height: 70px;
+    bottom: 1.5vh;
+    right: 9vw;
+    width: 33vw;
+    height: 11vw;
+    min-width: 200px;
+    min-height: 67px;
     margin-top: 0;
     z-index: 12;
+  }
+}
+
+/* Small Mobile: Extra adjustments for devices under 550px */
+@media (max-width: 550px) {
+  .hero-overlay-img {
+    min-height: 240px;
+  }
+
+  .rive-btn-link {
+    bottom: 1vh;
+    left: 49%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 50vw;
+    height: 16.6vw;
+    min-width: 180px;
+    min-height: 60px;
   }
 }
