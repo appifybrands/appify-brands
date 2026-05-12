@@ -2,15 +2,15 @@
 
 /* ── Brew Cup Brand Root (Happy Italy Style) ───────────── */
 .cafe-root {
-  --brew-teal:          #2A7D8C;
-  --brew-teal-dark:     #1F5F6B;
-  --brew-cream:         #F5F0E8;
-  --brew-sand:          #C9A86C;
-  --brew-brown:         #8B6845;
-  --brew-dark:          #0D1E1F;
-  --brew-black:         #000000;
-  --brew-white:         #FFFFFF;
-  --brew-gray:          #E5E5E5;
+  --brew-teal: #2A7D8C;
+  --brew-teal-dark: #1F5F6B;
+  --brew-cream: #F5F0E8;
+  --brew-sand: #C9A86C;
+  --brew-brown: #8B6845;
+  --brew-dark: #0D1E1F;
+  --brew-black: #000000;
+  --brew-white: #FFFFFF;
+  --brew-gray: #E5E5E5;
 
   font-family: 'Montserrat', sans-serif;
   background-color: var(--brew-white);
@@ -26,10 +26,12 @@
   color: var(--brew-dark);
   text-transform: uppercase;
 }
+
 .brew-heading-italic {
   font-style: italic;
   font-weight: 900;
 }
+
 .brew-subheading {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
@@ -55,17 +57,21 @@
   border: none;
   white-space: nowrap;
 }
+
 .brew-btn:hover {
   transform: scale(1.05);
 }
+
 .brew-btn-teal {
   background-color: var(--brew-teal);
   color: var(--brew-white);
 }
+
 .brew-btn-sand {
   background-color: var(--brew-sand);
   color: var(--brew-dark);
 }
+
 .brew-btn-dark {
   background-color: var(--brew-dark);
   color: var(--brew-white);
@@ -91,9 +97,11 @@
 .brew-section {
   padding: 80px 20px;
 }
+
 .brew-section-full {
   width: 100%;
 }
+
 .brew-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -105,11 +113,13 @@
   padding: 0;
   margin: 0;
 }
+
 .brew-menu-item {
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
 }
+
 .brew-menu-item-row {
   display: flex;
   align-items: baseline;
@@ -117,6 +127,7 @@
   width: 100%;
   position: relative;
 }
+
 .brew-menu-name {
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
@@ -126,6 +137,7 @@
   padding-right: 12px;
   z-index: 1;
 }
+
 .brew-menu-price {
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
@@ -135,6 +147,7 @@
   padding-left: 12px;
   z-index: 1;
 }
+
 .brew-menu-dots {
   position: absolute;
   left: 0;
@@ -143,6 +156,7 @@
   border-bottom: 3px dotted var(--brew-gray);
   z-index: 0;
 }
+
 .brew-menu-desc {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
@@ -153,22 +167,57 @@
 }
 
 /* ── Helpers ───────────────────────────────────────────── */
-.bg-teal { background-color: var(--brew-teal); color: var(--brew-white); }
-.bg-cream { background-color: var(--brew-cream); color: var(--brew-dark); }
-.bg-sand { background-color: var(--brew-sand); color: var(--brew-dark); }
-.bg-dark { background-color: var(--brew-dark); color: var(--brew-white); }
-.bg-white { background-color: var(--brew-white); color: var(--brew-dark); }
+.bg-teal {
+  background-color: var(--brew-teal);
+  color: var(--brew-white);
+}
 
-.text-teal { color: var(--brew-teal); }
-.text-cream { color: var(--brew-cream); }
-.text-sand { color: var(--brew-sand); }
-.text-dark { color: var(--brew-dark); }
-.text-white { color: var(--brew-white); }
+.bg-cream {
+  background-color: var(--brew-cream);
+  color: var(--brew-dark);
+}
+
+.bg-sand {
+  background-color: var(--brew-sand);
+  color: var(--brew-dark);
+}
+
+.bg-dark {
+  background-color: var(--brew-dark);
+  color: var(--brew-white);
+}
+
+.bg-white {
+  background-color: var(--brew-white);
+  color: var(--brew-dark);
+}
+
+.text-teal {
+  color: var(--brew-teal);
+}
+
+.text-cream {
+  color: var(--brew-cream);
+}
+
+.text-sand {
+  color: var(--brew-sand);
+}
+
+.text-dark {
+  color: var(--brew-dark);
+}
+
+.text-white {
+  color: var(--brew-white);
+}
 
 /* ── Nav ───────────────────────────────────────────────── */
 .brew-nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   background-color: transparent;
   border-bottom: 2px solid transparent;
@@ -187,6 +236,7 @@
 .brew-nav[data-scrolled="false"] .brew-nav-link {
   color: var(--brew-white);
 }
+
 .brew-nav[data-scrolled="false"] .brew-logo-text-main,
 .brew-nav[data-scrolled="false"] .brew-logo-text-sub {
   color: var(--brew-white) !important;
@@ -200,6 +250,7 @@
   justify-content: space-between;
   height: 90px;
 }
+
 .brew-nav-link {
   padding: 10px 16px;
   color: var(--brew-dark);
@@ -210,17 +261,100 @@
   text-transform: uppercase;
   transition: color 0.2s ease;
 }
+
 .brew-nav-link:hover {
   color: var(--brew-teal);
 }
 
 /* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .brew-desktop-only { display: none !important; }
-  .brew-nav-inner { height: 70px; }
-  .brew-menu-name, .brew-menu-price { font-size: 1.1rem; }
-  .brew-menu-desc { max-width: 100%; }
+  .brew-desktop-only {
+    display: none !important;
+  }
+
+  .brew-nav-inner {
+    height: 70px;
+  }
+
+  .brew-menu-name,
+  .brew-menu-price {
+    font-size: 1.1rem;
+  }
+
+  .brew-menu-desc {
+    max-width: 100%;
+  }
 }
+
 @media (min-width: 769px) {
-  .brew-mobile-only { display: none !important; }
+  .brew-mobile-only {
+    display: none !important;
+  }
+}
+
+/* -- Hero Overlay Responsive ----------------------------- */
+.hero-overlay-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.hero-overlay-img {
+  width: 100%;
+  display: block;
+  height: auto;
+  min-height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.rive-btn-link {
+  position: absolute;
+  z-index: 11;
+  pointer-events: auto;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+/* Desktop, Laptop & Tablet Horizontal (Natural Scaling) */
+@media (min-width: 769px) {
+  .rive-btn-link {
+    bottom: 3vh;
+    right: 2vw;
+    width: 23.5vw;
+    height: 7.8vw;
+    /* Optional: maintain a minimum size for usability */
+    min-width: 220px;
+    min-height: 73px;
+  }
+}
+
+/* Mobile & Tablet Vertical: Different Layout */
+@media (max-width: 768px) {
+  .hero-overlay-container {
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+
+  .hero-overlay-img {
+    min-height: 280px;
+  }
+
+  .rive-btn-link {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 210px;
+    height: 70px;
+    margin-top: -80px;
+    z-index: 12;
+  }
 }

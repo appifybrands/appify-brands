@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './cafe.css';
 import CafeNavbar from './components/CafeNavbar';
 import CafeHero from './components/CafeHero';
-import CafeActionStrip from './components/CafeActionStrip';
 import CafePromoSection from './components/CafePromoSection';
 import CafeFooter from './components/CafeFooter';
 
@@ -18,9 +17,6 @@ export default function BrewCupHome() {
       <main>
         {/* Hero Section */}
         <CafeHero />
-
-        {/* Action Strip (Take away / Delivery equivalent) */}
-        <CafeActionStrip />
 
         {/* Happy Kids equivalent */}
         <CafePromoSection
