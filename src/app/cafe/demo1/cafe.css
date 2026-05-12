@@ -317,6 +317,10 @@
   pointer-events: none;
 }
 
+.brew-hero {
+  height: 100vh;
+}
+
 .hero-overlay-img {
   width: 100%;
   display: block;
@@ -374,6 +378,10 @@
 
 /* Small Mobile: Extra adjustments for devices under 550px */
 @media (max-width: 550px) {
+  .brew-hero {
+    height: 90dvh;
+  }
+
   .hero-overlay-img {
     min-height: 240px;
   }

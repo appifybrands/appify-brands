@@ -4,10 +4,9 @@ import Link from 'next/link';
 import Rive from '@rive-app/react-canvas';
 export default function CafeHero() {
   return (
-    <section style={{
+    <section className="brew-hero" style={{
       position: 'relative',
       width: '100%',
-      height: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
