@@ -1,8 +1,25 @@
 "use client";
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 import Rive from '@rive-app/react-canvas';
+
 export default function CafeHero() {
+  const router = useRouter();
+  const hasNavigated = useRef(false);
+
+  const handleNavigation = (e: React.BaseSyntheticEvent) => {
+    if (hasNavigated.current) return;
+    hasNavigated.current = true;
+    e.stopPropagation();
+    
+    // Small timeout to allow the Rive animation to play
+    setTimeout(() => {
+      router.push("/cafe/demo1/menu");
+    }, 150);
+  };
+
   return (
     <section className="brew-hero" style={{
       position: 'relative',
@@ -85,14 +102,19 @@ export default function CafeHero() {
         </picture>
         
         {/* Rive Button Container */}
-        <Link href="/cafe/demo1/menu" className="rive-btn-link">
+        <div 
+          className="rive-btn-link" 
+          onClickCapture={handleNavigation}
+          onPointerUpCapture={handleNavigation}
+          style={{ cursor: 'pointer' }}
+        >
           <Rive 
             src="/cafe_demo1_assets/rive_files/our_menu.riv" 
             stateMachines="State Machine 1"
             artboard="Artboard"
             style={{ width: '100%', height: '100%' }}
           />
-        </Link>
+        </div>
       </div>
     </section>
   );
