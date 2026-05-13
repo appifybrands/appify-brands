@@ -107,6 +107,10 @@
   margin: 0 auto;
 }
 
+.brew-promo-img {
+  padding: 40px;
+}
+
 /* ── Menu List Styles ──────────────────────────────────── */
 .brew-menu-list {
   list-style: none;
@@ -321,6 +325,10 @@
 
   .brew-menu-desc {
     max-width: 100%;
+  }
+
+  .brew-promo-img {
+    padding: 10px; /* Reduced padding on mobile to increase image size */
   }
 }
 

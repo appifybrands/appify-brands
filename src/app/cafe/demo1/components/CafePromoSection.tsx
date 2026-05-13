@@ -36,7 +36,7 @@ export default function CafePromoSection({
   );
 
   const imgBlock = (
-    <div style={{ flex: '1 1 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px', minWidth: '300px' }}>
+    <div className="brew-promo-img" style={{ flex: '1 1 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '300px' }}>
       {imgSrc ? (
         <img 
           src={imgSrc} 
