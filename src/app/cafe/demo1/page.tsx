@@ -3,6 +3,7 @@ import './cafe.css';
 import CafeNavbar from './components/CafeNavbar';
 import CafeHero from './components/CafeHero';
 import CafePromoSection from './components/CafePromoSection';
+import CafeBaristaSection from './components/CafeBaristaSection';
 import CafeFooter from './components/CafeFooter';
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function BrewCupHome() {
           btnLabel="Learn More!"
           btnHref="#about"
           btnClass="brew-btn-teal"
+          imgSrc="/cafe_demo1_assets/elements/section1_nature_element.png"
         />
 
         {/* Deals equivalent */}
@@ -44,6 +46,7 @@ export default function BrewCupHome() {
           btnLabel="View Deals"
           btnHref="/cafe/demo1/menu"
           btnClass="brew-btn-sand"
+          imgSrc="/cafe_demo1_assets/elements/section2_pastries_element.png"
         />
 
         {/* Groups equivalent */}
@@ -58,7 +61,10 @@ export default function BrewCupHome() {
           btnLabel="Tell me more!"
           btnHref="#contact"
           btnClass="brew-btn-dark"
+          imgSrc="/cafe_demo1_assets/elements/section3_party_element.png"
         />
+
+        <CafeBaristaSection />
 
       </main>
       <CafeFooter />

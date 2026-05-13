@@ -172,8 +172,9 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: var(--brew-teal) rgba(0,0,0,0.05);
-  padding-bottom: 12px; /* space for scrollbar */
+  scrollbar-color: var(--brew-teal) rgba(0, 0, 0, 0.05);
+  padding-bottom: 12px;
+  /* space for scrollbar */
 }
 
 .brew-menu-tabs-scroll::-webkit-scrollbar {
@@ -181,9 +182,10 @@
 }
 
 .brew-menu-tabs-scroll::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
-  margin: 0 24px; /* Align track with content padding */
+  margin: 0 24px;
+  /* Align track with content padding */
 }
 
 .brew-menu-tabs-scroll::-webkit-scrollbar-thumb {
@@ -424,5 +426,46 @@
     min-width: 180px;
     min-height: 60px;
     pointer-events: auto !important;
+  }
+}
+
+/* ── Barista Section ───────────────────────────────────── */
+.barista-section {
+  background-image: url('/cafe_demo1_assets/bg/bg_chess_blue.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
+  width: 100%;
+}
+
+.barista-container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.barista-rive-wrapper {
+  width: 100%;
+  max-width: 650px;
+  /* Reduced for PC */
+  aspect-ratio: 800 / 1200;
+  margin: 0 auto;
+  /* Horizontal centering */
+}
+
+@media (max-width: 991px) {
+  .barista-rive-wrapper {
+    max-width: 550px;
+  }
+}
+
+@media (max-width: 600px) {
+  .barista-rive-wrapper {
+    max-width: 100%;
+    /* Keeps mobile perfect */
   }
 }

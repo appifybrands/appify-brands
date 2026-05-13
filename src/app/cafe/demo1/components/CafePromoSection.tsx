@@ -11,10 +11,11 @@ interface PromoSectionProps {
   btnLabel?: string;
   btnHref?: string;
   btnClass?: string;
+  imgSrc?: string;
 }
 
 export default function CafePromoSection({
-  imagePosition = 'left', label, bgColor, textColor, subTextColor, heading, body, btnLabel, btnHref, btnClass = 'brew-btn-dark'
+  imagePosition = 'left', label, bgColor, textColor, subTextColor, heading, body, btnLabel, btnHref, btnClass = 'brew-btn-dark', imgSrc
 }: PromoSectionProps) {
   const imgFirst = imagePosition === 'left';
 
@@ -36,10 +37,18 @@ export default function CafePromoSection({
 
   const imgBlock = (
     <div style={{ flex: '1 1 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px', minWidth: '300px' }}>
-      <div className="brew-placeholder" style={{ width: '100%', height: '100%', minHeight: '400px', backgroundColor: 'transparent', borderColor: textColor }}>
-        <span style={{ fontSize: '4rem', opacity: 0.8, marginBottom: '20px' }}>📸</span>
-        <div style={{ color: textColor }}>{label}</div>
-      </div>
+      {imgSrc ? (
+        <img 
+          src={imgSrc} 
+          alt={label} 
+          style={{ width: '100%', height: 'auto', objectFit: 'contain', maxHeight: '600px' }} 
+        />
+      ) : (
+        <div className="brew-placeholder" style={{ width: '100%', height: '100%', minHeight: '400px', backgroundColor: 'transparent', borderColor: textColor }}>
+          <span style={{ fontSize: '4rem', opacity: 0.8, marginBottom: '20px' }}>📸</span>
+          <div style={{ color: textColor }}>{label}</div>
+        </div>
+      )}
     </div>
   );
 
@@ -49,3 +58,4 @@ export default function CafePromoSection({
     </section>
   );
 }
+
