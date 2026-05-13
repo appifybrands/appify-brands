@@ -166,6 +166,31 @@
   max-width: 80%;
 }
 
+/* ── Custom Scrollbar for Horizontal Tabs ──────────────── */
+.brew-menu-tabs-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brew-teal) rgba(0,0,0,0.05);
+  padding-bottom: 12px; /* space for scrollbar */
+}
+
+.brew-menu-tabs-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.brew-menu-tabs-scroll::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+  margin: 0 24px; /* Align track with content padding */
+}
+
+.brew-menu-tabs-scroll::-webkit-scrollbar-thumb {
+  background: var(--brew-teal);
+  border-radius: 4px;
+}
+
 /* ── Helpers ───────────────────────────────────────────── */
 .bg-teal {
   background-color: var(--brew-teal);
