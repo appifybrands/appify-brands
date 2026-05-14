@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import Rive from '@rive-app/react-canvas';
 
 export default function CafeHero() {
   const router = useRouter();
   const hasNavigated = useRef(false);
+  const riveContainerRef = useRef<HTMLDivElement>(null);
 
   const handleNavigation = (e: React.BaseSyntheticEvent) => {
     if (hasNavigated.current) return;
@@ -19,6 +20,28 @@ export default function CafeHero() {
       router.push("/cafe/demo1/menu");
     }, 150);
   };
+
+  useEffect(() => {
+    const container = riveContainerRef.current;
+    if (!container) return;
+
+    const handleTouch = () => {
+      // Passive listener for iOS scroll stability
+    };
+
+    const canvas = container.querySelector('canvas');
+    if (canvas) {
+      canvas.addEventListener('touchstart', handleTouch, { passive: true });
+      canvas.addEventListener('touchmove', handleTouch, { passive: true });
+    }
+
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener('touchstart', handleTouch);
+        canvas.removeEventListener('touchmove', handleTouch);
+      }
+    };
+  }, []);
 
   return (
     <section className="brew-hero" style={{
@@ -106,6 +129,7 @@ export default function CafeHero() {
           className="rive-btn-link" 
           onClickCapture={handleNavigation}
           onPointerUpCapture={handleNavigation}
+          ref={riveContainerRef}
           style={{ cursor: 'pointer' }}
         >
           <Rive 

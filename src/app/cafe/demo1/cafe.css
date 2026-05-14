@@ -16,6 +16,7 @@
   background-color: var(--brew-white);
   color: var(--brew-dark);
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
 }
 
@@ -355,6 +356,7 @@
 
 .brew-hero {
   height: 100vh;
+  height: 100dvh;
 }
 
 .hero-overlay-img {
@@ -479,6 +481,7 @@
   user-select: none;
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
 }
 
 @media (max-width: 991px) {
