@@ -112,7 +112,7 @@ export default function CafeHero() {
             src="/cafe_demo1_assets/rive_files/our_menu.riv" 
             stateMachines="State Machine 1"
             artboard="Artboard"
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', touchAction: 'pan-y' }}
           />
         </div>
       </div>

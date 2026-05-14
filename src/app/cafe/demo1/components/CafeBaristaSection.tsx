@@ -10,7 +10,7 @@ export default function CafeBaristaSection() {
           <Rive 
             src="/cafe_demo1_assets/rive_files/barista_section.riv"
             stateMachines="State Machine 1"
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', touchAction: 'pan-y' }}
           />
         </div>
       </div>

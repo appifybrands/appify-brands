@@ -16,6 +16,7 @@
   background-color: var(--brew-white);
   color: var(--brew-dark);
   overflow-x: hidden;
+  touch-action: pan-y;
 }
 
 /* ── Typography ────────────────────────────────────────── */
@@ -364,6 +365,7 @@
   pointer-events: auto;
   display: block;
   transition: all 0.3s ease;
+  touch-action: pan-y;
 }
 
 /* Desktop, Laptop & Tablet Horizontal (Natural Scaling) */
@@ -385,7 +387,7 @@
     justify-content: flex-end;
     align-items: center;
     padding-bottom: 0;
-    pointer-events: auto;
+    pointer-events: none; /* Changed from auto to prevent blocking scroll */
   }
 
   .hero-overlay-img {
@@ -426,6 +428,7 @@
     min-width: 180px;
     min-height: 60px;
     pointer-events: auto !important;
+    touch-action: pan-y;
   }
 }
 
@@ -435,7 +438,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
+  /* overflow: hidden; Removed to ensure it doesn't block scrolling */
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0;
   width: 100%;
@@ -455,6 +458,19 @@
   aspect-ratio: 800 / 1200;
   margin: 0 auto;
   /* Horizontal centering */
+  touch-action: pan-y; /* Allow vertical scrolling even if touching the canvas */
+}
+
+.barista-section,
+.barista-container,
+.barista-rive-wrapper,
+.barista-rive-wrapper canvas,
+.rive-btn-link,
+.rive-btn-link canvas {
+  touch-action: pan-y !important;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (max-width: 991px) {
