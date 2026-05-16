@@ -1,19 +1,82 @@
-import type { Metadata } from 'next';
+"use client";
+
+import { useState, useEffect, useRef } from 'react';
 import './cafe.css';
 import CafeNavbar from './components/CafeNavbar';
 import CafeHero from './components/CafeHero';
 import CafePromoSection from './components/CafePromoSection';
 import CafeBaristaSection from './components/CafeBaristaSection';
 import CafeFooter from './components/CafeFooter';
-
-export const metadata: Metadata = {
-  title: 'The Brew Cup Cafe — Epic Taste & Nature',
-  description: 'The Brew Cup Cafe is your nature-inspired escape for specialty coffee, artisan fast food, and seasonal drinks.',
-};
+import LoadingScreen from './components/LoadingScreen';
 
 export default function BrewCupHome() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const loadedCount = useRef(0);
+
+  const assets = [
+    // Video
+    { type: 'video', src: '/cafe_demo1_assets/hero_video/15609853_3840_2160_50fps.mp4' },
+    // Rive Files
+    { type: 'rive', src: '/cafe_demo1_assets/rive_files/our_menu.riv' },
+    { type: 'rive', src: '/cafe_demo1_assets/rive_files/barista_section.riv' },
+    // Elements/Images
+    { type: 'image', src: '/cafe_demo1_assets/elements/section1_nature_element.png' },
+    { type: 'image', src: '/cafe_demo1_assets/elements/section2_pastries_element.png' },
+    { type: 'image', src: '/cafe_demo1_assets/elements/section3_party_element.png' },
+    { type: 'image', src: '/cafe_demo1_assets/overlays/main_paper_overlay_brew_cup_cafe2.png' },
+    { type: 'image', src: '/cafe_demo1_assets/overlays/main_paper_overlay_brew_cup_cafe2_mobile_tablet.png' },
+    { type: 'image', src: '/cafe_demo1_assets/overlays/main_paper_overlay_brew_cup_cafe2_mobile_550.png' },
+    { type: 'image', src: '/cafe_demo1_assets/bg/bg_chess_blue.jpg' },
+  ];
+
+  useEffect(() => {
+    const totalAssets = assets.length;
+    
+    const updateProgress = () => {
+      loadedCount.current += 1;
+      const newProgress = (loadedCount.current / totalAssets) * 100;
+      setProgress(newProgress);
+      
+      if (loadedCount.current >= totalAssets) {
+        // Add a small delay for smooth transition
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 800);
+      }
+    };
+
+    assets.forEach(asset => {
+      if (asset.type === 'image') {
+        const img = new Image();
+        img.src = asset.src;
+        img.onload = updateProgress;
+        img.onerror = updateProgress; // Count as loaded even if error to avoid stuck loader
+      } else if (asset.type === 'video') {
+        const video = document.createElement('video');
+        video.src = asset.src;
+        video.oncanplaythrough = updateProgress;
+        video.onerror = updateProgress;
+      } else if (asset.type === 'rive') {
+        // We can use fetch to preload Rive files
+        fetch(asset.src)
+          .then(updateProgress)
+          .catch(updateProgress);
+      }
+    });
+
+    // Fallback in case something hangs
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="cafe-root">
+    <div className="cafe-root" data-loaded={!isLoading}>
+      <LoadingScreen progress={progress} isLoading={isLoading} />
+      
       <CafeNavbar />
       <main>
         {/* Hero Section */}
