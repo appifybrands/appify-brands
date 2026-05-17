@@ -473,8 +473,6 @@
 
 .barista-section,
 .barista-container,
-.barista-rive-wrapper,
-.barista-rive-wrapper canvas,
 .rive-btn-link,
 .rive-btn-link canvas {
   touch-action: pan-y !important;
@@ -482,6 +480,26 @@
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
   pointer-events: auto;
+}
+
+.barista-rive-wrapper {
+  touch-action: pan-y !important;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.barista-rive-wrapper canvas {
+  touch-action: pan-y !important;
+  /* Fix iOS scroll by disabling pointer events on mobile/touch */
+  pointer-events: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .barista-rive-wrapper canvas {
+    /* Re-enable pointer events for desktop hover effects */
+    pointer-events: auto !important;
+  }
 }
 
 @media (max-width: 991px) {

@@ -7,27 +7,9 @@ export default function CafeBaristaSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleTouch = (e: TouchEvent) => {
-      // Passive listener allows the event to be passed to the browser for scrolling
-    };
-
-    // Find the canvas element inside the Rive component
-    const canvas = container.querySelector('canvas');
-    if (canvas) {
-      canvas.addEventListener('touchstart', handleTouch, { passive: true });
-      canvas.addEventListener('touchmove', handleTouch, { passive: true });
-    }
-
-    return () => {
-      if (canvas) {
-        canvas.removeEventListener('touchstart', handleTouch);
-        canvas.removeEventListener('touchmove', handleTouch);
-      }
-    };
+    // Canvas touch interactions are now handled natively via CSS pointer-events: none on mobile
   }, []);
+
 
   return (
     <section className="barista-section">
