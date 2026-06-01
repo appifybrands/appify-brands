@@ -422,7 +422,7 @@ export default function HostCrmPage() {
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => setActiveTab(tab.id as "overview" | "bookings" | "inquiries" | "calendar")}
                 className={`px-6 py-4 text-[10px] font-bold uppercase tracking-widest border-b-2 transition-all relative ${
                   activeTab === tab.id
                     ? "border-emerald-400 text-emerald-300"
@@ -567,7 +567,7 @@ export default function HostCrmPage() {
                     <Filter size={12} className="text-emerald-400" />
                     <select
                       value={bookingFilter}
-                      onChange={(e: any) => setBookingFilter(e.target.value)}
+                      onChange={(e) => setBookingFilter(e.target.value as "pending" | "approved" | "checked-in" | "cancelled" | "all")}
                       className="bg-[#181818] border border-white/5 px-4 py-2.5 rounded-xl text-xs text-white focus:outline-none"
                     >
                       <option value="all">All Statuses</option>
@@ -722,7 +722,7 @@ export default function HostCrmPage() {
                           </span>
                           
                           <p className="text-white/60 text-xs font-light line-clamp-2 leading-relaxed">
-                            "{inq.message}"
+                            &ldquo;{inq.message}&rdquo;
                           </p>
                         </div>
                       ))

@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AppifyBrands — We Turn Brands Into Apps",
+  title: "AppifyBrands | High Converting Websites",
   description: "AppifyBrands engineers premium digital experiences and transforms brands into powerful, high-converting applications.",
   icons: {
     icon: [
