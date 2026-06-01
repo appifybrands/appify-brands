@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from 'next/image';
+import MailCTA from "./MailCTA";
 
 export default function FeatureCardsSection() {
   const [activeCard, setActiveCard] = useState(0);
@@ -66,7 +67,7 @@ export default function FeatureCardsSection() {
           </span>
 
           <h2 
-            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            className="flex w-full max-w-2xl justify-center text-center font-black tracking-tight uppercase whitespace-nowrap"
             style={{
               fontSize: "clamp(2rem, 5vw, 4rem)",
               lineHeight: 1.1,
@@ -74,15 +75,9 @@ export default function FeatureCardsSection() {
               fontFamily: "'Inter', sans-serif",
             }}
           >
-            Strategic Digital Solutions
+            Digital Solutions
           </h2>
 
-          <p 
-            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            We specialize in building bespoke, high-performance applications that bridge the gap between complex business logic and exceptional user experience.
-          </p>
         </motion.div>
 
         <div className="relative z-5 my-2 sm:my-8 flex w-full flex-col items-center justify-center gap-2">
@@ -197,6 +192,8 @@ export default function FeatureCardsSection() {
             </div>
           </div>
         </div>
+
+        <MailCTA className="mt-12" helperText="Need a landing page, storefront, or dashboard that converts? Mail us to get started." />
       </div>
     </section>
   );

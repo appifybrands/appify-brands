@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import MailCTA from "./MailCTA";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -75,7 +76,7 @@ export default function SelectedWorkSection() {
           </span>
 
           <h2 
-            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            className="flex w-full max-w-2xl justify-center text-center font-black tracking-tight uppercase whitespace-nowrap"
             style={{
               fontSize: "clamp(2rem, 5vw, 4rem)",
               lineHeight: 1.1,
@@ -83,17 +84,9 @@ export default function SelectedWorkSection() {
               fontFamily: "'Inter', sans-serif",
             }}
           >
-            Proven success for our clients
+            Proven Client Wins
           </h2>
 
-          <p 
-            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            Explore the high-performance applications and premium digital ecosystems
-            <br className="hidden sm:block" />
-            we&apos;ve engineered to drive measurable results for our global partners.
-          </p>
         </motion.div>
       </div>
 
@@ -147,6 +140,9 @@ export default function SelectedWorkSection() {
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
+
+        <MailCTA className="mt-10" helperText="Want results like these? Mail us to get started." />
+
       </div>
     </section>
   );

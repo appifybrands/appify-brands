@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import MailCTA from "./MailCTA";
 
 const projects = [
   {
@@ -58,7 +59,7 @@ export default function PremiumShowcaseSection() {
           </span>
 
           <h2
-            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            className="flex w-full max-w-2xl justify-center text-center font-black tracking-tight uppercase whitespace-nowrap"
             style={{
               fontSize: "clamp(2rem, 5vw, 4rem)",
               lineHeight: 1.1,
@@ -66,15 +67,9 @@ export default function PremiumShowcaseSection() {
               fontFamily: "'Inter', sans-serif",
             }}
           >
-            Premium Design Showcase
+            Premium Showcase
           </h2>
 
-          <p
-            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            Discover the high-performance digital ecosystems and boutique storefronts we&apos;ve engineered to elevate global brands and redefine user expectations.
-          </p>
         </motion.div>
 
         {/* Grid */}
@@ -187,6 +182,8 @@ export default function PremiumShowcaseSection() {
           {/* Subtle background glow */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#c9a84c] opacity-20 blur-[120px] pointer-events-none group-hover:opacity-30 transition-opacity duration-500" />
         </motion.div>
+
+        <MailCTA className="mt-14" helperText="Want a premium showcase like this? Mail us to get started." />
       </div>
     </section>
   );

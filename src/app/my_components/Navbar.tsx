@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon, CheckCircle2, ChevronDown } from "lucide-react";
+import { MAIL_HREF } from "./MailCTA";
 
 type SubItem = { label: string; icon: React.ElementType; href: string };
 type NavLink = { label: string; href: string; subItems?: SubItem[] };
@@ -188,19 +189,25 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* CTA — desktop only (Styled like the black pill in the reference image) */}
-            <Link
-              href="/#bottom"
-              onClick={(e) => handleNav(e, "/#bottom")}
-              className="hidden md:inline-flex relative items-center justify-center px-7 py-2.5 text-[0.7rem] font-bold tracking-[0.15em] uppercase transition-all duration-300 rounded-full hover:scale-105"
+            {/* Mail CTA — desktop only */}
+            <a
+              href={MAIL_HREF}
+              aria-label="Mail Appify Brands"
+              className="hidden md:inline-flex relative items-center justify-center px-4 py-2 transition-all duration-300 rounded-full hover:scale-105"
               style={{
-                background: "var(--navy)",
-                color: "#ffffff",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255,255,255,0.2)",
+                background: "#ffffff",
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.8)",
               }}
             >
-              Contact
-            </Link>
+              <Image
+                src="/gmail_logo_png.png"
+                alt="Gmail"
+                width={180}
+                height={50}
+                className="h-6 w-auto"
+              />
+            </a>
 
             {/* Hamburger — mobile */}
             <button
@@ -274,6 +281,24 @@ export default function Navbar() {
             </div>
           ))}
         </nav>
+        <a
+          href={MAIL_HREF}
+          onClick={() => setMenuOpen(false)}
+          aria-label="Mail Appify Brands"
+          className="mt-10 inline-flex w-fit items-center justify-center rounded-full px-5 py-3 shadow-lg"
+          style={{
+            background: "#ffffff",
+            border: "1px solid rgba(0,0,0,0.08)",
+          }}
+        >
+          <Image
+            src="/gmail_logo_png.png"
+            alt="Gmail"
+            width={180}
+            height={50}
+            className="h-9 w-auto"
+          />
+        </a>
         <p className="mt-16 text-xs tracking-widest uppercase" style={{ color: "var(--text-secondary)", opacity: 0.5 }}>
           AppifyBrands © 2025
         </p>

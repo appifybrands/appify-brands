@@ -1,24 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
+import MailCTA from "./MailCTA";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 const pillars = [
   {
     num: "01",
-    title: "Performance",
-    desc: "Every millisecond matters. We obsess over Core Web Vitals, bundle sizes, and rendering performance.",
+    title: "Fast Delivery",
+    desc: "We ship quickly without cutting corners, your project goes live in record time.",
   },
   {
     num: "02",
-    title: "Design Craft",
-    desc: "Pixel-perfect execution. We treat visual design as a discipline — every detail is deliberate.",
+    title: "High Converting Pages",
+    desc: "Every page is crafted to turn visitors into customers and maximize your results.",
   },
   {
     num: "03",
-    title: "Innovation",
-    desc: "Cutting-edge tech stack. We leverage the latest tools to give your product a competitive edge.",
+    title: "Premium Branding",
+    desc: "Polished, distinctive design that makes your brand look world-class and memorable.",
   },
 ];
 
@@ -53,11 +54,11 @@ export default function AboutSection() {
               border: "1px solid var(--border-medium)"
             }}
           >
-            About Us
+            Why Choose Us
           </span>
 
           <h2 
-            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            className="flex w-full max-w-2xl justify-center text-center font-black tracking-tight uppercase whitespace-nowrap"
             style={{
               fontSize: "clamp(2rem, 5vw, 4rem)",
               lineHeight: 1.1,
@@ -65,18 +66,9 @@ export default function AboutSection() {
               fontFamily: "'Inter', sans-serif",
             }}
           >
-            Engineering Digital Excellence
+            Why Choose Us
           </h2>
 
-          <p 
-            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            We&apos;re a boutique digital agency specializing in building modern frontend experiences using 
-            <span className="font-semibold text-[var(--text-primary)]"> React</span> and 
-            <span className="font-semibold text-[var(--text-primary)]"> Next.js</span>. 
-            Our projects are meticulously crafted to ensure beautiful, highly responsive, and unforgettable digital experiences.
-          </p>
         </motion.div>
 
         {/* Three pillars */}
@@ -145,6 +137,8 @@ export default function AboutSection() {
             ))}
           </div>
         </motion.div>
+
+        <MailCTA className="mt-12" helperText="Want fast delivery, better conversions, and premium branding? Mail us to get started." />
       </div>
     </section>
   );

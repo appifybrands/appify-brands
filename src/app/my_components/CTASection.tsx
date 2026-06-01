@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import MailCTA from "./MailCTA";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -60,7 +61,7 @@ export default function CTASection() {
             </span>
 
             <h2 
-              className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+              className="flex w-full max-w-2xl justify-center text-center font-black tracking-tight uppercase whitespace-nowrap"
               style={{
                 fontSize: "clamp(2rem, 5vw, 4rem)",
                 lineHeight: 1.1,
@@ -68,27 +69,11 @@ export default function CTASection() {
                 fontFamily: "'Inter', sans-serif",
               }}
             >
-              Ready to elevate your digital presence?
+                Ready To Launch?
             </h2>
-            <p 
-              className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-xl mx-auto font-light"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Let&apos;s engineer a high-performance digital ecosystem that captivates your audience and drives measurable results for your business.
-            </p>
           </div>
           
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-4 mt-4"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-50">Scroll to Explore</span>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-              <path d="M7 13l5 5 5-5M12 6v12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </motion.div>
+          <MailCTA helperText="Ready to build a high-converting website? Mail us to get started." />
         </motion.div>
       </div>
     </section>

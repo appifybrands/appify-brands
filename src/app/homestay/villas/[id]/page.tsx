@@ -3,16 +3,14 @@
 import { use, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Calendar, X, Check, ArrowLeft, ChevronLeft, ChevronRight,
-  Coffee, Bed, Palette, Layout, Maximize, Bath, Flame, Waves, Sparkles, Wifi, Info, Phone, Mail, User
+  Calendar, Check, ArrowLeft, ChevronLeft, ChevronRight, MapPin, Star,
+  Coffee, Bed, Palette, Layout, Maximize, Bath, Flame, Waves, Sparkles, Wifi, Phone, Mail, User
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CircularGallery from "@/components/circular-flip-card-gallery";
-import { Skiper34 } from "@/components/skiper34";
 import CircularTestimonials from "@/components/circular-testimonials";
 import { InteractiveSelector } from "@/components/interactive-selector";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { villasData } from "../../data";
 import { Booking, Inquiry } from "../../types";
 
@@ -248,7 +246,7 @@ export default function VillaConvertingPage({ params }: { params: Promise<{ id: 
     } else {
       // Check if any blocked/booked/pending dates lie inside selection
       let hasConflict = false;
-      let d = new Date(checkIn);
+      const d = new Date(checkIn);
       const endD = new Date(dayStr);
 
       while (d <= endD) {
@@ -370,7 +368,7 @@ export default function VillaConvertingPage({ params }: { params: Promise<{ id: 
       <div className="fixed inset-0 z-5 pointer-events-none shadow-[inset_0_0_200px_rgba(0,0,0,0.8)]" />
 
       {/* ── Floating Back Control Header ── */}
-      <header className="relative z-40 w-full border-b border-white/5 bg-[#070c0a]/50 backdrop-blur-xl sticky top-0">
+      <header className="absolute inset-x-0 top-0 z-40 w-full border-b border-white/10 bg-black/25 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
           <Link
             href="/homestay"
@@ -400,90 +398,164 @@ export default function VillaConvertingPage({ params }: { params: Promise<{ id: 
 
       <div className="relative z-10">
 
-        {/* ── CINEMATIC HERO SECTION ── */}
-        <section className="min-h-[calc(100vh-6rem)] flex flex-col items-center justify-center px-6 relative">
-          
-          {/* Rating Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="absolute top-[15%] left-1/2 -translate-x-1/2 flex items-center gap-4 bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/10 shadow-2xl z-20"
-          >
-            <div className="flex -space-x-3">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Avatar key={i} className="border-2 border-[#070c0a] w-7 h-7 ring-1 ring-white/10 shadow-2xl">
-                  <AvatarImage src={`https://i.pravatar.cc/100?u=${villa.id + i + 10}`} />
-                  <AvatarFallback className="bg-neutral-800 text-white text-[8px]">G</AvatarFallback>
-                </Avatar>
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex gap-0.5">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <span key={i} className="text-amber-400 text-[10px]">★</span>
-                ))}
-              </div>
-              <span className="text-white/60 text-[9px] uppercase tracking-[0.2em] font-bold">
-                {villa.rating} / 5 ({villa.reviewsCount} reviews)
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Main Title Banner */}
-          <div className="flex flex-col items-center text-center gap-4 max-w-4xl">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-amber-400 text-xs sm:text-sm tracking-[0.4em] uppercase font-semibold"
-            >
-              {villa.tagline}
-            </motion.span>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl sm:text-7xl lg:text-9xl font-black text-white italic tracking-tighter uppercase leading-[0.85]"
-            >
-              {villa.name.split(" ").slice(0, -1).join(" ")}
-              <br />
-              <span className="text-amber-400">{villa.name.split(" ").slice(-1)[0]}</span>
-            </motion.h1>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="mt-6 px-6 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl"
-            >
-              <h2 className="text-[10px] sm:text-xs font-light text-white/80 tracking-[0.4em] uppercase flex items-center gap-2">
-                <MapPin size={11} className="text-amber-400" />
-                {villa.location}
-              </h2>
-            </motion.div>
+        {/* ── ROBERT ELLIOTT INSPIRED HERO SECTION ── */}
+        <section className="relative min-h-screen overflow-hidden border-b border-white/10">
+          <div className="absolute inset-0">
+            <div
+              style={{ backgroundImage: `url('${villa.heroImage}')` }}
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            />
+            <div className="absolute inset-0 bg-black/45" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#070c0a]/95 via-[#070c0a]/60 to-black/25" />
+            <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#070c0a] to-transparent" />
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          >
-            <span className="text-white/30 text-[9px] uppercase tracking-[0.5em] font-semibold">Explore details</span>
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="text-white/40"
-            >
-              <ChevronDown size={28} strokeWidth={1.5} />
-            </motion.div>
-          </motion.div>
+          <div className="relative z-10 flex min-h-screen flex-col">
+            <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-8 px-6 pb-12 pt-36 md:grid-cols-[minmax(0,1.15fr)_minmax(280px,360px)] md:gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,440px)] lg:pb-16 lg:pt-40">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="max-w-3xl rounded-[1.5rem] border border-white/20 bg-white/[0.09] p-5 shadow-[0_25px_70px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:p-8 lg:p-10"
+              >
+                <span className="text-[10px] font-semibold uppercase tracking-[0.32em] text-amber-300">
+                  {villa.tagline}
+                </span>
+                <h1 className="mt-4 text-4xl font-light leading-[1.05] tracking-normal text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+                  {villa.name}
+                  <span className="mt-3 block text-2xl font-semibold leading-tight text-amber-200 sm:text-3xl lg:text-4xl">
+                    Private stays built around the view.
+                  </span>
+                </h1>
+
+                <div className="my-6 flex items-center">
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
+                  <div className="mx-3 h-2 w-2 rotate-45 bg-amber-300" />
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
+                </div>
+
+                <p className="max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
+                  {villa.description}
+                </p>
+
+                <div className="mt-7 grid gap-4 border-y border-white/10 py-5 text-sm sm:grid-cols-3">
+                  <div>
+                    <span className="block text-[9px] font-bold uppercase tracking-[0.25em] text-white/40">Location</span>
+                    <span className="mt-1 block font-semibold text-white">{villa.location}</span>
+                  </div>
+                  <div>
+                    <span className="block text-[9px] font-bold uppercase tracking-[0.25em] text-white/40">Rate</span>
+                    <span className="mt-1 block font-semibold text-white">${villa.price} / night</span>
+                  </div>
+                  <div>
+                    <span className="block text-[9px] font-bold uppercase tracking-[0.25em] text-white/40">Guests</span>
+                    <span className="mt-1 block font-semibold text-white">Up to {villa.maxGuests}</span>
+                  </div>
+                </div>
+
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href="#availability"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-amber-300 px-5 py-3 text-[10px] font-extrabold uppercase tracking-[0.22em] text-black shadow-[0_10px_35px_rgba(251,191,36,0.22)] transition-all hover:bg-amber-200 active:scale-95"
+                  >
+                    <Calendar size={15} />
+                    View Availability
+                  </a>
+                  <a
+                    href="#gallery"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/15 bg-black/25 px-5 py-3 text-[10px] font-extrabold uppercase tracking-[0.22em] text-white transition-all hover:bg-white/10 active:scale-95"
+                  >
+                    <Maximize size={15} />
+                    Explore Gallery
+                  </a>
+                </div>
+              </motion.div>
+
+              <motion.aside
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-[1.5rem] border border-white/20 bg-white/[0.1] p-5 shadow-[0_25px_70px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+                  <div
+                    style={{ backgroundImage: `url('${villa.image}')` }}
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-bold text-amber-300 backdrop-blur-md">
+                    <Star size={13} fill="currentColor" />
+                    {villa.rating}
+                  </div>
+                  <div className="absolute inset-x-4 bottom-4">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-white/45">Featured Retreat</span>
+                    <h2 className="mt-1 text-xl font-semibold leading-tight text-white">{villa.name}</h2>
+                  </div>
+                </div>
+
+                <div className="mt-5 space-y-5">
+                  <div className="flex items-end justify-between gap-4 border-b border-white/10 pb-5">
+                    <div>
+                      <span className="block text-[9px] font-bold uppercase tracking-[0.25em] text-white/40">Starting At</span>
+                      <span className="mt-1 block text-3xl font-black text-white font-mono">${villa.price}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="block text-[9px] font-bold uppercase tracking-[0.25em] text-white/40">Sleeps</span>
+                      <span className="mt-1 block text-sm font-semibold text-white">{villa.maxGuests} Guests</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 text-sm text-white/70">
+                    <div className="flex items-center gap-3">
+                      <MapPin size={15} className="text-amber-300" />
+                      <span>{villa.location}</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Star size={15} className="text-amber-300" fill="currentColor" />
+                      <span>{villa.reviewsCount} verified guest reviews</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Sparkles size={15} className="text-amber-300" />
+                      <span>{villa.amenities[0] || "Curated luxury amenities"}</span>
+                    </div>
+                  </div>
+
+                  <a
+                    href="#availability"
+                    className="inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-xl border border-amber-300/30 bg-amber-300/10 px-5 py-3 text-[10px] font-extrabold uppercase tracking-[0.22em] text-amber-200 transition-all hover:bg-amber-300 hover:text-black active:scale-95"
+                  >
+                    <Calendar size={15} />
+                    Plan Your Stay
+                  </a>
+                </div>
+              </motion.aside>
+            </div>
+
+            <div className="border-t border-white/10 bg-black/45 backdrop-blur-xl">
+              <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-white/10 px-6 sm:grid-cols-2 md:grid-cols-4 md:divide-x md:divide-y-0">
+                {[
+                  { icon: <MapPin size={22} />, title: "Signature Setting", text: villa.location },
+                  { icon: <Bed size={22} />, title: "Guest Capacity", text: `Up to ${villa.maxGuests} guests` },
+                  { icon: <Sparkles size={22} />, title: "Premium Inclusion", text: villa.amenities[0] || "Luxury amenities" },
+                  { icon: <Star size={22} fill="currentColor" />, title: "Guest Rated", text: `${villa.rating} from ${villa.reviewsCount} reviews` },
+                ].map((feature) => (
+                  <div key={feature.title} className="flex min-h-24 items-center gap-4 py-5 sm:px-5 lg:px-8">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center text-amber-300">
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/55">{feature.title}</h3>
+                      <p className="mt-1 text-sm font-semibold text-white">{feature.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ── TWO-COLUMN DETAILED OVERVIEW & RESERVATION WIDGET ── */}
-        <section className="max-w-7xl mx-auto px-6 py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-25">
+        <section id="availability" className="max-w-7xl mx-auto px-6 py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-25">
           
           {/* LEFT COLUMN: VILLA DETAIL PRESENTATION */}
           <div className="lg:col-span-7 space-y-16">
@@ -919,7 +991,7 @@ export default function VillaConvertingPage({ params }: { params: Promise<{ id: 
         </section>
 
         {/* ── CINEMATIC GALLERY GRID ── */}
-        <section className="relative z-10 py-32 border-t border-white/5 bg-[#070c0a]/50">
+        <section id="gallery" className="relative z-10 py-32 border-t border-white/5 bg-[#070c0a]/50">
           <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
             <span className="text-amber-400 text-[10px] uppercase tracking-[0.3em] font-bold block mb-3">Architectural Frames</span>
             <h2 className="text-4xl md:text-6xl font-black text-white italic tracking-tighter uppercase mb-6">
@@ -960,7 +1032,7 @@ export default function VillaConvertingPage({ params }: { params: Promise<{ id: 
                   className="flex-shrink-0 w-[300px] sm:w-[400px] p-8 rounded-[2rem] border border-white/10 bg-neutral-900/60 backdrop-blur-md flex flex-col justify-between shadow-2xl"
                 >
                   <p className="text-white/80 text-xs font-light leading-relaxed italic mb-6">
-                    "{review.text}"
+                    &quot;{review.text}&quot;
                   </p>
                   <div className="flex items-center justify-between border-t border-white/5 pt-4">
                     <span className="text-white/90 font-bold text-[10px] tracking-wider uppercase">{review.name}</span>

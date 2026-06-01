@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import MailCTA from "./MailCTA";
 
 interface FAQItem {
   question: string;
@@ -58,7 +59,7 @@ export default function FAQSection() {
           </span>
 
           <h2 
-            className="flex w-full max-w-2xl flex-col justify-center text-center font-black tracking-tight uppercase"
+            className="flex w-full max-w-2xl justify-center text-center font-black tracking-tight uppercase whitespace-nowrap"
             style={{
               fontSize: "clamp(2rem, 5vw, 4rem)",
               lineHeight: 1.1,
@@ -66,15 +67,9 @@ export default function FAQSection() {
               fontFamily: "'Inter', sans-serif",
             }}
           >
-            Common Inquiries
+            Common Questions
           </h2>
 
-          <p 
-            className="self-stretch text-center text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            Everything you need to know about our high-performance digital engineering process and how we help brands scale.
-          </p>
         </motion.div>
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start">
@@ -131,6 +126,8 @@ export default function FAQSection() {
           </div>
 
         </div>
+
+        <MailCTA className="mt-12" helperText="Still deciding what to build? Mail us to get started." />
       </div>
     </section>
   );
