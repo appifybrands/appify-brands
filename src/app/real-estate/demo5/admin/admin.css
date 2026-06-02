@@ -1,0 +1,729 @@
+/* ════════════════════════════════════════════════════════
+   Luxury Villa Admin — scoped design system (.villa-admin)
+   Light, warm hospitality aesthetic. No dark dashboard.
+   ════════════════════════════════════════════════════════ */
+
+.villa-admin {
+  --va-bg: #f6f3ee;
+  --va-fg: #1f1f1f;
+  --va-card: #ffffff;
+  --va-primary: #1f1f1f;
+  --va-secondary: #7c6f64;
+  --va-accent: #c8a97e;
+  --va-accent-soft: #ecdcc4;
+  --va-border: #e8dfd2;
+  --va-muted: #efeae2;
+  --va-muted-fg: #8c8276;
+  --va-radius: 1rem;
+  --va-radius-sm: 0.625rem;
+  --va-shadow: 0 1px 2px rgba(31, 31, 31, 0.04), 0 8px 24px rgba(31, 31, 31, 0.05);
+  --va-shadow-sm: 0 1px 2px rgba(31, 31, 31, 0.05);
+
+  --va-green: #4f7d5a;
+  --va-green-bg: #e6efe7;
+  --va-yellow: #b8893b;
+  --va-yellow-bg: #f5ecd8;
+  --va-red: #b04a3f;
+  --va-red-bg: #f5e2df;
+  --va-blue: #46637e;
+  --va-blue-bg: #e3eaf1;
+
+  font-family: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  background: var(--va-bg);
+  color: var(--va-fg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.villa-admin *,
+.villa-admin *::before,
+.villa-admin *::after {
+  box-sizing: border-box;
+}
+
+/* ── Layout ─────────────────────────────────────────── */
+.va-shell {
+  display: grid;
+  grid-template-columns: 264px 1fr;
+  min-height: 100vh;
+}
+.va-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.va-content {
+  padding: 32px 40px 64px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Sidebar ────────────────────────────────────────── */
+.va-sidebar {
+  background: var(--va-card);
+  border-right: 1px solid var(--va-border);
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.va-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 12px 24px;
+}
+.va-brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--va-accent), #a8895f);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+.va-brand-name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.va-brand-sub {
+  font-size: 11px;
+  color: var(--va-muted-fg);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.va-nav-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--va-muted-fg);
+  padding: 14px 12px 6px;
+}
+.va-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--va-radius-sm);
+  color: var(--va-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.va-nav-item:hover {
+  background: var(--va-muted);
+  color: var(--va-fg);
+}
+.va-nav-item.active {
+  background: var(--va-primary);
+  color: #fff;
+}
+.va-nav-item.active svg {
+  color: #fff;
+}
+.va-sidebar-foot {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--va-border);
+}
+
+/* ── Topbar ─────────────────────────────────────────── */
+.va-topbar {
+  height: 72px;
+  border-bottom: 1px solid var(--va-border);
+  background: rgba(246, 243, 238, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.va-topbar h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.va-topbar-sub {
+  font-size: 13px;
+  color: var(--va-muted-fg);
+  margin-top: 2px;
+}
+.va-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.va-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--va-accent-soft);
+  color: #8a6d43;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ── Cards ──────────────────────────────────────────── */
+.va-card {
+  background: var(--va-card);
+  border: 1px solid var(--va-border);
+  border-radius: var(--va-radius);
+  box-shadow: var(--va-shadow);
+}
+.va-card-pad {
+  padding: 24px;
+}
+.va-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.va-muted {
+  color: var(--va-muted-fg);
+  font-size: 13px;
+}
+
+/* ── Stat cards ─────────────────────────────────────── */
+.va-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.va-stat {
+  background: var(--va-card);
+  border: 1px solid var(--va-border);
+  border-radius: var(--va-radius);
+  padding: 22px;
+  box-shadow: var(--va-shadow-sm);
+}
+.va-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--va-muted);
+  color: var(--va-secondary);
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+}
+.va-stat-value {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.va-stat-label {
+  font-size: 13px;
+  color: var(--va-muted-fg);
+  margin-top: 2px;
+}
+
+/* ── Buttons ────────────────────────────────────────── */
+.va-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: var(--va-radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.va-btn-primary {
+  background: var(--va-primary);
+  color: #fff;
+}
+.va-btn-primary:hover {
+  background: #353535;
+}
+.va-btn-accent {
+  background: var(--va-accent);
+  color: #fff;
+}
+.va-btn-accent:hover {
+  background: #b8965f;
+}
+.va-btn-ghost {
+  background: transparent;
+  border-color: var(--va-border);
+  color: var(--va-fg);
+}
+.va-btn-ghost:hover {
+  background: var(--va-muted);
+}
+.va-btn-danger {
+  background: var(--va-red-bg);
+  color: var(--va-red);
+}
+.va-btn-danger:hover {
+  background: #efd2cd;
+}
+.va-btn-sm {
+  padding: 7px 12px;
+  font-size: 13px;
+}
+.va-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.va-btn-icon {
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+}
+
+/* ── Forms ──────────────────────────────────────────── */
+.va-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.va-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--va-secondary);
+}
+.va-input,
+.va-textarea,
+.va-select {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--va-fg);
+  background: #fff;
+  border: 1px solid var(--va-border);
+  border-radius: var(--va-radius-sm);
+  padding: 10px 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.va-input:focus,
+.va-textarea:focus,
+.va-select:focus {
+  outline: none;
+  border-color: var(--va-accent);
+  box-shadow: 0 0 0 3px rgba(200, 169, 126, 0.18);
+}
+.va-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+.va-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Badges ─────────────────────────────────────────── */
+.va-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: capitalize;
+}
+.va-badge-green { background: var(--va-green-bg); color: var(--va-green); }
+.va-badge-yellow { background: var(--va-yellow-bg); color: var(--va-yellow); }
+.va-badge-red { background: var(--va-red-bg); color: var(--va-red); }
+.va-badge-blue { background: var(--va-blue-bg); color: var(--va-blue); }
+.va-badge-gray { background: var(--va-muted); color: var(--va-secondary); }
+.va-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── Tables ─────────────────────────────────────────── */
+.va-table-wrap {
+  background: var(--va-card);
+  border: 1px solid var(--va-border);
+  border-radius: var(--va-radius);
+  overflow: hidden;
+}
+.va-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.va-table th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--va-muted-fg);
+  font-weight: 600;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--va-border);
+  background: #faf8f4;
+}
+.va-table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--va-border);
+  vertical-align: middle;
+}
+.va-table tr:last-child td {
+  border-bottom: none;
+}
+.va-table tbody tr:hover {
+  background: #faf8f4;
+}
+.va-cell-strong {
+  font-weight: 500;
+}
+.va-cell-sub {
+  font-size: 12px;
+  color: var(--va-muted-fg);
+}
+
+/* ── Villa cards ────────────────────────────────────── */
+.va-villa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.va-villa-card {
+  background: var(--va-card);
+  border: 1px solid var(--va-border);
+  border-radius: var(--va-radius);
+  overflow: hidden;
+  box-shadow: var(--va-shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.va-villa-card:hover {
+  box-shadow: var(--va-shadow);
+  transform: translateY(-2px);
+}
+.va-villa-img {
+  height: 190px;
+  background: var(--va-muted);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.va-villa-img-tags {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 6px;
+}
+.va-villa-body {
+  padding: 20px;
+}
+.va-villa-title {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.va-villa-meta {
+  display: flex;
+  gap: 14px;
+  margin: 12px 0 16px;
+  font-size: 13px;
+  color: var(--va-secondary);
+}
+.va-villa-price {
+  font-size: 18px;
+  font-weight: 600;
+}
+.va-villa-price span {
+  font-size: 13px;
+  color: var(--va-muted-fg);
+  font-weight: 400;
+}
+.va-villa-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--va-border);
+}
+
+/* ── Modal ──────────────────────────────────────────── */
+.va-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 31, 31, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 20px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.va-modal {
+  background: var(--va-card);
+  border-radius: var(--va-radius);
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 20px 60px rgba(31, 31, 31, 0.18);
+  animation: va-pop 0.18s ease;
+}
+.va-modal-lg { max-width: 760px; }
+@keyframes va-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.va-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--va-border);
+}
+.va-modal-head h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+.va-modal-body {
+  padding: 24px;
+}
+.va-modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 18px 24px;
+  border-top: 1px solid var(--va-border);
+}
+.va-x {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--va-muted-fg);
+  padding: 6px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+.va-x:hover { background: var(--va-muted); color: var(--va-fg); }
+
+/* ── Page header / toolbar ──────────────────────────── */
+.va-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.va-page-head h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.va-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.va-search {
+  position: relative;
+}
+.va-search svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--va-muted-fg);
+}
+.va-search input {
+  padding-left: 36px;
+  min-width: 240px;
+}
+
+/* ── Login ──────────────────────────────────────────── */
+.va-auth {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(120% 120% at 50% 0%, #fbf9f5 0%, var(--va-bg) 60%);
+}
+.va-auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--va-card);
+  border: 1px solid var(--va-border);
+  border-radius: var(--va-radius);
+  box-shadow: var(--va-shadow);
+  padding: 40px;
+}
+.va-auth-brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.va-auth-brand .va-brand-mark {
+  margin: 0 auto 14px;
+  width: 48px;
+  height: 48px;
+}
+
+/* ── Calendar ───────────────────────────────────────── */
+.va-cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.va-cal-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+.va-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid var(--va-border);
+  border-radius: var(--va-radius);
+  overflow: hidden;
+  background: var(--va-card);
+}
+.va-cal-dow {
+  padding: 12px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--va-muted-fg);
+  font-weight: 600;
+  background: #faf8f4;
+  border-bottom: 1px solid var(--va-border);
+  text-align: center;
+}
+.va-cal-cell {
+  min-height: 108px;
+  border-right: 1px solid var(--va-border);
+  border-bottom: 1px solid var(--va-border);
+  padding: 8px;
+  position: relative;
+}
+.va-cal-cell:nth-child(7n) { border-right: none; }
+.va-cal-cell.muted { background: #faf8f4; }
+.va-cal-date {
+  font-size: 12px;
+  color: var(--va-secondary);
+  font-weight: 500;
+}
+.va-cal-cell.today .va-cal-date {
+  background: var(--va-primary);
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.va-cal-event {
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  margin-top: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.va-cal-event.confirmed { background: var(--va-green-bg); color: var(--va-green); }
+.va-cal-event.pending { background: var(--va-yellow-bg); color: var(--va-yellow); }
+.va-cal-event.blocked { background: var(--va-red-bg); color: var(--va-red); }
+.va-legend {
+  display: flex;
+  gap: 18px;
+  font-size: 13px;
+  color: var(--va-secondary);
+}
+.va-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.va-legend i {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* ── Misc ───────────────────────────────────────────── */
+.va-empty {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--va-muted-fg);
+}
+.va-empty svg { margin: 0 auto 14px; opacity: 0.5; }
+.va-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--va-border);
+  border-top-color: var(--va-accent);
+  border-radius: 50%;
+  animation: va-spin 0.7s linear infinite;
+  margin: 64px auto;
+}
+@keyframes va-spin { to { transform: rotate(360deg); } }
+.va-row { display: flex; align-items: center; gap: 10px; }
+.va-between { display: flex; align-items: center; justify-content: space-between; }
+.va-stack { display: flex; flex-direction: column; gap: 16px; }
+.va-mt { margin-top: 24px; }
+.va-tag {
+  font-size: 11px;
+  background: var(--va-muted);
+  color: var(--va-secondary);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+/* ── Toast ──────────────────────────────────────────── */
+.va-toasts {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 200;
+}
+.va-toast {
+  background: var(--va-primary);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: var(--va-radius-sm);
+  font-size: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: va-pop 0.18s ease;
+  min-width: 220px;
+}
+.va-toast.error { background: var(--va-red); }
+.va-toast.success { background: var(--va-green); }
+
+@media (max-width: 900px) {
+  .va-shell { grid-template-columns: 1fr; }
+  .va-sidebar { display: none; }
+  .va-stats { grid-template-columns: repeat(2, 1fr); }
+  .va-content, .va-topbar { padding-left: 20px; padding-right: 20px; }
+  .va-grid-2 { grid-template-columns: 1fr; }
+}

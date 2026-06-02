@@ -142,6 +142,7 @@ export default function Navbar() {
                 alt="AppifyBrands Logo"
                 width={36}
                 height={36}
+                priority
                 className="relative z-10 object-contain rounded-full scale-[1.05] group-hover:scale-[1.10] transition-transform duration-300"
               />
             </div>
