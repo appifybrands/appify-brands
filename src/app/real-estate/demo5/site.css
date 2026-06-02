@@ -1,0 +1,746 @@
+/* ════════════════════════════════════════════════════════
+   Villa Suite — public site design system (.villa-site)
+   Mirrors the warm luxury palette of the admin.
+   ════════════════════════════════════════════════════════ */
+
+.villa-site {
+  --vs-bg: #f6f3ee;
+  --vs-bg-elev: #fbf8f3;
+  --vs-fg: #1f1f1f;
+  --vs-muted-fg: #7c6f64;
+  --vs-accent: #c8a97e;
+  --vs-accent-dark: #a4895f;
+  --vs-accent-soft: #ecdcc4;
+  --vs-border: #e8dfd2;
+  --vs-card: #ffffff;
+  --vs-shadow-sm: 0 1px 2px rgba(31, 31, 31, 0.05);
+  --vs-shadow: 0 4px 16px rgba(31, 31, 31, 0.06);
+  --vs-shadow-lg: 0 20px 60px rgba(31, 31, 31, 0.12);
+  --vs-radius: 18px;
+  --vs-radius-sm: 10px;
+
+  font-family:
+    "Inter",
+    "Plus Jakarta Sans",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: var(--vs-bg);
+  color: var(--vs-fg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.villa-site *,
+.villa-site *::before,
+.villa-site *::after {
+  box-sizing: border-box;
+}
+
+.villa-site h1,
+.villa-site h2,
+.villa-site h3 {
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--vs-fg);
+}
+
+.villa-site h1 {
+  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+  line-height: 1.05;
+}
+.villa-site h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  line-height: 1.12;
+}
+.villa-site h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  line-height: 1.2;
+}
+
+.villa-site p {
+  margin: 0;
+  color: var(--vs-muted-fg);
+  line-height: 1.65;
+}
+.villa-site a {
+  color: inherit;
+  text-decoration: none;
+}
+.villa-site img {
+  display: block;
+  max-width: 100%;
+}
+.villa-site button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.vs-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Nav ──────────────────────────────────────────────── */
+.vs-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(246, 243, 238, 0.85);
+  backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--vs-border);
+}
+.vs-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+.vs-brand {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.vs-brand span {
+  color: var(--vs-accent);
+}
+.vs-nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  font-size: 0.92rem;
+}
+.vs-nav-links a {
+  color: var(--vs-muted-fg);
+  transition: color 160ms ease;
+}
+.vs-nav-links a:hover {
+  color: var(--vs-fg);
+}
+.vs-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vs-fg);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  transition: background 160ms ease;
+}
+.vs-nav-cta:hover {
+  background: var(--vs-accent-dark);
+}
+@media (max-width: 760px) {
+  .vs-nav-links {
+    display: none;
+  }
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+.vs-hero {
+  position: relative;
+  min-height: 86vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 120px 0 80px;
+  color: #fff;
+  overflow: hidden;
+}
+.vs-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.65) 100%),
+    url("/real-estate-demo3/Demo3front.png") center/cover no-repeat;
+  z-index: 0;
+}
+.vs-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.vs-hero h1 {
+  color: #fff;
+}
+.vs-hero p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  margin-top: 18px;
+  max-width: 560px;
+}
+.vs-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vs-accent-soft);
+  margin-bottom: 22px;
+}
+.vs-hero-eyebrow::before {
+  content: "";
+  width: 36px;
+  height: 1px;
+  background: var(--vs-accent);
+}
+.vs-hero-cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+}
+
+/* ── Buttons ──────────────────────────────────────────── */
+.vs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+.vs-btn:hover {
+  transform: translateY(-1px);
+}
+.vs-btn-primary {
+  background: var(--vs-accent);
+  color: #1f1f1f;
+}
+.vs-btn-primary:hover {
+  background: var(--vs-accent-dark);
+  color: #fff;
+}
+.vs-btn-ghost {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.vs-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.vs-btn-dark {
+  background: var(--vs-fg);
+  color: #fff;
+}
+.vs-btn-dark:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ── Sections ─────────────────────────────────────────── */
+.vs-section {
+  padding: 110px 0;
+}
+.vs-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vs-accent-dark);
+  margin-bottom: 14px;
+}
+.vs-section-eyebrow::before {
+  content: "";
+  width: 36px;
+  height: 1px;
+  background: var(--vs-accent);
+}
+.vs-section-head {
+  max-width: 720px;
+  margin-bottom: 56px;
+}
+.vs-section-head p {
+  margin-top: 14px;
+  font-size: 1.05rem;
+}
+.vs-section-head--center {
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.vs-section-head--center .vs-section-eyebrow {
+  justify-content: center;
+}
+
+/* ── Villa cards ──────────────────────────────────────── */
+.vs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+.vs-card {
+  background: var(--vs-card);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius);
+  overflow: hidden;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+  display: flex;
+  flex-direction: column;
+}
+.vs-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--vs-shadow-lg);
+}
+.vs-card-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.vs-card-img img,
+.vs-card-img .vs-img-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms ease;
+}
+.vs-card:hover .vs-card-img img {
+  transform: scale(1.06);
+}
+.vs-img-fallback {
+  background: linear-gradient(135deg, var(--vs-accent-soft), #d8c4a5);
+  display: grid;
+  place-items: center;
+  color: rgba(31, 31, 31, 0.4);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+}
+.vs-card-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--vs-fg);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.vs-card-body {
+  padding: 24px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.vs-card-loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vs-muted-fg);
+  font-size: 0.82rem;
+}
+.vs-card-title {
+  font-size: 1.45rem;
+}
+.vs-card-meta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--vs-muted-fg);
+  border-top: 1px solid var(--vs-border);
+  padding-top: 14px;
+  margin-top: 6px;
+}
+.vs-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.vs-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 14px;
+}
+.vs-card-price {
+  font-size: 1.2rem;
+  color: var(--vs-fg);
+  font-weight: 600;
+}
+.vs-card-price small {
+  color: var(--vs-muted-fg);
+  font-weight: 400;
+  font-size: 0.78rem;
+  margin-left: 4px;
+}
+.vs-card-link {
+  color: var(--vs-accent-dark);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+.vs-card-link:hover {
+  color: var(--vs-fg);
+}
+
+/* ── Filters ──────────────────────────────────────────── */
+.vs-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.vs-input,
+.vs-select,
+.vs-textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--vs-card);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius-sm);
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--vs-fg);
+  width: 100%;
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+.vs-input:focus,
+.vs-select:focus,
+.vs-textarea:focus {
+  border-color: var(--vs-accent);
+  box-shadow: 0 0 0 3px rgba(200, 169, 126, 0.18);
+}
+.vs-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* ── Villa detail ─────────────────────────────────────── */
+.vs-detail-hero {
+  position: relative;
+  aspect-ratio: 21 / 9;
+  border-radius: var(--vs-radius);
+  overflow: hidden;
+  margin-top: 32px;
+}
+.vs-detail-hero img,
+.vs-detail-hero .vs-img-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.vs-detail-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 48px;
+  margin-top: 56px;
+}
+@media (max-width: 960px) {
+  .vs-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.vs-pill-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 0 28px;
+}
+.vs-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--vs-bg-elev);
+  border: 1px solid var(--vs-border);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--vs-muted-fg);
+}
+.vs-amenities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+.vs-amenity {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--vs-fg);
+  font-size: 0.92rem;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--vs-border);
+}
+.vs-amenity svg {
+  color: var(--vs-accent-dark);
+}
+.vs-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 26px;
+}
+.vs-gallery > div {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--vs-radius-sm);
+}
+.vs-gallery img,
+.vs-gallery .vs-img-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Booking card ─────────────────────────────────────── */
+.vs-booking {
+  background: var(--vs-card);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius);
+  padding: 28px;
+  box-shadow: var(--vs-shadow);
+  position: sticky;
+  top: 100px;
+}
+.vs-booking h3 {
+  margin-bottom: 6px;
+}
+.vs-booking-price {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.vs-booking-price small {
+  color: var(--vs-muted-fg);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+.vs-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+.vs-form-row--single {
+  grid-template-columns: 1fr;
+}
+.vs-label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--vs-muted-fg);
+  margin-bottom: 6px;
+}
+.vs-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 20px;
+  border-top: 1px solid var(--vs-border);
+  font-size: 1.05rem;
+}
+.vs-total strong {
+  font-size: 1.2rem;
+}
+.vs-alert {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--vs-radius-sm);
+  font-size: 0.88rem;
+  border: 1px solid transparent;
+}
+.vs-alert-error {
+  background: #fbe9e6;
+  border-color: #f3c4bd;
+  color: #8a3027;
+}
+.vs-alert-ok {
+  background: #e8f1ea;
+  border-color: #c8dcce;
+  color: #355e44;
+}
+
+/* ── Features strip ───────────────────────────────────── */
+.vs-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .vs-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.vs-feature {
+  text-align: left;
+}
+.vs-feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--vs-accent-soft);
+  color: var(--vs-accent-dark);
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+}
+.vs-feature h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+.vs-feature p {
+  font-size: 0.92rem;
+}
+
+/* ── Testimonial ──────────────────────────────────────── */
+.vs-testimonial {
+  background: var(--vs-fg);
+  color: #fff;
+  border-radius: var(--vs-radius);
+  padding: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.vs-testimonial::before {
+  content: "\201C";
+  position: absolute;
+  top: -30px;
+  left: 24px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 14rem;
+  color: var(--vs-accent);
+  opacity: 0.4;
+  line-height: 1;
+}
+.vs-testimonial blockquote {
+  position: relative;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 820px;
+}
+.vs-testimonial cite {
+  display: block;
+  margin-top: 28px;
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vs-accent-soft);
+}
+
+/* ── Newsletter ───────────────────────────────────────── */
+.vs-newsletter {
+  background: var(--vs-bg-elev);
+  border: 1px solid var(--vs-border);
+  border-radius: var(--vs-radius);
+  padding: 56px;
+  text-align: center;
+}
+.vs-newsletter-form {
+  display: flex;
+  gap: 10px;
+  max-width: 460px;
+  margin: 22px auto 0;
+}
+@media (max-width: 560px) {
+  .vs-newsletter-form {
+    flex-direction: column;
+  }
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+.vs-footer {
+  background: var(--vs-fg);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 70px 0 30px;
+}
+.vs-footer h4 {
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.vs-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 48px;
+}
+@media (max-width: 800px) {
+  .vs-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.vs-footer a {
+  display: block;
+  padding: 4px 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+.vs-footer a:hover {
+  color: var(--vs-accent);
+}
+.vs-footer-bottom {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Loading / empty ──────────────────────────────────── */
+.vs-loading {
+  display: grid;
+  place-items: center;
+  padding: 80px 0;
+  color: var(--vs-muted-fg);
+  font-size: 0.92rem;
+}
+.vs-spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid var(--vs-border);
+  border-top-color: var(--vs-accent);
+  animation: vs-spin 0.9s linear infinite;
+  margin-bottom: 12px;
+}
+@keyframes vs-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.vs-empty {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--vs-muted-fg);
+  border: 1px dashed var(--vs-border);
+  border-radius: var(--vs-radius);
+}
