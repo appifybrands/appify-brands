@@ -11,26 +11,18 @@ type SubItem = { label: string; icon: React.ElementType; href: string };
 type NavLink = { label: string; href: string; subItems?: SubItem[] };
 
 const navLinks: NavLink[] = [
-  { label: "Pricing",      href: "/pricing" },
-  { label: "Works",        href: "/#works" },
-  { 
-    label: "Services",     
-    href: "/#services",
-    subItems: [
-      { label: "Landing Pages", icon: CheckCircle2, href: "/#services" },
-      { label: "E-Commerce", icon: CheckCircle2, href: "/#services" },
-      { label: "Admin Panels", icon: CheckCircle2, href: "/#services" },
-    ]
-  },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Works", href: "/#works" },
+  { label: "Services", href: "/#services" },
   { label: "Testimonials", href: "/#testimonials" },
-  { label: "About",        href: "/#about" },
+  { label: "About", href: "/#about" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted]     = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -40,37 +32,74 @@ export default function Navbar() {
   }, []);
 
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.includes('#')) {
-      const [path, hash] = href.split('#');
+    if (href.includes("#")) {
+      const [path, hash] = href.split("#");
       const currentPath = window.location.pathname;
 
-      if (currentPath === path || (path === '/' && currentPath === '') || (path === '' && currentPath === '/')) {
+      if (
+        currentPath === path ||
+        (path === "/" && currentPath === "") ||
+        (path === "" && currentPath === "/")
+      ) {
         e.preventDefault();
         setMenuOpen(false);
-        
-        if (hash === 'bottom') {
-          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+
+        if (hash === "bottom") {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+          return;
+        }
+
+        // Handle services tab navigation
+        const serviceTabMap: Record<string, number> = {
+          "services-landing": 0,
+          "services-ecommerce": 1,
+          "services-admin": 2,
+        };
+        if (hash in serviceTabMap) {
+          const target = document.querySelector("#services");
+          if (target)
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.dispatchEvent(
+            new CustomEvent("services-tab", { detail: serviceTabMap[hash] }),
+          );
           return;
         }
 
         const target = document.querySelector(`#${hash}`);
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (target)
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
   };
 
-  const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  const isDark = resolvedTheme === "dark" || (!resolvedTheme && theme === "dark");
+  const toggleTheme = () =>
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  const isDark =
+    mounted &&
+    (resolvedTheme === "dark" || (!resolvedTheme && theme === "dark"));
 
-  const appleGlassVars = {
-    "--bg-primary": "rgba(255, 255, 255, 0.65)",
-    "--bg-secondary": "rgba(255, 255, 255, 0.4)",
-    "--text-primary": "#000000",
-    "--text-secondary": "#444444",
-    "--text-accent": "#222222",
-    "--border-subtle": "rgba(255, 255, 255, 0.3)",
-    "--border-medium": "rgba(255, 255, 255, 0.6)",
-  } as React.CSSProperties;
+  const appleGlassVars = isDark
+    ? ({
+        "--bg-primary": "rgba(15, 23, 42, 0.55)",
+        "--bg-secondary": "rgba(15, 23, 42, 0.3)",
+        "--text-primary": "#f1f5f9",
+        "--text-secondary": "#cbd5e1",
+        "--text-accent": "#e2e8f0",
+        "--border-subtle": "rgba(255, 255, 255, 0.1)",
+        "--border-medium": "rgba(255, 255, 255, 0.2)",
+      } as React.CSSProperties)
+    : ({
+        "--bg-primary": "rgba(255, 255, 255, 0.35)",
+        "--bg-secondary": "rgba(255, 255, 255, 0.2)",
+        "--text-primary": "#000000",
+        "--text-secondary": "#444444",
+        "--text-accent": "#222222",
+        "--border-subtle": "rgba(255, 255, 255, 0.25)",
+        "--border-medium": "rgba(255, 255, 255, 0.4)",
+      } as React.CSSProperties);
 
   return (
     <>
@@ -79,27 +108,31 @@ export default function Navbar() {
         style={{
           ...appleGlassVars,
           background: "var(--bg-primary)",
-          backdropFilter: "blur(30px) saturate(200%)",
-          WebkitBackdropFilter: "blur(30px) saturate(200%)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
           border: "1px solid var(--border-medium)",
-          boxShadow: scrolled ? "0 16px 40px -10px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.4)" : "0 8px 32px -10px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.4)"
+          boxShadow: scrolled
+            ? "0 16px 40px -10px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(255,255,255,0.3)"
+            : "0 8px 32px -10px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(255,255,255,0.3)",
         }}
       >
         <div className="mx-auto flex items-center justify-between h-16 pr-6 sm:pr-8 pl-2 sm:pl-3">
-
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center w-[40px] h-[40px] rounded-full group cursor-pointer overflow-hidden shadow-lg"
-                 style={{ boxShadow: "0 0 15px rgba(26, 45, 66, 0.2)" }}>
+            <div
+              className="relative flex items-center justify-center w-[40px] h-[40px] rounded-full group cursor-pointer overflow-hidden shadow-lg"
+              style={{ boxShadow: "0 0 15px rgba(26, 45, 66, 0.2)" }}
+            >
               {/* Spinning liquid gradient background */}
-              <div 
+              <div
                 className="absolute inset-[-50%] rounded-full opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: "conic-gradient(from 0deg, var(--mist), var(--navy), var(--pearl), var(--navy), var(--mist))",
-                  animation: "spin 3s linear infinite"
+                  background:
+                    "conic-gradient(from 0deg, var(--mist), var(--navy), var(--pearl), var(--navy), var(--mist))",
+                  animation: "spin 3s linear infinite",
                 }}
               ></div>
-              
+
               {/* Inner background to mask out the center, leaving a border */}
               <div className="absolute inset-[2px] rounded-full bg-[var(--bg-primary)] transition-colors duration-300"></div>
 
@@ -125,25 +158,33 @@ export default function Navbar() {
                   style={{ color: "var(--text-secondary)" }}
                 >
                   <div className="roll-text text-[0.7rem] font-semibold tracking-[0.15em] uppercase">
-                    <span className="text-real transition-colors duration-300 group-hover:text-[var(--text-primary)]">{link.label}</span>
-                    <span className="text-clone text-[var(--text-accent)]">{link.label}</span>
+                    <span className="text-real transition-colors duration-300 group-hover:text-[var(--text-primary)]">
+                      {link.label}
+                    </span>
+                    <span className="text-clone text-[var(--text-accent)]">
+                      {link.label}
+                    </span>
                   </div>
                   {link.subItems && (
-                    <ChevronDown size={12} className="opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <ChevronDown
+                      size={12}
+                      className="opacity-60 group-hover:opacity-100 transition-opacity"
+                    />
                   )}
                 </Link>
 
                 {/* Apple Glass Dropdown */}
                 {link.subItems && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-50">
-                    <div 
+                    <div
                       className="flex flex-col rounded-[22px] overflow-hidden py-2 w-48 shadow-2xl"
                       style={{
                         background: "rgba(255, 255, 255, 0.75)",
                         backdropFilter: "blur(40px) saturate(200%)",
                         WebkitBackdropFilter: "blur(40px) saturate(200%)",
                         border: "1px solid rgba(255, 255, 255, 0.6)",
-                        boxShadow: "0 20px 40px -10px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.4)",
+                        boxShadow:
+                          "0 20px 40px -10px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.4)",
                       }}
                     >
                       {link.subItems.map((sub, i) => {
@@ -157,7 +198,9 @@ export default function Navbar() {
                             style={{ color: "#000000" }}
                           >
                             <Icon size={16} strokeWidth={1.5} />
-                            <span className="text-[0.95rem] font-medium tracking-tight normal-case">{sub.label}</span>
+                            <span className="text-[0.95rem] font-medium tracking-tight normal-case">
+                              {sub.label}
+                            </span>
                           </Link>
                         );
                       })}
@@ -181,9 +224,19 @@ export default function Navbar() {
               }}
             >
               {mounted ? (
-                isDark
-                  ? <SunIcon size={18} strokeWidth={1.5} style={{ color: "var(--navy)" }} />
-                  : <MoonIcon size={18} strokeWidth={1.5} style={{ color: "var(--navy)" }} />
+                isDark ? (
+                  <SunIcon
+                    size={18}
+                    strokeWidth={1.5}
+                    style={{ color: "var(--text-primary)" }}
+                  />
+                ) : (
+                  <MoonIcon
+                    size={18}
+                    strokeWidth={1.5}
+                    style={{ color: "var(--text-primary)" }}
+                  />
+                )
               ) : (
                 <div className="w-4 h-4" />
               )}
@@ -197,7 +250,8 @@ export default function Navbar() {
               style={{
                 background: "#ffffff",
                 border: "1px solid rgba(0,0,0,0.08)",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.8)",
+                boxShadow:
+                  "0 10px 20px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.8)",
               }}
             >
               <Image
@@ -224,9 +278,11 @@ export default function Navbar() {
                     background: "var(--text-primary)",
                     opacity: i === 1 && menuOpen ? 0 : 1,
                     transform:
-                      i === 0 && menuOpen ? "rotate(45deg) translateY(7px)"
-                      : i === 2 && menuOpen ? "rotate(-45deg) translateY(-7px)"
-                      : "none",
+                      i === 0 && menuOpen
+                        ? "rotate(45deg) translateY(7px)"
+                        : i === 2 && menuOpen
+                          ? "rotate(-45deg) translateY(-7px)"
+                          : "none",
                   }}
                 />
               ))}
@@ -265,14 +321,21 @@ export default function Navbar() {
                 {link.label}
               </Link>
               {link.subItems && (
-                <div className="flex flex-col gap-3 pl-4 border-l border-[var(--border-medium)]"
-                     style={{
-                       transitionDelay: menuOpen ? `${i * 60 + 100}ms` : "0ms",
-                       opacity: menuOpen ? 1 : 0,
-                       transform: menuOpen ? "translateX(0)" : "translateX(-10px)",
-                     }}>
+                <div
+                  className="flex flex-col gap-3 pl-4 border-l border-[var(--border-medium)]"
+                  style={{
+                    transitionDelay: menuOpen ? `${i * 60 + 100}ms` : "0ms",
+                    opacity: menuOpen ? 1 : 0,
+                    transform: menuOpen ? "translateX(0)" : "translateX(-10px)",
+                  }}
+                >
                   {link.subItems.map((sub, j) => (
-                    <Link key={j} href={sub.href} onClick={(e) => handleNav(e, sub.href)} className="text-lg font-medium text-[var(--text-secondary)]">
+                    <Link
+                      key={j}
+                      href={sub.href}
+                      onClick={(e) => handleNav(e, sub.href)}
+                      className="text-lg font-medium text-[var(--text-secondary)]"
+                    >
                       {sub.label}
                     </Link>
                   ))}
@@ -299,7 +362,10 @@ export default function Navbar() {
             className="h-9 w-auto"
           />
         </a>
-        <p className="mt-16 text-xs tracking-widest uppercase" style={{ color: "var(--text-secondary)", opacity: 0.5 }}>
+        <p
+          className="mt-16 text-xs tracking-widest uppercase"
+          style={{ color: "var(--text-secondary)", opacity: 0.5 }}
+        >
           AppifyBrands © 2025
         </p>
       </div>

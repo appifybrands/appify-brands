@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import Lenis from 'lenis';
+import Lenis from "lenis";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -13,14 +13,22 @@ import MailCTA, { MAIL_HREF } from "./my_components/MailCTA";
 import WrapButton from "@/components/ui/wrap-button";
 
 // ── Lazy-load below-the-fold sections so the hero paints fast ──
-const SelectedWorkSection = dynamic(() => import('@/app/my_components/SelectedWorkSection'));
-const PremiumShowcaseSection = dynamic(() => import('@/app/my_components/PremiumShowcaseSection'));
-const FeatureCardsSection = dynamic(() => import('@/app/my_components/FeatureCardsSection'));
-const TestimonialsSection = dynamic(() => import('@/app/my_components/TestimonialsSection'));
-const AboutSection = dynamic(() => import('@/app/my_components/AboutSection'));
-const FAQSection = dynamic(() => import('@/app/my_components/FAQSection'));
-const CTASection = dynamic(() => import('@/app/my_components/CTASection'));
-const Footer = dynamic(() => import('./my_components/Footer'));
+const SelectedWorkSection = dynamic(
+  () => import("@/app/my_components/SelectedWorkSection"),
+);
+const PremiumShowcaseSection = dynamic(
+  () => import("@/app/my_components/PremiumShowcaseSection"),
+);
+const FeatureCardsSection = dynamic(
+  () => import("@/app/my_components/FeatureCardsSection"),
+);
+const TestimonialsSection = dynamic(
+  () => import("@/app/my_components/TestimonialsSection"),
+);
+const AboutSection = dynamic(() => import("@/app/my_components/AboutSection"));
+const FAQSection = dynamic(() => import("@/app/my_components/FAQSection"));
+const CTASection = dynamic(() => import("@/app/my_components/CTASection"));
+const Footer = dynamic(() => import("./my_components/Footer"));
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -36,8 +44,8 @@ export default function Home() {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
+      orientation: "vertical",
+      gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
       lerp: 0.1,
@@ -50,7 +58,10 @@ export default function Home() {
     }
     requestAnimationFrame(raf);
 
-    return () => { lenis.destroy(); lenisRef.current = null; };
+    return () => {
+      lenis.destroy();
+      lenisRef.current = null;
+    };
   }, []);
 
   return (
@@ -66,8 +77,8 @@ export default function Home() {
       <section
         id="main"
         ref={heroRef}
-        className="relative z-10 min-h-screen flex flex-col items-center justify-center overflow-hidden"
-        style={{ paddingTop: "64px" }}
+        className="relative z-10 min-h-screen flex flex-col items-center justify-center pb-12"
+        style={{ paddingTop: "96px" }}
       >
         {/* ── Simple grid background ── */}
         <div className="absolute inset-0 z-0 grid-overlay pointer-events-none" />
@@ -99,7 +110,10 @@ export default function Home() {
             >
               <span
                 className="h-px w-8 sm:w-12"
-                style={{ background: "linear-gradient(to right, transparent, var(--text-secondary))" }}
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, var(--text-secondary))",
+                }}
               />
               <p
                 className="text-center text-xs font-semibold uppercase tracking-[0.3em] sm:text-sm"
@@ -109,7 +123,10 @@ export default function Home() {
               </p>
               <span
                 className="h-px w-8 sm:w-12"
-                style={{ background: "linear-gradient(to left, transparent, var(--text-secondary))" }}
+                style={{
+                  background:
+                    "linear-gradient(to left, transparent, var(--text-secondary))",
+                }}
               />
             </div>
           </motion.div>
@@ -165,8 +182,12 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            style={{ y: heroY, opacity: heroOpacity, borderColor: "rgba(201, 168, 76, 0.3)" }}
-            className="group relative max-h-[40vh] overflow-hidden rounded-3xl border bg-black/70 backdrop-blur-xl"
+            style={{
+              y: heroY,
+              opacity: heroOpacity,
+              borderColor: "rgba(201, 168, 76, 0.3)",
+            }}
+            className="group relative md:max-h-[40vh] overflow-hidden rounded-3xl border bg-black/70 backdrop-blur-xl"
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
@@ -181,7 +202,7 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-transparent pointer-events-none" />
 
-            <div className="relative z-10 flex max-h-[40vh] flex-col items-center justify-center gap-8 p-8 text-center md:flex-row md:items-center md:justify-between md:p-14 md:text-left">
+            <div className="relative z-10 flex flex-col items-center justify-center gap-5 p-5 text-center sm:gap-6 sm:p-6 md:max-h-[40vh] md:flex-row md:items-center md:justify-between md:gap-8 md:p-14 md:text-left">
               <div className="flex max-w-2xl flex-col gap-5">
                 <h2
                   className="font-black uppercase tracking-tighter text-white"
@@ -196,7 +217,12 @@ export default function Home() {
                 </h2>
 
                 <p className="max-w-2xl text-sm font-light leading-relaxed text-white/80 sm:text-lg">
-                  Get the look and feel locked before proceeding with the full website,   absolutely <span className="font-semibold" style={{ color: "#22c55e" }}>free</span>. To do it, simply mail us.
+                  Get the look and feel locked before proceeding with the full
+                  website, absolutely{" "}
+                  <span className="font-semibold" style={{ color: "#22c55e" }}>
+                    free
+                  </span>
+                  . To do it, simply mail us.
                 </p>
               </div>
 
@@ -221,6 +247,19 @@ export default function Home() {
           className="relative z-50 flex w-full flex-col items-center justify-center gap-6 border-t px-6 py-16 text-center sm:py-20"
           style={{ borderColor: "var(--border-subtle)" }}
         >
+          <h3
+            className="text-xl sm:text-2xl font-bold tracking-tight"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Ready to elevate your brand?
+          </h3>
+          <p
+            className="max-w-md text-sm sm:text-base font-light leading-relaxed"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            Book a free 30-minute strategy call or drop us a mail — let&apos;s
+            build something remarkable together.
+          </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <MailCTA />
             <a

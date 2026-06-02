@@ -15,27 +15,31 @@ const luxuryAmenities = [
   {
     name: "Cedar Soaking",
     designation: "Therapy",
-    quote: "Our wood-fired hot tub is hand-built from local cedar and filled with fresh mountain spring water.",
-    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&fit=crop"
+    quote:
+      "Our wood-fired hot tub is hand-built from local cedar and filled with fresh mountain spring water.",
+    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&fit=crop",
   },
   {
     name: "Gourmet Hearth",
     designation: "Dining",
-    quote: "Wake up to organic breakfasts delivered daily, featuring farm-to-table berries, sourdough, and local honey.",
-    src: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=600&fit=crop"
+    quote:
+      "Wake up to organic breakfasts delivered daily, featuring farm-to-table berries, sourdough, and local honey.",
+    src: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=600&fit=crop",
   },
   {
     name: "Private Concierge",
     designation: "Service",
-    quote: "We arrange exclusive guided hikes, private yoga sessions on the deck, and local vineyard tours.",
-    src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&fit=crop"
+    quote:
+      "We arrange exclusive guided hikes, private yoga sessions on the deck, and local vineyard tours.",
+    src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&fit=crop",
   },
   {
     name: "Stargazing Deck",
     designation: "Astronomy",
-    quote: "Equipped with a high-power astronomical telescope and plush blankets for cold mountain nights.",
-    src: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&fit=crop"
-  }
+    quote:
+      "Equipped with a high-power astronomical telescope and plush blankets for cold mountain nights.",
+    src: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&fit=crop",
+  },
 ];
 
 const natureImages = [
@@ -47,18 +51,78 @@ const natureImages = [
 ];
 
 const galleryCards = [
-  { image: "https://images.unsplash.com/photo-1549693578-d683be217e58?w=400&h=600&fit=crop", title: "A-Frame Silhouette", description: "The iconic triangle glowing amidst towering trees" },
-  { image: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=400&h=600&fit=crop", title: "Winter Wonder", description: "Heavy snow dusting the warm cedar deck" },
-  { image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=600&fit=crop", title: "Hot Tub Steam", description: "Warm steam rising in the cold mountain air" },
-  { image: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&h=600&fit=crop", title: "Loft View", description: "Peering down into the warm, illuminated living room" },
-  { image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=600&fit=crop", title: "Artisan Kitchen", description: "Cozy counter space with fresh coffee brewing" },
-  { image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=600&fit=crop", title: "Morning Mist", description: "Mist rolling over the mountain ridges at 6:00 AM" },
-  { image: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=400&h=600&fit=crop", title: "Pine Shadows", description: "Sunny morning shadows dancing on the cedar planks" },
-  { image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=400&h=600&fit=crop", title: "Midnight Sky", description: "Millions of stars shining brightly above the roofline" },
-  { image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400&h=600&fit=crop", title: "Linen Rest", description: "Fresh linen on the plush feather bed" },
-  { image: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?w=400&h=600&fit=crop", title: "Reading Light", description: "Soft warm yellow light falling on an open book" },
-  { image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&h=600&fit=crop", title: "Skylight Shower", description: "Hot shower with a direct view of the sky" },
-  { image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=600&fit=crop", title: "Evening Fire", description: "Gathering around the stone fireplace with friends" },
+  {
+    image:
+      "https://images.unsplash.com/photo-1549693578-d683be217e58?w=400&h=600&fit=crop",
+    title: "A-Frame Silhouette",
+    description: "The iconic triangle glowing amidst towering trees",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=400&h=600&fit=crop",
+    title: "Winter Wonder",
+    description: "Heavy snow dusting the warm cedar deck",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=600&fit=crop",
+    title: "Hot Tub Steam",
+    description: "Warm steam rising in the cold mountain air",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&h=600&fit=crop",
+    title: "Loft View",
+    description: "Peering down into the warm, illuminated living room",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=600&fit=crop",
+    title: "Artisan Kitchen",
+    description: "Cozy counter space with fresh coffee brewing",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=600&fit=crop",
+    title: "Morning Mist",
+    description: "Mist rolling over the mountain ridges at 6:00 AM",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=400&h=600&fit=crop",
+    title: "Pine Shadows",
+    description: "Sunny morning shadows dancing on the cedar planks",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=400&h=600&fit=crop",
+    title: "Midnight Sky",
+    description: "Millions of stars shining brightly above the roofline",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400&h=600&fit=crop",
+    title: "Linen Rest",
+    description: "Fresh linen on the plush feather bed",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?w=400&h=600&fit=crop",
+    title: "Reading Light",
+    description: "Soft warm yellow light falling on an open book",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&h=600&fit=crop",
+    title: "Skylight Shower",
+    description: "Hot shower with a direct view of the sky",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=600&fit=crop",
+    title: "Evening Fire",
+    description: "Gathering around the stone fireplace with friends",
+  },
 ];
 
 export default function HomestayDirectoryPage() {
@@ -84,12 +148,9 @@ export default function HomestayDirectoryPage() {
 
   return (
     <div className="relative min-h-screen bg-[#070c0a] text-neutral-100 font-sans overflow-x-hidden selection:bg-amber-400 selection:text-black">
-      
       {/* ── Fixed Cinematic Background ── */}
       <div className="fixed inset-0 z-0 bg-[#070c0a]">
-        <div
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=1600&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-25"
-        />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=1600&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-25" />
         {/* Subtle radial overlay for vignetting */}
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#070c0a]/90 via-[#070c0a]/10 to-[#070c0a]" />
@@ -99,20 +160,42 @@ export default function HomestayDirectoryPage() {
       <div className="fixed inset-0 z-5 pointer-events-none shadow-[inset_0_0_200px_rgba(0,0,0,0.8)]" />
 
       {/* ── Sticky Luxury Header ── */}
-      <header className="relative z-40 w-full border-b border-white/5 bg-[#070c0a]/50 backdrop-blur-xl sticky top-0">
+      <header className="relative z-40 w-full border-b border-white/5 bg-[#070c0a]/20 backdrop-blur-sm sticky top-0">
         <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
           <Link href="/homestay" className="flex items-center gap-3 group">
             <div className="w-11 h-11 rounded-xl bg-amber-400 flex items-center justify-center text-black font-black text-xl transition-transform duration-500 group-hover:scale-105 shadow-[0_4px_30px_rgba(251,191,36,0.2)]">
               LH
             </div>
-            <span className="font-extrabold uppercase text-xs tracking-[0.3em]">LuxeHaven</span>
+            <span className="font-extrabold uppercase text-xs tracking-[0.3em]">
+              LuxeHaven
+            </span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-12 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/60">
-            <a href="#showcase" className="hover:text-amber-400 transition-colors">Our Villas</a>
-            <a href="#amenities" className="hover:text-amber-400 transition-colors">Amenities</a>
-            <a href="#experience" className="hover:text-amber-400 transition-colors">Experience</a>
-            <a href="#testimonials" className="hover:text-amber-400 transition-colors">Stories</a>
+            <a
+              href="#showcase"
+              className="hover:text-amber-400 transition-colors"
+            >
+              Our Villas
+            </a>
+            <a
+              href="#amenities"
+              className="hover:text-amber-400 transition-colors"
+            >
+              Amenities
+            </a>
+            <a
+              href="#experience"
+              className="hover:text-amber-400 transition-colors"
+            >
+              Experience
+            </a>
+            <a
+              href="#testimonials"
+              className="hover:text-amber-400 transition-colors"
+            >
+              Stories
+            </a>
           </nav>
 
           <div>
@@ -128,10 +211,8 @@ export default function HomestayDirectoryPage() {
 
       {/* ── Content Wrapper ── */}
       <div className="relative z-10">
-
         {/* HERO SECTION */}
         <section className="min-h-[calc(100vh-6rem)] flex items-center justify-center px-6 relative">
-          
           {/* Trusted Badge Overlay */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -141,16 +222,23 @@ export default function HomestayDirectoryPage() {
           >
             <div className="flex -space-x-3">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Avatar key={i} className="border-2 border-[#070c0a] w-7 h-7 ring-1 ring-white/10 shadow-2xl">
+                <Avatar
+                  key={i}
+                  className="border-2 border-[#070c0a] w-7 h-7 ring-1 ring-white/10 shadow-2xl"
+                >
                   <AvatarImage src={`https://i.pravatar.cc/100?u=${i + 35}`} />
-                  <AvatarFallback className="bg-neutral-800 text-white text-[8px]">G</AvatarFallback>
+                  <AvatarFallback className="bg-neutral-800 text-white text-[8px]">
+                    G
+                  </AvatarFallback>
                 </Avatar>
               ))}
             </div>
             <div className="flex items-center gap-3">
               <div className="flex gap-0.5">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <span key={i} className="text-amber-400 text-[10px]">★</span>
+                  <span key={i} className="text-amber-400 text-[10px]">
+                    ★
+                  </span>
                 ))}
               </div>
               <span className="text-white/60 text-[8px] uppercase tracking-[0.2em] font-bold">
@@ -188,7 +276,9 @@ export default function HomestayDirectoryPage() {
               transition={{ duration: 1, delay: 0.4 }}
               className="text-white/50 font-light text-xs sm:text-sm max-w-md mt-4 leading-relaxed"
             >
-              Curated hideaways combining isolated wilderness with refined structural architecture. Soaking tubs, custom stone hearths, and raw redwood treehouse decks.
+              Curated hideaways combining isolated wilderness with refined
+              structural architecture. Soaking tubs, custom stone hearths, and
+              raw redwood treehouse decks.
             </motion.p>
           </div>
 
@@ -199,7 +289,9 @@ export default function HomestayDirectoryPage() {
             transition={{ delay: 1, duration: 1 }}
             className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
-            <span className="text-white/30 text-[9px] uppercase tracking-[0.5em] font-semibold">Explore</span>
+            <span className="text-white/30 text-[9px] uppercase tracking-[0.5em] font-semibold">
+              Explore
+            </span>
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -223,7 +315,9 @@ export default function HomestayDirectoryPage() {
                 Choose Your Sanctuary
               </h2>
               <p className="text-white/50 text-xs sm:text-sm max-w-lg font-light leading-relaxed">
-                Explore our three architectural masterworks. Toggle availability status in the CRM inventory panel to watch updates sync instantly.
+                Explore our three architectural masterworks. Toggle availability
+                status in the CRM inventory panel to watch updates sync
+                instantly.
               </p>
             </div>
           </div>
@@ -232,7 +326,9 @@ export default function HomestayDirectoryPage() {
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
             {activeSuites.length === 0 ? (
               <div className="col-span-3 text-center py-20 bg-white/[0.02] rounded-3xl border border-white/5">
-                <p className="text-white/40 text-xs uppercase tracking-wider">No active suites currently available.</p>
+                <p className="text-white/40 text-xs uppercase tracking-wider">
+                  No active suites currently available.
+                </p>
               </div>
             ) : (
               activeSuites.map((suite) => (
@@ -250,7 +346,9 @@ export default function HomestayDirectoryPage() {
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.onerror = null;
-                          target.src = "https://placehold.co/800x600/0c1812/333333?text=" + encodeURIComponent(suite.name);
+                          target.src =
+                            "https://placehold.co/800x600/0c1812/333333?text=" +
+                            encodeURIComponent(suite.name);
                         }}
                       />
                       <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/15 flex items-center gap-1.5 text-[10px] text-amber-400 font-bold">
@@ -275,8 +373,8 @@ export default function HomestayDirectoryPage() {
                     {/* Amenities Tag Line */}
                     <div className="flex flex-wrap gap-1.5 pt-2">
                       {suite.amenities.slice(0, 3).map((amenity, idx) => (
-                        <span 
-                          key={idx} 
+                        <span
+                          key={idx}
                           className="text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-white/70"
                         >
                           {amenity}
@@ -287,8 +385,12 @@ export default function HomestayDirectoryPage() {
 
                   <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
                     <div>
-                      <span className="text-[9px] text-white/40 block uppercase tracking-wider">Per Night</span>
-                      <span className="text-lg font-bold font-mono text-white">${suite.price}</span>
+                      <span className="text-[9px] text-white/40 block uppercase tracking-wider">
+                        Per Night
+                      </span>
+                      <span className="text-lg font-bold font-mono text-white">
+                        ${suite.price}
+                      </span>
                     </div>
                     <Link
                       href={`/homestay/villas/${suite.id}`}
@@ -326,7 +428,10 @@ export default function HomestayDirectoryPage() {
         </section>
 
         {/* TESTIMONIAL MARQUEE SECTION */}
-        <section id="testimonials" className="relative z-10 py-32 bg-transparent overflow-hidden">
+        <section
+          id="testimonials"
+          className="relative z-10 py-32 bg-transparent overflow-hidden"
+        >
           <div className="max-w-7xl mx-auto px-6 mb-8 text-center">
             <div className="px-4 py-1.5 rounded-full bg-black/30 backdrop-blur-md border border-white/10 shadow-lg inline-block mb-6">
               <span className="text-white/60 text-xs uppercase tracking-[0.3em] font-medium">
@@ -338,7 +443,8 @@ export default function HomestayDirectoryPage() {
             </h2>
             <div className="max-w-xl mx-auto px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-md border border-white/10 shadow-xl">
               <p className="text-sm text-white/70 font-light">
-                Listen to the whispers of the mountain lodge and redwoods from our curated guest journals.
+                Listen to the whispers of the mountain lodge and redwoods from
+                our curated guest journals.
               </p>
             </div>
           </div>
@@ -346,23 +452,59 @@ export default function HomestayDirectoryPage() {
           <div className="flex flex-col gap-6">
             <ResortTestimonialMarquee
               testimonials={[
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171802.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171810.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171816.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171822.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171832.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171843.png" },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171802.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171810.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171816.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171822.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171832.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171843.png",
+                },
               ]}
             />
             <ResortTestimonialMarquee
               reverse
               testimonials={[
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171853.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171858.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171903.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171908.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171933.png" },
-                { imgSrc: "/demo2_assets/reviews/Screenshot 2026-04-28 171938.png" },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171853.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171858.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171903.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171908.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171933.png",
+                },
+                {
+                  imgSrc:
+                    "/demo2_assets/reviews/Screenshot 2026-04-28 171938.png",
+                },
               ]}
             />
           </div>
@@ -384,9 +526,7 @@ export default function HomestayDirectoryPage() {
             </p>
           </div>
         </section>
-
       </div>
-
     </div>
   );
 }

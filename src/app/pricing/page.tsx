@@ -5,7 +5,6 @@ import { Check, ArrowRight } from "lucide-react";
 import Navbar from "@/app/my_components/Navbar";
 import Footer from "@/app/my_components/Footer";
 import CTASection from "@/app/my_components/CTASection";
-import SplineScene from "@/app/my_components/real-estate-demo1/SplineScene";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -13,7 +12,8 @@ const plans = [
   {
     name: "Strategic Landing Page",
     price: "$1,000",
-    description: "Built for brands that want to stand out and convert with precision.",
+    description:
+      "Built for brands that want to stand out and convert with precision.",
     features: [
       "High-Performance UI/UX",
       "Strategic Brand Positioning",
@@ -27,7 +27,8 @@ const plans = [
   {
     name: "Corporate Digital Ecosystem",
     price: "$2,500",
-    description: "Designed for businesses serious about growth and market authority.",
+    description:
+      "Designed for businesses serious about growth and market authority.",
     features: [
       "Bespoke Digital Identity",
       "Advanced UI/UX Engineering",
@@ -41,7 +42,8 @@ const plans = [
   {
     name: "Custom Product Engineering",
     price: "$5,000+",
-    description: "Tailored software solutions for ambitious companies and startups.",
+    description:
+      "Tailored software solutions for ambitious companies and startups.",
     features: [
       "Full-Stack Ecosystems",
       "Bespoke Software Architecture",
@@ -68,11 +70,13 @@ export default function PricingPage() {
             transition={{ duration: 0.8, ease: EASE }}
           >
             <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight mb-6">
-              Premium <span className="text-[var(--text-secondary)]">Investment</span>
+              Premium{" "}
+              <span className="text-[var(--text-secondary)]">Investment</span>
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-[var(--text-secondary)]">
-              Bespoke digital experiences engineered for industry leaders and ambitious brands. 
-              We don&apos;t just build websites; we build market authority.
+              Bespoke digital experiences engineered for industry leaders and
+              ambitious brands. We don&apos;t just build websites; we build
+              market authority.
             </p>
           </motion.div>
         </section>
@@ -86,7 +90,9 @@ export default function PricingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 * idx, ease: EASE }}
               className={`relative flex flex-col p-8 rounded-3xl site-card border ${
-                plan.popular ? "border-[var(--border-strong)]" : "border-[var(--border-subtle)]"
+                plan.popular
+                  ? "border-[var(--border-strong)]"
+                  : "border-[var(--border-subtle)]"
               }`}
             >
               {plan.popular && (
@@ -100,8 +106,12 @@ export default function PricingPage() {
                   {plan.name}
                 </h3>
                 <div className="flex flex-col gap-1">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] opacity-60">Starting from</span>
-                  <span className="text-4xl font-black tracking-tighter">{plan.price}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)] opacity-60">
+                    Starting from
+                  </span>
+                  <span className="text-4xl font-black tracking-tighter">
+                    {plan.price}
+                  </span>
                 </div>
                 <p className="mt-4 text-sm text-[var(--text-secondary)] leading-relaxed">
                   {plan.description}
@@ -111,7 +121,10 @@ export default function PricingPage() {
               <div className="flex-1 mb-10">
                 <ul className="space-y-4">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
+                    <li
+                      key={feature}
+                      className="flex items-start gap-3 text-sm text-[var(--text-secondary)]"
+                    >
                       <Check className="w-5 h-5 text-[var(--text-primary)] shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -128,10 +141,6 @@ export default function PricingPage() {
         </section>
 
         <CTASection />
-
-        <footer className="relative z-50 w-full h-screen overflow-hidden">
-          <SplineScene scene="/scene.splinecode" />
-        </footer>
       </main>
 
       <Footer />
