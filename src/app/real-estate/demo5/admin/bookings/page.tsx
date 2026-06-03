@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { Plus, Search, Trash2, Check, X, BookOpen } from "lucide-react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { Plus, Search, Trash2, Check, X, BookOpen, ImageIcon } from "lucide-react";
 import { AdminShell } from "../_components/AdminShell";
 import {
   Spinner,
@@ -27,11 +27,17 @@ function villaName(v: Booking["villa"]) {
   return typeof v === "string" ? "—" : v?.title ?? "—";
 }
 
+function villaThumbnail(v: Booking["villa"]) {
+  return typeof v === "string" ? "" : v?.featuredImage ?? "";
+}
+
 export default function BookingsPage() {
   const { toast } = useToast();
+  const rowRefs = useRef<Record<string, HTMLTableRowElement | null>>({});
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [villas, setVillas] = useState<Villa[]>([]);
   const [loading, setLoading] = useState(true);
+  const [highlightedBookingId, setHighlightedBookingId] = useState("");
   const [q, setQ] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [open, setOpen] = useState(false);
@@ -67,6 +73,19 @@ export default function BookingsPage() {
     const t = setTimeout(load, 250);
     return () => clearTimeout(t);
   }, [load]);
+
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("booking");
+    if (id) setHighlightedBookingId(id);
+  }, []);
+
+  useEffect(() => {
+    if (!highlightedBookingId || loading) return;
+    rowRefs.current[highlightedBookingId]?.scrollIntoView({
+      block: "center",
+      behavior: "smooth",
+    });
+  }, [bookings, highlightedBookingId, loading]);
 
   useEffect(() => {
     api.get<Villa[]>("/villas").then(setVillas).catch(() => {});
@@ -195,13 +214,44 @@ export default function BookingsPage() {
               </tr>
             </thead>
             <tbody>
-              {bookings.map((b) => (
-                <tr key={b._id}>
+              {bookings.map((b) => {
+                const thumbnail = villaThumbnail(b.villa);
+                return (
+                <tr
+                  key={b._id}
+                  ref={(node) => {
+                    rowRefs.current[b._id] = node;
+                  }}
+                  className={
+                    b._id === highlightedBookingId ? "va-table-row-highlight" : undefined
+                  }
+                >
                   <td>
                     <div className="va-cell-strong">{b.guestName}</div>
                     <div className="va-cell-sub">{b.guestEmail}</div>
                   </td>
-                  <td>{villaName(b.villa)}</td>
+                  <td>
+                    <div className="va-booking-villa">
+                      <div
+                        className="va-booking-villa-thumb"
+                        style={
+                          thumbnail
+                            ? { backgroundImage: `url(${thumbnail})` }
+                            : undefined
+                        }
+                      >
+                        {!thumbnail && <ImageIcon size={16} />}
+                      </div>
+                      <div>
+                        <div className="va-cell-strong">{villaName(b.villa)}</div>
+                        {typeof b.villa !== "string" && (
+                          <div className="va-cell-sub">
+                            {currency(b.villa.pricePerNight)}/night
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </td>
                   <td>
                     <div>{formatDate(b.checkIn)}</div>
                     <div className="va-cell-sub">→ {formatDate(b.checkOut)}</div>
@@ -258,7 +308,8 @@ export default function BookingsPage() {
                     </div>
                   </td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
           </table>
         </div>

@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AdminShell } from "../_components/AdminShell";
-import { Modal, Badge, currency, formatDate } from "../_components/ui";
+import { formatDate } from "../_components/ui";
 import { api } from "../_lib/api";
 import type { Booking } from "../_lib/types";
 
@@ -15,6 +16,22 @@ const MONTHS = [
 
 function villaName(v: Booking["villa"]) {
   return typeof v === "string" ? "—" : v?.title ?? "—";
+}
+
+function villaThumbnail(v: Booking["villa"]) {
+  return typeof v === "string" ? "" : v?.featuredImage ?? "";
+}
+
+function formatCalendarDate(value: string) {
+  return new Date(value).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function dayStart(value: Date | string) {
+  const date = new Date(value);
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
 function sameDay(a: Date, b: Date) {
@@ -32,12 +49,12 @@ function eventClass(status: Booking["bookingStatus"]) {
 }
 
 export default function CalendarPage() {
+  const router = useRouter();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [cursor, setCursor] = useState(() => {
     const d = new Date();
     return new Date(d.getFullYear(), d.getMonth(), 1);
   });
-  const [selected, setSelected] = useState<Booking | null>(null);
 
   useEffect(() => {
     api
@@ -71,12 +88,21 @@ export default function CalendarPage() {
   }, [cursor]);
 
   function eventsForDay(day: Date) {
-    return bookings.filter((b) => {
-      const ci = new Date(b.checkIn);
-      const co = new Date(b.checkOut);
-      return day >= new Date(ci.getFullYear(), ci.getMonth(), ci.getDate()) &&
-        day < new Date(co.getFullYear(), co.getMonth(), co.getDate() + 1);
-    });
+    const current = dayStart(day);
+    return bookings
+      .filter((b) => {
+        const checkIn = dayStart(b.checkIn);
+        const checkOut = dayStart(b.checkOut);
+        return current >= checkIn && current <= checkOut;
+      })
+      .sort(
+        (a, b) =>
+          dayStart(a.checkIn).getTime() - dayStart(b.checkIn).getTime()
+      );
+  }
+
+  function openBooking(booking: Booking) {
+    router.push(`/real-estate/demo5/admin/bookings?booking=${booking._id}`);
   }
 
   const today = new Date();
@@ -138,19 +164,40 @@ export default function CalendarPage() {
                 }`}
               >
                 <div className="va-cal-date">{date.getDate()}</div>
-                {events.slice(0, 3).map((b) => (
-                  <div
-                    key={b._id}
-                    className={`va-cal-event ${eventClass(b.bookingStatus)}`}
-                    onClick={() => setSelected(b)}
-                    title={`${b.guestName} — ${villaName(b.villa)}`}
-                  >
-                    {b.guestName}
-                  </div>
-                ))}
-                {events.length > 3 && (
+                {events.slice(0, 2).map((b) => {
+                  const thumbnail = villaThumbnail(b.villa);
+                  return (
+                    <button
+                      key={b._id}
+                      type="button"
+                      className={`va-cal-event ${eventClass(b.bookingStatus)}`}
+                      onClick={() => openBooking(b)}
+                      title={`${villaName(b.villa)}: ${formatDate(b.checkIn)} → ${formatDate(
+                        b.checkOut
+                      )} — ${b.guestName}`}
+                    >
+                      <span
+                        className="va-cal-event-thumb"
+                        style={
+                          thumbnail
+                            ? { backgroundImage: `url(${thumbnail})` }
+                            : undefined
+                        }
+                      />
+                      <span className="va-cal-event-copy">
+                        <span className="va-cal-event-title">{villaName(b.villa)}</span>
+                        <span className="va-cal-event-range">
+                          Check-in {formatCalendarDate(b.checkIn)} → Check-out{" "}
+                          {formatCalendarDate(b.checkOut)}
+                        </span>
+                        <span className="va-cal-event-guest">{b.guestName}</span>
+                      </span>
+                    </button>
+                  );
+                })}
+                {events.length > 2 && (
                   <div className="va-cell-sub" style={{ marginTop: 2 }}>
-                    +{events.length - 3} more
+                    +{events.length - 2} more
                   </div>
                 )}
               </div>
@@ -159,44 +206,6 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      <Modal
-        open={!!selected}
-        onClose={() => setSelected(null)}
-        title="Booking details"
-      >
-        {selected && (
-          <div className="va-stack" style={{ gap: 12 }}>
-            <div className="va-between">
-              <span className="va-muted">Guest</span>
-              <strong>{selected.guestName}</strong>
-            </div>
-            <div className="va-between">
-              <span className="va-muted">Villa</span>
-              <span>{villaName(selected.villa)}</span>
-            </div>
-            <div className="va-between">
-              <span className="va-muted">Check-in</span>
-              <span>{formatDate(selected.checkIn)}</span>
-            </div>
-            <div className="va-between">
-              <span className="va-muted">Check-out</span>
-              <span>{formatDate(selected.checkOut)}</span>
-            </div>
-            <div className="va-between">
-              <span className="va-muted">Status</span>
-              <Badge value={selected.bookingStatus} />
-            </div>
-            <div className="va-between">
-              <span className="va-muted">Payment</span>
-              <Badge value={selected.paymentStatus} />
-            </div>
-            <div className="va-between">
-              <span className="va-muted">Total</span>
-              <strong>{currency(selected.totalAmount)}</strong>
-            </div>
-          </div>
-        )}
-      </Modal>
     </AdminShell>
   );
 }

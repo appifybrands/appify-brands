@@ -473,12 +473,36 @@
 .va-table tbody tr:hover {
   background: #faf8f4;
 }
+.va-table tbody tr.va-table-row-highlight {
+  background: #fff7e8;
+  box-shadow: inset 3px 0 0 var(--va-accent);
+}
 .va-cell-strong {
   font-weight: 500;
 }
 .va-cell-sub {
   font-size: 12px;
   color: var(--va-muted-fg);
+}
+.va-booking-villa {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 190px;
+}
+.va-booking-villa-thumb {
+  width: 54px;
+  height: 42px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--va-border);
+  background: var(--va-muted);
+  color: var(--va-muted-fg);
+  display: grid;
+  place-items: center;
+  background-size: cover;
+  background-position: center;
 }
 
 /* ── Villa cards ────────────────────────────────────── */
@@ -699,7 +723,7 @@
   text-align: center;
 }
 .va-cal-cell {
-  min-height: 108px;
+  min-height: 178px;
   border-right: 1px solid var(--va-border);
   border-bottom: 1px solid var(--va-border);
   padding: 8px;
@@ -722,14 +746,59 @@
   place-items: center;
 }
 .va-cal-event {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-family: inherit;
+  text-align: left;
+  border: 0;
   font-size: 11px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  margin-top: 4px;
+  padding: 6px;
+  border-radius: 8px;
+  margin-top: 5px;
   cursor: pointer;
+  overflow: hidden;
+  min-height: 62px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.va-cal-event:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--va-shadow-sm);
+}
+.va-cal-event-thumb {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.55);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.va-cal-event-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.va-cal-event-title,
+.va-cal-event-guest {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.va-cal-event-title {
+  font-weight: 700;
+}
+.va-cal-event-range {
+  font-size: 10px;
+  opacity: 0.9;
+  line-height: 1.25;
+}
+.va-cal-event-guest {
+  font-size: 10px;
+  opacity: 0.8;
 }
 .va-cal-event.confirmed { background: var(--va-green-bg); color: var(--va-green); }
 .va-cal-event.pending { background: var(--va-yellow-bg); color: var(--va-yellow); }
