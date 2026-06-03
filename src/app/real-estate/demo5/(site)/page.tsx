@@ -1,13 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { api } from "../_lib/api";
 import type { Settings, Villa } from "../_lib/types";
-import { ExpandingCards } from "../_components/ExpandingCards";
+import { InteractiveTravelCard } from "../_components/InteractiveTravelCard";
+
+const FALLBACK_VILLA_IMAGES = [
+  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
+];
 
 export default function Demo5Home() {
+  const router = useRouter();
   const [, setSettings] = useState<Settings | null>(null);
   const [villas, setVillas] = useState<Villa[]>([]);
   const [, setLoading] = useState(true);
@@ -162,33 +173,7 @@ export default function Demo5Home() {
               </div>
             </div>
 
-            <div className="vs-harmony-gallery">
-              <div className="vs-harmony-controls">
-                <button className="vs-harmony-btn">
-                  <ChevronLeft size={16} />
-                </button>
-                <div className="vs-harmony-progress">
-                  <div className="vs-harmony-progress-bar"></div>
-                </div>
-                <button className="vs-harmony-btn">
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-              <div className="vs-harmony-images">
-                <div className="vs-harmony-img">
-                  <img
-                    src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
-                    alt="Villa exterior"
-                  />
-                </div>
-                <div className="vs-harmony-img">
-                  <img
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80"
-                    alt="Villa interior"
-                  />
-                </div>
-              </div>
-            </div>
+            <HarmonyGallery />
 
             <div className="vs-harmony-stats">
               <div className="vs-harmony-stat">
@@ -235,24 +220,28 @@ export default function Demo5Home() {
             </div>
           </div>
 
-          <div className="vs-collection-expanding">
-            <ExpandingCards
-              items={showcase.map((v) => ({
-                id: v._id,
-                title: v.title,
-                description:
-                  v.description ||
-                  `${v.bedrooms || 0} bedrooms · ${v.maxGuests || 2} guests · ${
-                    v.location || "Private retreat"
-                  }`,
-                imgSrc:
-                  v.featuredImage ||
-                  v.galleryImages?.[0] ||
-                  "/real-estate-demo4/villa-exterior.jpg",
-                icon: <MapPin size={20} />,
-                linkHref: `/real-estate/demo5/villas/${v.slug}`,
-              }))}
-            />
+          <div
+            className="vs-collection-cards"
+            style={{ perspective: "1000px" }}
+          >
+            {showcase.map((v, i) => {
+              const href = `/real-estate/demo5/villas/${v.slug}`;
+              return (
+                <InteractiveTravelCard
+                  key={v._id}
+                  title={v.title}
+                  subtitle={v.location || "Private retreat"}
+                  imageUrl={
+                    v.featuredImage ||
+                    v.galleryImages?.[0] ||
+                    FALLBACK_VILLA_IMAGES[i % FALLBACK_VILLA_IMAGES.length]
+                  }
+                  actionText="Reserve your villa"
+                  href={href}
+                  onActionClick={() => router.push(href)}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
@@ -262,6 +251,83 @@ export default function Demo5Home() {
 
       {/* End of content */}
     </>
+  );
+}
+
+const HARMONY_IMAGES = [
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1600&q=80",
+  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=80",
+];
+
+function HarmonyGallery() {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  function update() {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setProgress(max <= 0 ? 1 : el.scrollLeft / max);
+  }
+
+  function scrollBy(dir: 1 | -1) {
+    const el = trackRef.current;
+    if (!el) return;
+    const step = el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    update();
+    const el = trackRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return (
+    <div className="vs-harmony-gallery">
+      <div className="vs-harmony-controls">
+        <button
+          className="vs-harmony-btn"
+          onClick={() => scrollBy(-1)}
+          aria-label="Previous"
+        >
+          <ChevronLeft size={16} />
+        </button>
+        <div className="vs-harmony-progress">
+          <div
+            className="vs-harmony-progress-bar"
+            style={{
+              width: `${Math.max(15, Math.min(100, progress * 100 + 15))}%`,
+              transition: "width 200ms ease",
+            }}
+          />
+        </div>
+        <button
+          className="vs-harmony-btn"
+          onClick={() => scrollBy(1)}
+          aria-label="Next"
+        >
+          <ChevronRight size={16} />
+        </button>
+      </div>
+      <div className="vs-harmony-images" ref={trackRef}>
+        {HARMONY_IMAGES.map((src, i) => (
+          <div className="vs-harmony-img" key={src}>
+            <img src={src} alt={`Villa view ${i + 1}`} />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

@@ -19,34 +19,6 @@ export function Footer() {
     <div className="vs-footer-wrapper" id="contact">
       <footer className="vs-footer">
         <div className="vs-container">
-          <div className="vs-footer-top">
-            <h2 className="vs-footer-cta-text">
-              Ready to find your perfect escape?
-            </h2>
-            <Link
-              href="/real-estate/demo5/villas"
-              className="vs-btn-explore"
-              style={{ margin: 0, paddingLeft: 32 }}
-            >
-              <span className="vs-btn-explore-text">RESERVE YOUR VILLA</span>
-              <span className="vs-btn-explore-icon">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-            </Link>
-          </div>
-
           <div className="vs-footer-grid">
             <div className="vs-footer-brand-col">
               <div className="vs-footer-logo">

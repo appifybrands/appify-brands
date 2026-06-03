@@ -1,12 +1,23 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { api } from "../../_lib/api";
 import type { Villa } from "../../_lib/types";
-import { VillaCard } from "../../_components/VillaCard";
+import { InteractiveTravelCard } from "../../_components/InteractiveTravelCard";
+
+const FALLBACK_VILLA_IMAGES = [
+  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
+];
 
 export default function VillasPage() {
+  const router = useRouter();
   const [villas, setVillas] = useState<Villa[]>([]);
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
@@ -16,85 +27,116 @@ export default function VillasPage() {
 
   useEffect(() => {
     api
-      .get<Villa[]>("/villas?status=available")
+      .get<Villa[]>("/villas")
       .then((v) => setVillas(v ?? []))
       .catch(() => setVillas([]))
       .finally(() => setLoading(false));
   }, []);
 
+  const visible = useMemo(
+    () => villas.filter((v) => v.status !== "draft"),
+    [villas],
+  );
+
   const filtered = useMemo(() => {
     const lower = q.trim().toLowerCase();
     const list = lower
-      ? villas.filter(
+      ? visible.filter(
           (v) =>
             v.title.toLowerCase().includes(lower) ||
-            v.location.toLowerCase().includes(lower),
+            (v.location || "").toLowerCase().includes(lower),
         )
-      : villas;
+      : visible;
     const sorted = [...list];
     if (sort === "price-asc")
-      sorted.sort((a, b) => a.pricePerNight - b.pricePerNight);
+      sorted.sort((a, b) => (a.pricePerNight || 0) - (b.pricePerNight || 0));
     if (sort === "price-desc")
-      sorted.sort((a, b) => b.pricePerNight - a.pricePerNight);
+      sorted.sort((a, b) => (b.pricePerNight || 0) - (a.pricePerNight || 0));
     return sorted;
-  }, [villas, q, sort]);
+  }, [visible, q, sort]);
 
   return (
-    <main className="vs-section" style={{ paddingTop: 140 }}>
+    <section className="vs-villas-listing vs-villas-listing--standalone">
       <div className="vs-container">
-        <div className="vs-section-head">
-          <span className="vs-section-eyebrow">The collection</span>
-          <h2>Every villa, every season.</h2>
-          <p>Filter by name or destination to find your next escape.</p>
+        <div className="vs-villas-header">
+          <span className="vs-about-num">
+            (03)
+            <br />
+            THE COLLECTION
+          </span>
+          <h1 className="vs-villas-title">Every villa, every season</h1>
+          <p className="vs-villas-subtitle">
+            A curated list of private retreats — quiet architecture, slow
+            mornings, and uninterrupted views.
+          </p>
         </div>
 
-        <div className="vs-filters">
-          <div style={{ flex: "1 1 280px", position: "relative" }}>
-            <Search
-              size={16}
-              style={{
-                position: "absolute",
-                left: 14,
-                top: "50%",
-                transform: "translateY(-50%)",
-                color: "var(--vs-muted-fg)",
-              }}
-            />
+        <div className="vs-villas-toolbar">
+          <div className="vs-villas-search">
+            <Search size={16} className="vs-villas-search-icon" />
             <input
-              className="vs-input"
-              placeholder="Search by villa or destination…"
+              type="text"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              style={{ paddingLeft: 38 }}
+              placeholder="Search by villa or destination…"
             />
           </div>
-          <select
-            className="vs-select"
-            style={{ maxWidth: 220 }}
-            value={sort}
-            onChange={(e) => setSort(e.target.value as typeof sort)}
-          >
-            <option value="recent">Most recent</option>
-            <option value="price-asc">Price: low to high</option>
-            <option value="price-desc">Price: high to low</option>
-          </select>
+          <div className="vs-villas-toolbar-right">
+            <span className="vs-villas-count">
+              {loading
+                ? "Loading…"
+                : `${filtered.length} ${
+                    filtered.length === 1 ? "villa" : "villas"
+                  }`}
+            </span>
+            <select
+              className="vs-villas-sort"
+              value={sort}
+              onChange={(e) => setSort(e.target.value as typeof sort)}
+            >
+              <option value="recent">Most recent</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+            </select>
+          </div>
         </div>
 
         {loading ? (
-          <div className="vs-loading">
-            <div className="vs-spinner" />
-            Loading villas…
-          </div>
+          <div className="vs-villas-state">Loading villas…</div>
         ) : filtered.length === 0 ? (
-          <div className="vs-empty">No villas match your search.</div>
+          <div className="vs-villas-state">
+            No villas match your search yet.
+          </div>
         ) : (
-          <div className="vs-grid">
-            {filtered.map((v) => (
-              <VillaCard key={v._id} villa={v} />
-            ))}
+          <div
+            className="vs-collection-cards vs-villas-grid"
+            style={{ perspective: "1000px" }}
+          >
+            {filtered.map((v, i) => {
+              const href = `/real-estate/demo5/villas/${v.slug}`;
+              return (
+                <InteractiveTravelCard
+                  key={v._id}
+                  title={v.title}
+                  subtitle={v.location || "Private retreat"}
+                  imageUrl={
+                    v.featuredImage ||
+                    v.galleryImages?.[0] ||
+                    FALLBACK_VILLA_IMAGES[i % FALLBACK_VILLA_IMAGES.length]
+                  }
+                  actionText={
+                    v.pricePerNight
+                      ? `From $${v.pricePerNight} / night`
+                      : "Reserve your villa"
+                  }
+                  href={href}
+                  onActionClick={() => router.push(href)}
+                />
+              );
+            })}
           </div>
         )}
       </div>
-    </main>
+    </section>
   );
 }

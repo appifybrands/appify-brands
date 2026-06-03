@@ -1409,6 +1409,19 @@
   transform: translateX(4px);
 }
 
+.vs-collection-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  margin-top: 60px;
+}
+
+.vs-collection-cards > * {
+  width: 100%;
+  max-width: 320px;
+}
+
 .vs-collection-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1654,5 +1667,629 @@
   .vs-newsletter-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+}
+
+/* ─── Villas Listing Page ─── */
+.vs-hero--compact {
+  min-height: 60vh;
+  padding-top: 140px;
+  padding-bottom: 80px;
+  align-items: center;
+}
+.vs-hero-content--wide {
+  max-width: 100% !important;
+}
+
+.vs-villas-listing {
+  background: #f5f0eb;
+  padding: 80px 0 140px;
+}
+
+.vs-villas-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.08);
+}
+
+.vs-villas-search {
+  position: relative;
+  flex: 1 1 320px;
+  display: flex;
+  align-items: center;
+}
+.vs-villas-search-icon {
+  position: absolute;
+  left: 0;
+  color: #6b6359;
+  pointer-events: none;
+}
+.vs-villas-search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.15);
+  padding: 14px 0 14px 28px;
+  font-family: inherit;
+  font-size: 16px;
+  color: #1a1a1a;
+  transition: border-color 200ms ease;
+}
+.vs-villas-search input::placeholder {
+  color: #9a9590;
+  font-weight: 300;
+}
+.vs-villas-search input:focus {
+  border-bottom-color: #1a1a1a;
+}
+
+.vs-villas-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.vs-villas-count {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6b6359;
+  font-weight: 400;
+}
+.vs-villas-sort {
+  background: transparent;
+  border: 1px solid rgba(20, 20, 20, 0.15);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #1a1a1a;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 200ms ease;
+}
+.vs-villas-sort:hover,
+.vs-villas-sort:focus {
+  border-color: #1a1a1a;
+}
+
+.vs-villas-state {
+  padding: 120px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #6b6359;
+  font-weight: 300;
+}
+
+.vs-villas-grid {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 720px) {
+  .vs-villas-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .vs-villas-toolbar-right {
+    justify-content: space-between;
+  }
+  .vs-villas-listing {
+    padding: 60px 0 100px;
+  }
+}
+
+/* ─── Villas page header (no hero) ─── */
+.vs-villas-listing--standalone {
+  padding-top: 160px;
+}
+.vs-villas-header {
+  margin-bottom: 56px;
+}
+.vs-villas-header .vs-about-num {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #6b6359;
+  font-weight: 400;
+}
+.villa-site h1.vs-villas-title {
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+  line-height: 1.05;
+}
+.vs-villas-subtitle {
+  font-size: 16px;
+  color: #6b6359;
+  max-width: 560px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ─── Villa detail header (editorial) ─── */
+.vs-villa-detail-loading {
+  padding: 200px 0 160px;
+  text-align: center;
+  color: #6b6359;
+}
+.vs-villa-detail-loading .vs-btn-explore {
+  margin: 24px auto 0;
+}
+
+.vs-detail-header {
+  padding: 130px 0 28px;
+  background: #f5f0eb;
+}
+.vs-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6b6359;
+  margin-bottom: 24px;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+.vs-detail-back:hover {
+  color: #1a1a1a;
+}
+.vs-detail-header-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: end;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.08);
+}
+.vs-detail-header-left .vs-hero-eyebrow {
+  color: #6b6359;
+}
+.vs-detail-header-left .vs-hero-eyebrow::before {
+  background: #6b6359;
+}
+.villa-site h1.vs-detail-title {
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: #1a1a1a;
+  margin: 14px 0 0;
+}
+.vs-detail-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  text-align: right;
+}
+.vs-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 20px;
+  font-size: 13px;
+  color: #6b6359;
+}
+.vs-detail-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.vs-detail-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.vs-detail-price-amount {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.vs-detail-price-unit {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b6359;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ─── Hero gallery ─── */
+.vs-detail-hero-gallery {
+  background: #f5f0eb;
+  padding: 0 0 24px;
+}
+.vs-detail-hero-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  height: 64vh;
+  min-height: 480px;
+  max-height: 700px;
+}
+.vs-detail-hero-grid.is-single {
+  grid-template-columns: 1fr;
+}
+.vs-detail-hero-main,
+.vs-detail-hero-side {
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+}
+
+/* ─── Detail body ─── */
+.vs-detail-body {
+  background: #f5f0eb;
+  padding: 100px 0 140px;
+}
+.vs-detail-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 80px;
+  align-items: flex-start;
+}
+.vs-detail-main {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.vs-detail-block .vs-hero-eyebrow {
+  color: #6b6359;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.vs-detail-block .vs-about-num {
+  display: block;
+  margin-bottom: 24px;
+  color: #6b6359;
+  font-weight: 400;
+}
+.vs-detail-prose {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #2a2624;
+  white-space: pre-line;
+  font-weight: 400;
+}
+.vs-detail-amenities {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px 24px;
+}
+.vs-detail-amenity {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #2a2624;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.06);
+}
+.vs-detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.vs-detail-gallery-img {
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.vs-detail-gallery-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms ease;
+}
+.vs-detail-gallery-img:hover img {
+  transform: scale(1.04);
+}
+
+/* ─── Booking card ─── */
+.vs-detail-aside {
+  position: sticky;
+  top: 100px;
+}
+.vs-booking-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 30px 60px -30px rgba(20, 20, 20, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.vs-booking-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.08);
+}
+.vs-booking-price-amount {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+}
+.vs-booking-price-unit {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b6359;
+}
+.vs-booking-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid rgba(20, 20, 20, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.vs-booking-summary > div {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.vs-booking-summary > div + div {
+  border-left: 1px solid rgba(20, 20, 20, 0.1);
+}
+.vs-booking-summary span {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b6359;
+}
+.vs-booking-summary strong {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.vs-booking-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border: 1px solid rgba(20, 20, 20, 0.1);
+  border-radius: 12px;
+}
+.vs-booking-row label {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b6359;
+}
+.vs-booking-row select {
+  background: transparent;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+.vs-booking-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.vs-booking-fields input,
+.vs-booking-fields textarea {
+  width: 100%;
+  border: 1px solid rgba(20, 20, 20, 0.1);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #fff;
+  outline: none;
+  transition: border-color 200ms ease;
+  resize: vertical;
+}
+.vs-booking-fields input::placeholder,
+.vs-booking-fields textarea::placeholder {
+  color: #9a9590;
+}
+.vs-booking-fields input:focus,
+.vs-booking-fields textarea:focus {
+  border-color: #1a1a1a;
+}
+.vs-booking-total {
+  padding-top: 14px;
+  border-top: 1px solid rgba(20, 20, 20, 0.08);
+}
+.vs-booking-total > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #1a1a1a;
+}
+.vs-booking-total strong {
+  font-weight: 500;
+}
+.vs-booking-submit {
+  margin: 0 !important;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 24px !important;
+}
+.vs-booking-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.vs-booking-msg {
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+.vs-booking-msg.is-ok {
+  background: rgba(34, 139, 96, 0.08);
+  color: #1f6b48;
+}
+.vs-booking-msg.is-err {
+  background: rgba(176, 0, 32, 0.06);
+  color: #b00020;
+}
+
+/* ─── Calendar ─── */
+.vs-cal {
+  background: #fafaf7;
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+}
+.vs-cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.vs-cal-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+}
+.vs-cal-nav {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(20, 20, 20, 0.12);
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: #1a1a1a;
+  transition: background 200ms ease;
+}
+.vs-cal-nav:hover {
+  background: rgba(20, 20, 20, 0.06);
+}
+.vs-cal-dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a9590;
+  padding: 8px 0;
+}
+.vs-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.vs-cal-cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  color: #1a1a1a;
+  cursor: pointer;
+  border-radius: 8px;
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+}
+.vs-cal-cell:hover:not(:disabled):not(.is-start):not(.is-end) {
+  background: rgba(20, 20, 20, 0.06);
+}
+.vs-cal-empty {
+  cursor: default;
+}
+.vs-cal-cell.is-disabled {
+  color: #d8d2cb;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.vs-cal-cell.is-start,
+.vs-cal-cell.is-end {
+  background: #1a1a1a;
+  color: #fff;
+}
+.vs-cal-cell.is-range {
+  background: rgba(20, 20, 20, 0.08);
+  border-radius: 0;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1000px) {
+  .vs-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .vs-detail-aside {
+    position: static;
+  }
+}
+@media (max-width: 720px) {
+  .vs-detail-header {
+    padding: 120px 0 24px;
+  }
+  .vs-detail-header-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .vs-detail-header-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .vs-detail-meta {
+    justify-content: flex-start;
+  }
+  .vs-detail-hero-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 0;
+  }
+  .vs-detail-hero-main,
+  .vs-detail-hero-side {
+    height: 50vh;
+    min-height: 320px;
+    border-radius: 18px;
+  }
+  .vs-detail-body {
+    padding: 60px 0 100px;
+  }
+  .vs-villas-listing--standalone {
+    padding-top: 130px;
   }
 }
