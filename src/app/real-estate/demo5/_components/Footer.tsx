@@ -1,18 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { api } from "../_lib/api";
 import type { Settings } from "../_lib/types";
-
-const DEFAULTS: Pick<
-  Settings,
-  "companyName" | "contactEmail" | "phone" | "socialLinks"
-> = {
-  companyName: "Villa Suite",
-  contactEmail: "hello@villasuite.co",
-  phone: "+1 (212) 555-0100",
-  socialLinks: { instagram: "#", facebook: "#", twitter: "#" },
-};
 
 export function Footer() {
   const [settings, setSettings] = useState<Settings | null>(null);
@@ -24,55 +15,99 @@ export function Footer() {
       .catch(() => {});
   }, []);
 
-  const s = settings ?? (DEFAULTS as Settings);
-
   return (
-    <footer className="vs-footer" id="contact">
-      <div className="vs-container">
-        <div className="vs-footer-grid">
-          <div>
-            <div className="vs-brand" style={{ color: "#fff" }}>
-              {s.companyName.split(" ")[0]}
-              <span style={{ color: "var(--vs-accent)" }}>
-                {s.companyName.split(" ").slice(1).join(" ") || "Suite"}
-              </span>
-            </div>
-            <p
-              style={{
-                color: "rgba(255,255,255,0.6)",
-                marginTop: 16,
-                maxWidth: 320,
-              }}
+    <div className="vs-footer-wrapper" id="contact">
+      <footer className="vs-footer">
+        <div className="vs-container">
+          <div className="vs-footer-top">
+            <h2 className="vs-footer-cta-text">
+              Ready to find your perfect escape?
+            </h2>
+            <Link
+              href="/real-estate/demo5/villas"
+              className="vs-btn-explore"
+              style={{ margin: 0, paddingLeft: 32 }}
             >
-              A curated collection of private villas across the world&apos;s
-              most storied coastlines and cities.
-            </p>
+              <span className="vs-btn-explore-text">RESERVE YOUR VILLA</span>
+              <span className="vs-btn-explore-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </Link>
           </div>
-          <div>
-            <h4>Explore</h4>
-            <a href="/real-estate/demo5/villas">All stays</a>
-            <a href="#experiences">Experiences</a>
-            <a href="#about">Our story</a>
+
+          <div className="vs-footer-grid">
+            <div className="vs-footer-brand-col">
+              <div className="vs-footer-logo">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ marginRight: 8 }}
+                >
+                  <path
+                    d="M12 2L2 22H6L12 10L18 22H22L12 2Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M12 10L6 22H10L12 16L14 22H18L12 10Z"
+                    fill="currentColor"
+                    fillOpacity="0.5"
+                  />
+                </svg>
+                AURA VILLAS
+              </div>
+              <p>
+                A curated collection of private villas designed for ultimate
+                relaxation, where architecture naturally blends with its
+                surroundings.
+              </p>
+            </div>
+            <div>
+              <h4>Explore</h4>
+              <Link href="/real-estate/demo5/villas">All Villas</Link>
+              <a href="#featured">Featured</a>
+              <a href="#about">Story</a>
+            </div>
+            <div>
+              <h4>Concierge</h4>
+              <a
+                href={`mailto:${settings?.contactEmail || "hello@auravillas.com"}`}
+              >
+                {settings?.contactEmail || "hello@auravillas.com"}
+              </a>
+              <a href={`tel:${settings?.phone || "+1 234 567 890"}`}>
+                {settings?.phone || "+1 234 567 890"}
+              </a>
+            </div>
+            <div>
+              <h4>Follow</h4>
+              <a href={settings?.socialLinks?.instagram || "#"}>Instagram</a>
+              <a href={settings?.socialLinks?.facebook || "#"}>Facebook</a>
+              <a href={settings?.socialLinks?.twitter || "#"}>Twitter</a>
+            </div>
           </div>
-          <div>
-            <h4>Concierge</h4>
-            <a href={`mailto:${s.contactEmail}`}>{s.contactEmail}</a>
-            <a href={`tel:${s.phone}`}>{s.phone}</a>
-          </div>
-          <div>
-            <h4>Follow</h4>
-            <a href={s.socialLinks.instagram}>Instagram</a>
-            <a href={s.socialLinks.facebook}>Facebook</a>
-            <a href={s.socialLinks.twitter}>Twitter</a>
+          <div className="vs-footer-bottom">
+            <span>
+              © {new Date().getFullYear()} AURA VILLAS. All rights reserved.
+            </span>
+            <span>Privacy · Terms</span>
           </div>
         </div>
-        <div className="vs-footer-bottom">
-          <span>
-            © {new Date().getFullYear()} {s.companyName}. All rights reserved.
-          </span>
-          <span>Privacy · Terms</span>
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 }

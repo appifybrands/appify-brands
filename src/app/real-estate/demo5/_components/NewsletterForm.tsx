@@ -27,10 +27,11 @@ export function NewsletterForm() {
 
   return (
     <div className="vs-newsletter">
-      <span className="vs-section-eyebrow">Stay close</span>
+      <span className="vs-section-eyebrow">Stay Connected</span>
       <h2>The Concierge Letter</h2>
-      <p style={{ marginTop: 10 }}>
-        New villas, seasonal openings, and member-only stays — twice a month.
+      <p style={{ marginTop: 14, color: "var(--vs-muted-fg)" }}>
+        New villas, seasonal openings, and member-only stays — delivered twice a
+        month.
       </p>
       <form className="vs-newsletter-form" onSubmit={submit}>
         <input
@@ -39,20 +40,20 @@ export function NewsletterForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@elsewhere.com"
+          placeholder="your@email.com"
         />
         <button
           type="submit"
-          className="vs-btn vs-btn-dark"
+          className="vs-btn vs-btn-primary"
           disabled={state === "loading"}
         >
-          {state === "loading" ? "Subscribing…" : "Subscribe"}
+          {state === "loading" ? "..." : "Subscribe"}
         </button>
       </form>
       {state === "ok" && (
         <div
           className="vs-alert vs-alert-ok"
-          style={{ maxWidth: 460, margin: "16px auto 0" }}
+          style={{ maxWidth: 480, margin: "16px auto 0" }}
         >
           {message}
         </div>
@@ -60,7 +61,7 @@ export function NewsletterForm() {
       {state === "error" && (
         <div
           className="vs-alert vs-alert-error"
-          style={{ maxWidth: 460, margin: "16px auto 0" }}
+          style={{ maxWidth: 480, margin: "16px auto 0" }}
         >
           {message}
         </div>
