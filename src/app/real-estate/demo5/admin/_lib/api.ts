@@ -43,3 +43,27 @@ export const api = {
     request<T>(path, { method: "PUT", body: JSON.stringify(body ?? {}) }),
   del: <T>(path: string) => request<T>(path, { method: "DELETE" }),
 };
+
+/** Uploads an image file and returns its public URL. */
+export async function uploadImage(file: File): Promise<string> {
+  const form = new FormData();
+  form.append("file", file);
+
+  const res = await fetch(`${API_BASE}/uploads`, {
+    method: "POST",
+    credentials: "include",
+    body: form,
+  });
+
+  let json: ApiResult<{ url: string }> | null = null;
+  try {
+    json = (await res.json()) as ApiResult<{ url: string }>;
+  } catch {
+    /* non-json response */
+  }
+
+  if (!res.ok || (json && json.success === false)) {
+    throw new Error(json?.error || `Upload failed (${res.status})`);
+  }
+  return json?.data?.url ?? "";
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import {
   Plus,
   Search,
@@ -10,6 +10,9 @@ import {
   Bath,
   Users,
   Home,
+  Upload,
+  X,
+  ImagePlus,
 } from "lucide-react";
 import { AdminShell } from "../_components/AdminShell";
 import {
@@ -21,7 +24,7 @@ import {
   currency,
   useToast,
 } from "../_components/ui";
-import { api } from "../_lib/api";
+import { api, uploadImage } from "../_lib/api";
 import type { Villa } from "../_lib/types";
 
 type FormState = {
@@ -35,7 +38,7 @@ type FormState = {
   status: Villa["status"];
   featured: boolean;
   featuredImage: string;
-  galleryImages: string;
+  galleryImages: string[];
   amenities: string;
 };
 
@@ -50,7 +53,7 @@ const EMPTY: FormState = {
   status: "available",
   featured: false,
   featuredImage: "",
-  galleryImages: "",
+  galleryImages: [],
   amenities: "",
 };
 
@@ -63,6 +66,10 @@ export default function VillasPage() {
   const [editing, setEditing] = useState<Villa | null>(null);
   const [form, setForm] = useState<FormState>(EMPTY);
   const [saving, setSaving] = useState(false);
+  const [uploadingFeatured, setUploadingFeatured] = useState(false);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
+  const featuredInputRef = useRef<HTMLInputElement>(null);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -102,7 +109,7 @@ export default function VillasPage() {
       status: v.status,
       featured: v.featured,
       featuredImage: v.featuredImage,
-      galleryImages: v.galleryImages.join(", "),
+      galleryImages: v.galleryImages ?? [],
       amenities: v.amenities.join(", "),
     });
     setOpen(true);
@@ -113,6 +120,54 @@ export default function VillasPage() {
       .split(",")
       .map((x) => x.trim())
       .filter(Boolean);
+  }
+
+  async function handleFeaturedFile(file: File | undefined) {
+    if (!file) return;
+    setUploadingFeatured(true);
+    try {
+      const url = await uploadImage(file);
+      setForm((f) => ({ ...f, featuredImage: url }));
+      toast("Image uploaded", "success");
+    } catch (e) {
+      toast(e instanceof Error ? e.message : "Upload failed", "error");
+    } finally {
+      setUploadingFeatured(false);
+      if (featuredInputRef.current) featuredInputRef.current.value = "";
+    }
+  }
+
+  async function handleGalleryFiles(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    setUploadingGallery(true);
+    try {
+      const urls = await Promise.all(
+        Array.from(files).map((file) => uploadImage(file))
+      );
+      setForm((f) => ({
+        ...f,
+        galleryImages: [...f.galleryImages, ...urls.filter(Boolean)],
+      }));
+      toast(`${urls.length} image${urls.length > 1 ? "s" : ""} uploaded`, "success");
+    } catch (e) {
+      toast(e instanceof Error ? e.message : "Upload failed", "error");
+    } finally {
+      setUploadingGallery(false);
+      if (galleryInputRef.current) galleryInputRef.current.value = "";
+    }
+  }
+
+  function addGalleryUrl(url: string) {
+    const u = url.trim();
+    if (!u) return;
+    setForm((f) => ({ ...f, galleryImages: [...f.galleryImages, u] }));
+  }
+
+  function removeGalleryImage(idx: number) {
+    setForm((f) => ({
+      ...f,
+      galleryImages: f.galleryImages.filter((_, i) => i !== idx),
+    }));
   }
 
   async function save() {
@@ -132,7 +187,7 @@ export default function VillasPage() {
       status: form.status,
       featured: form.featured,
       featuredImage: form.featuredImage,
-      galleryImages: toList(form.galleryImages),
+      galleryImages: form.galleryImages,
       amenities: toList(form.amenities),
     };
     try {
@@ -344,19 +399,105 @@ export default function VillasPage() {
             </select>
           </Field>
         </div>
-        <Field label="Featured image URL">
+        <Field label="Featured image">
+          <input
+            ref={featuredInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={(e) => handleFeaturedFile(e.target.files?.[0])}
+          />
+          {form.featuredImage ? (
+            <div className="va-upload-preview">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={form.featuredImage} alt="Featured" />
+              <div className="va-upload-preview-actions">
+                <button
+                  type="button"
+                  className="va-btn va-btn-ghost va-btn-sm"
+                  onClick={() => featuredInputRef.current?.click()}
+                  disabled={uploadingFeatured}
+                >
+                  <Upload size={14} /> Replace
+                </button>
+                <button
+                  type="button"
+                  className="va-btn va-btn-danger va-btn-sm va-btn-icon"
+                  onClick={() => set("featuredImage", "")}
+                  aria-label="Remove image"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              type="button"
+              className="va-upload-drop"
+              onClick={() => featuredInputRef.current?.click()}
+              disabled={uploadingFeatured}
+            >
+              <ImagePlus size={22} />
+              <span>{uploadingFeatured ? "Uploading…" : "Click to upload an image"}</span>
+              <small>JPG, PNG, WEBP, GIF or AVIF · up to 5 MB</small>
+            </button>
+          )}
           <input
             className="va-input"
+            style={{ marginTop: 8 }}
             value={form.featuredImage}
             onChange={(e) => set("featuredImage", e.target.value)}
-            placeholder="https://…"
+            placeholder="…or paste an image URL"
           />
         </Field>
-        <Field label="Gallery image URLs (comma separated)">
+        <Field label="Gallery images">
+          <input
+            ref={galleryInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            style={{ display: "none" }}
+            onChange={(e) => handleGalleryFiles(e.target.files)}
+          />
+          {form.galleryImages.length > 0 && (
+            <div className="va-gallery-grid">
+              {form.galleryImages.map((src, i) => (
+                <div className="va-gallery-thumb" key={`${src}-${i}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={src} alt={`Gallery ${i + 1}`} />
+                  <button
+                    type="button"
+                    className="va-gallery-remove"
+                    onClick={() => removeGalleryImage(i)}
+                    aria-label="Remove image"
+                  >
+                    <X size={13} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <button
+            type="button"
+            className="va-btn va-btn-ghost va-btn-sm"
+            style={{ marginTop: 8 }}
+            onClick={() => galleryInputRef.current?.click()}
+            disabled={uploadingGallery}
+          >
+            <Upload size={14} />{" "}
+            {uploadingGallery ? "Uploading…" : "Upload gallery images"}
+          </button>
           <input
             className="va-input"
-            value={form.galleryImages}
-            onChange={(e) => set("galleryImages", e.target.value)}
+            style={{ marginTop: 8 }}
+            placeholder="…or paste an image URL and press Enter"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addGalleryUrl((e.target as HTMLInputElement).value);
+                (e.target as HTMLInputElement).value = "";
+              }
+            }}
           />
         </Field>
         <Field label="Amenities (comma separated)">
