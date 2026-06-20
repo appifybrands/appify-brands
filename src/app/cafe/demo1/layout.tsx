@@ -1,8 +1,10 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'The Brew Cup Cafe — Epic Taste & Nature',
-  description: 'The Brew Cup Cafe is your nature-inspired escape for specialty coffee, artisan fast food, and seasonal drinks.',
+  title: "The Brew Cup Cafe — Epic Taste & Nature",
+  description:
+    "The Brew Cup Cafe is your nature-inspired escape for specialty coffee, artisan fast food, and seasonal drinks.",
+  robots: { index: false, follow: false },
 };
 
 export default function CafeLayout({
