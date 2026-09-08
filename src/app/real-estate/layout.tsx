@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Prestige Estates — Where Elegance Meets Comfort",
   description:
     "Discover ultra-premium residential properties curated for those who demand nothing but the finest.",
+  robots: { index: false, follow: false },
 };
 
 export default function RealEstateLayout({
@@ -13,4 +14,3 @@ export default function RealEstateLayout({
 }) {
   return <>{children}</>;
 }
-
