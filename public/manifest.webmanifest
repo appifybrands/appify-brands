@@ -1,0 +1,20 @@
+{
+  "name": "AppifyBrands",
+  "short_name": "AppifyBrands",
+  "description": "We turn brands into apps",
+  "dir": "auto",
+  "lang": "en-US",
+  "display": "standalone",
+  "orientation": "any",
+  "start_url": "/?homescreen=1",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/new_logos/appifybrands_dark_logo_circular.png",
+      "sizes": "2000x2000",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

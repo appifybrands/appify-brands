@@ -1,0 +1,287 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Lenis from "lenis";
+
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+import Navbar from "./my_components/Navbar";
+import MailCTA, { MAIL_HREF } from "./my_components/MailCTA";
+import WrapButton from "@/components/ui/wrap-button";
+
+// ── Lazy-load below-the-fold sections so the hero paints fast ──
+const SelectedWorkSection = dynamic(
+  () => import("@/app/my_components/SelectedWorkSection"),
+);
+const PremiumShowcaseSection = dynamic(
+  () => import("@/app/my_components/PremiumShowcaseSection"),
+);
+const FeatureCardsSection = dynamic(
+  () => import("@/app/my_components/FeatureCardsSection"),
+);
+const TestimonialsSection = dynamic(
+  () => import("@/app/my_components/TestimonialsSection"),
+);
+const AboutSection = dynamic(() => import("@/app/my_components/AboutSection"));
+const FAQSection = dynamic(() => import("@/app/my_components/FAQSection"));
+const CTASection = dynamic(() => import("@/app/my_components/CTASection"));
+const Footer = dynamic(() => import("./my_components/Footer"));
+
+export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const lenisRef = useRef<Lenis | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      lerp: 0.1,
+    });
+    lenisRef.current = lenis;
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
+  return (
+    <div
+      className="relative min-h-screen overflow-x-hidden transition-colors duration-500"
+      style={{ background: "var(--bg-primary)", color: "var(--text-primary)" }}
+    >
+      <Navbar />
+
+      {/* ─────────────────────────────────────────── */}
+      {/* HERO                                        */}
+      {/* ─────────────────────────────────────────── */}
+      <section
+        id="main"
+        ref={heroRef}
+        className="relative z-10 min-h-screen flex flex-col items-center justify-center pb-12"
+        style={{ paddingTop: "96px" }}
+      >
+        {/* ── Simple grid background ── */}
+        <div className="absolute inset-0 z-0 grid-overlay pointer-events-none" />
+        {/* Soft fade so grid doesn't feel harsh at edges */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, var(--bg-primary) 80%)",
+          }}
+        />
+
+        <div className="relative z-10 w-full max-w-screen-xl px-6 sm:px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="mb-4 flex justify-center"
+          >
+            <div
+              className="inline-flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-md"
+              style={{
+                background: "rgba(255, 255, 255, 0.08)",
+                borderColor: "rgba(255, 255, 255, 0.15)",
+                WebkitBackdropFilter: "blur(12px)",
+                backdropFilter: "blur(12px)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)",
+              }}
+            >
+              <span
+                className="h-px w-8 sm:w-12"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, var(--text-secondary))",
+                }}
+              />
+              <p
+                className="text-center text-xs font-semibold uppercase tracking-[0.3em] sm:text-sm"
+                style={{ color: "var(--text-primary)" }}
+              >
+                We Make High Converting Websites
+              </p>
+              <span
+                className="h-px w-8 sm:w-12"
+                style={{
+                  background:
+                    "linear-gradient(to left, transparent, var(--text-secondary))",
+                }}
+              />
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="text-center font-black uppercase tracking-tighter"
+            style={{
+              fontSize: "clamp(3rem, 10vw, 8rem)",
+              lineHeight: 0.9,
+              fontFamily: "'Inter', sans-serif",
+              color: "var(--text-primary)",
+            }}
+          >
+            Appify Brands
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+            className="mb-8 mt-6 flex flex-wrap items-center justify-center gap-4"
+          >
+            <WrapButton
+              onClick={() => {
+                const target = document.getElementById("explore");
+                if (!target) return;
+                if (lenisRef.current) {
+                  lenisRef.current.scrollTo(target, { offset: -40 });
+                } else {
+                  target.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            >
+              Explore
+            </WrapButton>
+            <a
+              href={MAIL_HREF}
+              aria-label="Mail Appify Brands"
+              className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              style={{ border: "1px solid rgba(0,0,0,0.08)" }}
+            >
+              <Image
+                src="/gmail_logo_png.png"
+                alt="Gmail"
+                width={200}
+                height={55}
+                className="h-9 w-auto sm:h-10"
+              />
+            </a>
+          </motion.div>
+
+          <motion.div
+            style={{
+              y: heroY,
+              opacity: heroOpacity,
+              borderColor: "rgba(201, 168, 76, 0.3)",
+            }}
+            className="group relative md:max-h-[40vh] overflow-hidden rounded-3xl border bg-black/70 backdrop-blur-xl"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+              style={{ backgroundImage: "url('/hero banners.jpg')" }}
+            />
+            <div
+              className="absolute inset-0 opacity-70 transition-transform duration-1000 group-hover:scale-105"
+              style={{
+                background:
+                  "radial-gradient(circle at 80% 20%, rgba(201, 168, 76, 0.28), transparent 30%), linear-gradient(135deg, rgba(0,0,0,0.96), rgba(0,0,0,0.68))",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-transparent pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col items-center justify-center gap-5 p-5 text-center sm:gap-6 sm:p-6 md:max-h-[40vh] md:flex-row md:items-center md:justify-between md:gap-8 md:p-14 md:text-left">
+              <div className="flex max-w-2xl flex-col gap-5">
+                <h2
+                  className="font-black uppercase tracking-tighter text-white"
+                  style={{
+                    fontSize: "clamp(2rem, 5vw, 4.5rem)",
+                    lineHeight: 0.92,
+                    fontFamily: "'Inter', sans-serif",
+                  }}
+                >
+                  Get Your Hero Section{" "}
+                  <span style={{ color: "#22c55e" }}>Free</span>
+                </h2>
+
+                <p className="max-w-2xl text-sm font-light leading-relaxed text-white/80 sm:text-lg">
+                  Get the look and feel locked before proceeding with the full
+                  website, absolutely{" "}
+                  <span className="font-semibold" style={{ color: "#22c55e" }}>
+                    free
+                  </span>
+                  . To do it, simply mail us.
+                </p>
+              </div>
+
+              <MailCTA className="md:shrink-0" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── All sections ── */}
+      <div id="explore" className="relative z-10">
+        <SelectedWorkSection />
+        <PremiumShowcaseSection />
+        <FeatureCardsSection />
+        <TestimonialsSection />
+        <AboutSection />
+        <FAQSection />
+        <CTASection />
+
+        {/* ── Simple footer CTA ── */}
+        <section
+          className="relative z-50 flex w-full flex-col items-center justify-center gap-6 border-t px-6 py-16 text-center sm:py-20"
+          style={{ borderColor: "var(--border-subtle)" }}
+        >
+          <h3
+            className="text-xl sm:text-2xl font-bold tracking-tight"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Ready to elevate your brand?
+          </h3>
+          <p
+            className="max-w-md text-sm sm:text-base font-light leading-relaxed"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            Book a free 30-minute strategy call or drop us a mail — let&apos;s
+            build something remarkable together.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <MailCTA />
+            <a
+              href="https://calendly.com/appifybrands/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Book a call on Calendly"
+              className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              style={{ border: "1px solid rgba(0,0,0,0.08)" }}
+            >
+              <Image
+                src="/calendly_logo.png"
+                alt="Calendly"
+                width={240}
+                height={66}
+                className="h-12 w-auto sm:h-14"
+              />
+            </a>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    </div>
+  );
+}
