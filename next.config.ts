@@ -23,7 +23,6 @@ function resolveSplinePath(): string {
 }
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: path.join(__dirname, "../../"),
   // @splinetool/runtime still needs transpiling (ESM package)
   transpilePackages: ["@splinetool/runtime"],
 
