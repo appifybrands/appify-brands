@@ -119,7 +119,7 @@ export default function Home() {
                 className="text-center text-xs font-semibold uppercase tracking-[0.3em] sm:text-sm"
                 style={{ color: "var(--text-primary)" }}
               >
-                TURNING BRANDS INTO HIGH-CONVERTING WEBSITES, APPS & DIGITAL EXPERIENCES
+                TURNING BRANDS INTO WEBSITES, APPS & DIGITAL EXPERIENCES
               </p>
               <span
                 className="h-px w-8 sm:w-12"

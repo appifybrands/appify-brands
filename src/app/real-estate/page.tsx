@@ -23,7 +23,7 @@ const demos = [
     title: "Kashmir Nature Villa",
     subtitle: "Experience the pristine beauty of nature with seamless day and night mode transitions.",
     image: "/real-estate-demos/demo2-kashmir-nature-villa-with-day-and-night-mode.png",
-    href: "/homestays"
+    href: "/homestays/demo1"
   },
   {
     id: "demo3",
