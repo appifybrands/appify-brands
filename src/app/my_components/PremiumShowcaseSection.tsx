@@ -19,7 +19,7 @@ const projects = [
     category: "High-End Property",
     description: "Cinematic transitions and immersive galleries tailored for multi-million dollar listings.",
     video: "/premium_shocase_videos/realestate_demo.mp4",
-    href: "/real-estate/demo1",
+    href: "https://realestate.appifybrands.com",
   },
   {
     id: "larq",
@@ -28,6 +28,66 @@ const projects = [
     description: "A clean, conversion-focused product showcase for sustainable technology and design.",
     video: "/premium_shocase_videos/larq_demo.mp4",
     href: "https://larq-gray.vercel.app/",
+  },
+];
+
+const industryShowcases = [
+  {
+    id: "real-estate",
+    title: "Real Estate",
+    category: "Architecture",
+    badgeText: "3 Live Demos",
+    subdomainText: "realestate.appifybrands.com",
+    href: "https://realestate.appifybrands.com",
+    image: "/industry_showcases/realestate_cover.png",
+    description:
+      "Immersive 3D Spline architecture, scroll-driven frame sequence cinematography, and complete multi-property reservation CRM dashboards.",
+    tags: ["3D Spline Scene", "Scroll Sequence", "Admin CRM", "Villa Bookings"],
+    accentColor: "#c9a84c",
+    accentLight: "#e8c97a",
+    accentBg: "rgba(201, 168, 76, 0.12)",
+    accentBorder: "rgba(201, 168, 76, 0.35)",
+    glowColor: "rgba(201, 168, 76, 0.28)",
+    buttonGradient: "linear-gradient(135deg, #c9a84c 0%, #e8c97a 100%)",
+    buttonTextColor: "#1a1204",
+  },
+  {
+    id: "homestays",
+    title: "Homestays & Resorts",
+    category: "Hospitality & Retreats",
+    badgeText: "Day / Night Mode",
+    subdomainText: "homestays.appifybrands.com",
+    href: "https://homestays.appifybrands.com",
+    image: "/industry_showcases/homestays_cover.png",
+    description:
+      "Mountain sanctuary retreat featuring interactive real-time day & night lighting transitions, suite virtual tours, and luxury booking flows.",
+    tags: ["Day/Night Toggle", "Interactive Gallery", "Amenity Showcase", "Direct Booking"],
+    accentColor: "#10b981",
+    accentLight: "#34d399",
+    accentBg: "rgba(16, 185, 129, 0.12)",
+    accentBorder: "rgba(16, 185, 129, 0.35)",
+    glowColor: "rgba(16, 185, 129, 0.28)",
+    buttonGradient: "linear-gradient(135deg, #10b981 0%, #34d399 100%)",
+    buttonTextColor: "#022c22",
+  },
+  {
+    id: "cafes",
+    title: "Cafes & Dining",
+    category: "Culinary & Dining",
+    badgeText: "Video & Rive",
+    subdomainText: "cafes.appifybrands.com",
+    href: "https://cafes.appifybrands.com",
+    image: "/industry_showcases/cafes_cover.png",
+    description:
+      "Atmospheric digital storefront featuring 4K ambient video hero scenes, interactive Rive micro-animations, and dynamic digital menu systems.",
+    tags: ["4K Ambient Video", "Rive Animations", "Digital Menu", "Online Ordering"],
+    accentColor: "#f59e0b",
+    accentLight: "#fbbf24",
+    accentBg: "rgba(245, 158, 11, 0.12)",
+    accentBorder: "rgba(245, 158, 11, 0.35)",
+    glowColor: "rgba(245, 158, 11, 0.28)",
+    buttonGradient: "linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)",
+    buttonTextColor: "#2e1502",
   },
 ];
 
@@ -138,6 +198,7 @@ export default function PremiumShowcaseSection() {
             </motion.div>
           ))}
         </div>
+
         {/* ── Specialized Industry Demos & Niche Library ── */}
         <div id="demos" className="mt-24 pt-16 border-t" style={{ borderColor: "var(--border-subtle)" }}>
           <motion.div
@@ -145,24 +206,29 @@ export default function PremiumShowcaseSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: EASE }}
-            className="flex flex-col items-center text-center mb-12"
+            className="flex flex-col items-center text-center mb-14"
           >
             <span
-              className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-widest uppercase mb-4"
+              className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-widest uppercase mb-4"
               style={{
                 background: "var(--bg-secondary)",
                 color: "var(--text-primary)",
                 border: "1px solid var(--border-medium)",
               }}
             >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
               Interactive Template Library
             </span>
             <h3
-              className="font-black uppercase tracking-tight text-white text-center"
+              className="font-black uppercase tracking-tight text-center"
               style={{
                 fontSize: "clamp(2rem, 4vw, 3.5rem)",
                 lineHeight: 1.1,
                 fontFamily: "'Inter', sans-serif",
+                color: "var(--text-primary)",
               }}
             >
               Specialized Industry Showcases
@@ -176,170 +242,131 @@ export default function PremiumShowcaseSection() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Real Estate Showcase Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
-              className="group relative overflow-hidden rounded-3xl border bg-black/60 backdrop-blur-xl flex flex-col justify-between p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              style={{ borderColor: "rgba(201, 168, 76, 0.35)" }}
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 opacity-40 mix-blend-overlay"
-                style={{ backgroundImage: "url(/real-estate-demos/demo1-luxury-villa.png)" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/75 to-black/95 pointer-events-none" />
+            {industryShowcases.map((showcase, idx) => (
+              <motion.div
+                key={showcase.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 * (idx + 1), ease: EASE }}
+                className="group relative flex flex-col justify-between rounded-[28px] border overflow-hidden p-6 sm:p-7 transition-all duration-500 hover:-translate-y-2"
+                style={{
+                  background: "linear-gradient(180deg, rgba(16, 26, 40, 0.95) 0%, rgba(9, 14, 23, 0.98) 100%)",
+                  borderColor: showcase.accentBorder,
+                  boxShadow: `0 10px 30px -10px rgba(0,0,0,0.5)`,
+                }}
+              >
+                {/* Dynamic Ambient Background Glow on Hover */}
+                <div
+                  className="absolute -top-24 -right-24 w-60 h-60 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                  style={{ background: showcase.glowColor }}
+                />
+                <div
+                  className="absolute -bottom-24 -left-24 w-60 h-60 rounded-full blur-3xl opacity-0 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none"
+                  style={{ background: showcase.glowColor }}
+                />
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span
-                    className="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full border"
-                    style={{ borderColor: "rgba(201, 168, 76, 0.4)", background: "rgba(201, 168, 76, 0.1)", color: "#c9a84c" }}
+                <div className="relative z-10 flex flex-col">
+                  {/* Top Preview Image Container */}
+                  <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 mb-6 bg-black/50 shadow-inner">
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+                      style={{ backgroundImage: `url(${showcase.image})` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090e17] via-black/30 to-transparent" />
+
+                    {/* Top Badges */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10">
+                      <span
+                        className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full backdrop-blur-md border"
+                        style={{
+                          background: showcase.accentBg,
+                          borderColor: showcase.accentBorder,
+                          color: showcase.accentLight,
+                        }}
+                      >
+                        {showcase.category}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-full backdrop-blur-md bg-black/60 border border-white/15 text-white/90">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        {showcase.badgeText}
+                      </span>
+                    </div>
+
+                    {/* Subdomain Pill at bottom of preview */}
+                    <div className="absolute bottom-3 left-3 z-10">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg backdrop-blur-md bg-black/75 border border-white/15 text-[11px] font-mono text-white/80">
+                        <span className="text-emerald-400">●</span>
+                        <span>{showcase.subdomainText}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Title & Description */}
+                  <div className="flex flex-col mb-5">
+                    <h4
+                      className="text-2xl sm:text-[1.7rem] font-black uppercase tracking-tight text-white transition-colors duration-300"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
+                      <span className="group-hover:text-[var(--hover-color)] transition-colors duration-300" style={{ ["--hover-color" as string]: showcase.accentLight }}>
+                        {showcase.title}
+                      </span>
+                    </h4>
+
+                    <p className="text-sm font-light leading-relaxed text-slate-300 mt-2.5 min-h-[4rem]">
+                      {showcase.description}
+                    </p>
+                  </div>
+
+                  {/* Feature Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-4 mb-6 border-t border-white/10">
+                    {showcase.tags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[11px] px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/10 text-white/75 transition-colors group-hover:border-white/20"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action CTA Button */}
+                <div className="relative z-10 pt-2">
+                  <a
+                    href={showcase.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-between px-5 py-3.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] active:scale-[0.99]"
+                    style={{
+                      background: showcase.buttonGradient,
+                      color: showcase.buttonTextColor,
+                      boxShadow: `0 8px 25px -6px ${showcase.glowColor}`,
+                    }}
                   >
-                    Architecture
-                  </span>
-                  <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/10">
-                    3 Demos Live
-                  </span>
+                    <span className="tracking-wider">Explore {showcase.title.split(" ")[0]}</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-medium tracking-normal opacity-80 normal-case hidden sm:inline">
+                        Visit Subdomain
+                      </span>
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                      >
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </div>
+                  </a>
                 </div>
-
-                <h4 className="text-2xl font-black uppercase tracking-tight text-white mb-3 group-hover:text-[#c9a84c] transition-colors">
-                  Real Estate
-                </h4>
-                <p className="text-sm font-light leading-relaxed text-white/80 mb-6">
-                  Immersive 3D Spline architecture, scroll-driven frame sequences, and full villa reservation CRM systems.
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 mb-8 border-t border-white/10 pt-4">
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">3D Spline Scene</span>
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Scroll Sequence</span>
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Admin CRM</span>
-                </div>
-              </div>
-
-              <div className="relative z-10 pt-2">
-                <Link
-                  href="/real-estate"
-                  className="w-full inline-flex items-center justify-between px-5 py-3.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 bg-[#c9a84c] text-black hover:bg-[#e8c97a] shadow-[0_0_20px_rgba(201,168,76,0.3)]"
-                >
-                  <span>Explore Real Estate</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Homestays & Resorts Showcase Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
-              className="group relative overflow-hidden rounded-3xl border bg-black/60 backdrop-blur-xl flex flex-col justify-between p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              style={{ borderColor: "rgba(52, 211, 153, 0.35)" }}
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 opacity-40 mix-blend-overlay"
-                style={{ backgroundImage: "url(/real-estate-demos/demo2-kashmir-nature-villa-with-day-and-night-mode.png)" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/75 to-black/95 pointer-events-none" />
-
-              <div className="relative z-10">
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span
-                    className="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full border"
-                    style={{ borderColor: "rgba(52, 211, 153, 0.4)", background: "rgba(52, 211, 153, 0.1)", color: "#34d399" }}
-                  >
-                    Hospitality & Retreats
-                  </span>
-                  <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/10">
-                    Day / Night Mode
-                  </span>
-                </div>
-
-                <h4 className="text-2xl font-black uppercase tracking-tight text-white mb-3 group-hover:text-[#34d399] transition-colors">
-                  Homestays &amp; Resorts
-                </h4>
-                <p className="text-sm font-light leading-relaxed text-white/80 mb-6">
-                  Mountain sanctuary retreat featuring interactive day and night lighting transitions, suite tours, and luxury amenities.
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 mb-8 border-t border-white/10 pt-4">
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Day/Night Toggle</span>
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Interactive Gallery</span>
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Amenity Showcase</span>
-                </div>
-              </div>
-
-              <div className="relative z-10 pt-2">
-                <Link
-                  href="/homestays"
-                  className="w-full inline-flex items-center justify-between px-5 py-3.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 bg-[#34d399] text-black hover:bg-[#6ee7b7] shadow-[0_0_20px_rgba(52,211,153,0.3)]"
-                >
-                  <span>Explore Homestays</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Cafes & Culinary Showcase Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
-              className="group relative overflow-hidden rounded-3xl border bg-black/60 backdrop-blur-xl flex flex-col justify-between p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              style={{ borderColor: "rgba(245, 158, 11, 0.35)" }}
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 opacity-40 mix-blend-overlay"
-                style={{ backgroundImage: "url(/cafe_demo1_assets/Menu/menu_banner.png)" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/75 to-black/95 pointer-events-none" />
-
-              <div className="relative z-10">
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span
-                    className="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full border"
-                    style={{ borderColor: "rgba(245, 158, 11, 0.4)", background: "rgba(245, 158, 11, 0.1)", color: "#f59e0b" }}
-                  >
-                    Culinary &amp; Dining
-                  </span>
-                  <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/10">
-                    Video &amp; Rive
-                  </span>
-                </div>
-
-                <h4 className="text-2xl font-black uppercase tracking-tight text-white mb-3 group-hover:text-[#f59e0b] transition-colors">
-                  Cafes &amp; Dining
-                </h4>
-                <p className="text-sm font-light leading-relaxed text-white/80 mb-6">
-                  Atmospheric digital storefront featuring 4K ambient video hero, interactive Rive micro-animations, and curated digital menus.
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 mb-8 border-t border-white/10 pt-4">
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">4K Video Background</span>
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Rive Animations</span>
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Digital Menu</span>
-                </div>
-              </div>
-
-              <div className="relative z-10 pt-2">
-                <Link
-                  href="/cafe/demo1"
-                  className="w-full inline-flex items-center justify-between px-5 py-3.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 bg-[#f59e0b] text-black hover:bg-[#fbbf24] shadow-[0_0_20px_rgba(245,158,11,0.3)]"
-                >
-                  <span>Explore Cafes</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
