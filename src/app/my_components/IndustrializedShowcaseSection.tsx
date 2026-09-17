@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useSpring } from "framer-motion";
 import { Play, ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import React, { useState, useEffect, useRef } from "react";
@@ -10,7 +10,7 @@ const VideoPopOver = dynamic(() => import("./VideoPopOver"), {
   ssr: false,
 });
 
-// 1:1 200px Square Showreel Item with Viewport-based Lazy Video Loading
+// 1:1 200px Square Showreel Item with Cursor-Interactive View Showreel Button
 const NicheShowreelItem = ({
   title,
   video,
@@ -25,6 +25,27 @@ const NicheShowreelItem = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isInView, setIsInView] = useState(false);
+
+  const SPRING = {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 15,
+  };
+
+  const x = useSpring(0, SPRING);
+  const y = useSpring(0, SPRING);
+  const opacity = useSpring(0, SPRING);
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    opacity.set(1);
+    const bounds = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - bounds.left);
+    y.set(e.clientY - bounds.top);
+  };
+
+  const handlePointerLeave = () => {
+    opacity.set(0);
+  };
 
   useEffect(() => {
     const el = containerRef.current;
@@ -51,12 +72,23 @@ const NicheShowreelItem = ({
         {title}
       </h3>
 
-      {/* 1:1 200px video showreel */}
+      {/* 1:1 200px video showreel with cursor-interactive button */}
       <div
         ref={containerRef}
+        onMouseMove={handlePointerMove}
+        onMouseLeave={handlePointerLeave}
         onClick={() => onPlay(video)}
         className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/20 shadow-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/50 w-[200px] h-[200px] shrink-0 bg-black/60 aspect-square"
       >
+        {/* Cursor interactive View Showreel badge */}
+        <motion.div
+          style={{ x, y, opacity }}
+          className="pointer-events-none absolute left-0 top-0 z-30 flex -translate-x-1/2 -translate-y-1/2 w-max select-none items-center justify-center gap-1.5 rounded-full bg-black/75 px-3 py-1.5 text-[11px] font-semibold text-white backdrop-blur-md border border-white/25 shadow-2xl"
+        >
+          <Play className="size-3 fill-white text-white" />
+          <span>View Showreel</span>
+        </motion.div>
+
         {isInView ? (
           <video
             ref={videoRef}
@@ -74,14 +106,6 @@ const NicheShowreelItem = ({
 
         {/* Ambient Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none opacity-60 group-hover:opacity-30 transition-opacity" />
-
-        {/* Play badge overlay */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md border border-white/20 shadow-lg group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all duration-300">
-            <Play className="size-3.5 fill-current" />
-            <span>Play</span>
-          </div>
-        </div>
       </div>
 
       {/* View Demos Button */}
@@ -102,7 +126,7 @@ export const niches = [
   {
     id: "real-estate",
     title: "Real Estate",
-    video: "/premium_shocase_videos/realestate_demo.mp4",
+    video: "/showreel/real%20estate%20showreel.mp4",
     href: "https://realestate.appifybrands.com",
   },
   {

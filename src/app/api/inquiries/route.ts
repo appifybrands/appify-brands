@@ -49,7 +49,7 @@ export async function POST(req: Request) {
         body: JSON.stringify(payload),
         signal: AbortSignal.timeout(6000),
       });
-    } catch (fetchErr) {
+    } catch (_fetchErr) {
       // If local failed or timed out, attempt remote Render API
       if (apiUrl !== remoteApi) {
         try {
@@ -83,10 +83,11 @@ export async function POST(req: Request) {
       message: "Inquiry received! Our team will contact you shortly.",
       reference: `AB-${Date.now().toString().slice(-6)}`,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Failed to process inquiry";
     console.error("Error processing inquiry:", err);
     return NextResponse.json(
-      { error: err.message || "Failed to process inquiry" },
+      { error: message },
       { status: 500 }
     );
   }

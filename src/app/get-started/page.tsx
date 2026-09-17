@@ -2,132 +2,43 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  CheckCircle2,
-  ExternalLink,
-  Globe,
-  LayoutDashboard,
-  Loader2,
-  Mail,
-  MessageSquare,
-  Phone,
-  Send,
-  ShoppingBag,
-  Smartphone,
-  Sparkles,
-} from "lucide-react";
+import { ArrowLeft, CheckCircle2, ExternalLink, Loader2 } from "lucide-react";
 import Navbar from "../my_components/Navbar";
 
-// Live landing page templates
 const TEMPLATES = [
   {
     id: "real-estate",
     name: "Real Estate & Luxury Villas",
-    desc: "Sleek architecture, property listings & virtual tours",
     demoUrl: "https://realestate.appifybrands.com",
-    badge: "Live Demo",
   },
   {
     id: "homestays",
-    name: "Homestays & Boutique Resorts",
-    desc: "Scenic stays, amenity showcases & direct booking engine",
+    name: "Homestays & Resorts",
     demoUrl: "https://homestays.appifybrands.com",
-    badge: "Live Demo",
   },
   {
     id: "cafes",
-    name: "Cafes & Artisan Bistros",
-    desc: "Visual menus, vibe previews & table booking flow",
+    name: "Cafes & Dining",
     demoUrl: "https://cafes.appifybrands.com",
-    badge: "Live Demo",
   },
   {
     id: "restaurants",
-    name: "Restaurants & Fine Dining",
-    desc: "Gourmet showcases, chef specials & reservations",
+    name: "Restaurants & Dining",
     demoUrl: "https://restaurant.appifybrands.com",
-    badge: "Live Demo",
   },
   {
     id: "custom",
-    name: "Custom / Bespoke Landing Page",
-    desc: "Unique custom aesthetic made specifically for your brand",
+    name: "Custom Landing Page",
     demoUrl: "",
-    badge: "Custom",
   },
 ];
 
-const SERVICES = [
-  {
-    id: "Landing page",
-    title: "Landing Page",
-    icon: Globe,
-    desc: "High-converting niche templates & bespoke sites",
-  },
-  {
-    id: "Ecommerce",
-    title: "E-Commerce",
-    icon: ShoppingBag,
-    desc: "Modern stores, seamless cart & payment checkouts",
-  },
-  {
-    id: "Admin panel",
-    title: "Admin Panel",
-    icon: LayoutDashboard,
-    desc: "Internal CRM, operation portals & data analytics",
-  },
-  {
-    id: "Android & iOS apps",
-    title: "Android & iOS Apps",
-    icon: Smartphone,
-    desc: "Cross-platform mobile apps published to stores",
-  },
-];
-
-const CONTACT_CHANNELS = [
-  {
-    id: "WhatsApp",
-    label: "WhatsApp",
-    icon: MessageSquare,
-    placeholder: "+1 (555) 234-5678",
-    type: "tel",
-  },
-  {
-    id: "Gmail",
-    label: "Gmail / Email",
-    icon: Mail,
-    placeholder: "name@gmail.com",
-    type: "email",
-  },
-  {
-    id: "Mobile",
-    label: "Mobile Number",
-    icon: Phone,
-    placeholder: "+1 (555) 234-5678",
-    type: "tel",
-  },
-  {
-    id: "X",
-    label: "X (Twitter)",
-    icon: () => <span className="font-bold text-xs">𝕏</span>,
-    placeholder: "@yourhandle",
-    type: "text",
-  },
-  {
-    id: "LinkedIn",
-    label: "LinkedIn",
-    icon: () => <span className="font-bold text-xs">in</span>,
-    placeholder: "linkedin.com/in/username",
-    type: "text",
-  },
-];
-
-const INQUIRY_TYPES = [
-  { id: "To know quotation", label: "To know quotation / pricing" },
-  { id: "To purchase", label: "To purchase & start immediately" },
-  { id: "Consultation", label: "Book a consultation" },
-  { id: "Custom inquiry", label: "Custom project inquiry" },
+const CONTACT_TYPES = [
+  { id: "WhatsApp", label: "WhatsApp Number", placeholder: "+1 234 567 8900" },
+  { id: "Gmail", label: "Gmail / Email ID", placeholder: "you@gmail.com" },
+  { id: "Mobile", label: "Mobile Number", placeholder: "+1 234 567 8900" },
+  { id: "X", label: "X (Twitter) Handle", placeholder: "@username" },
+  { id: "LinkedIn", label: "LinkedIn Profile", placeholder: "linkedin.com/in/username" },
 ];
 
 export default function GetStartedPage() {
@@ -143,8 +54,8 @@ export default function GetStartedPage() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const activeChannel =
-    CONTACT_CHANNELS.find((c) => c.id === contactChannel) || CONTACT_CHANNELS[0];
+  const activeContactType =
+    CONTACT_TYPES.find((c) => c.id === contactChannel) || CONTACT_TYPES[0];
   const activeTemplate =
     TEMPLATES.find((t) => t.id === selectedTemplateId) || TEMPLATES[0];
 
@@ -153,12 +64,12 @@ export default function GetStartedPage() {
     setError(null);
 
     if (!name.trim()) {
-      setError("Please enter your name or brand name.");
+      setError("Please enter your name.");
       return;
     }
 
     if (!contactValue.trim()) {
-      setError(`Please enter your ${activeChannel.label}.`);
+      setError(`Please enter your ${activeContactType.label}.`);
       return;
     }
 
@@ -174,7 +85,7 @@ export default function GetStartedPage() {
         templateUrl: service === "Landing page" ? activeTemplate.demoUrl : "",
         description:
           service === "Landing page"
-            ? `Selected template: ${activeTemplate.name} (${activeTemplate.demoUrl || "Custom"})`
+            ? `Template: ${activeTemplate.name}`
             : description.trim(),
         inquiryType,
       };
@@ -186,366 +97,219 @@ export default function GetStartedPage() {
       });
 
       const data = await res.json();
-
-      if (!res.ok && data.error) {
-        throw new Error(data.error);
-      }
+      if (!res.ok && data.error) throw new Error(data.error);
 
       setSubmitted(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      setError(
-        err.message || "Failed to submit. Please check your details and try again."
-      );
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div
-      className="min-h-screen relative overflow-x-hidden"
-      style={{
-        background: "var(--bg-primary, #050508)",
-        color: "var(--text-primary, #f8fafc)",
-      }}
-    >
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
       <Navbar />
 
-      {/* Ambient background decoration */}
-      <div className="absolute inset-0 z-0 grid-overlay pointer-events-none opacity-40" />
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] pointer-events-none rounded-full blur-[140px] opacity-25"
-        style={{ background: "radial-gradient(circle, #6366f1, transparent 70%)" }}
-      />
-
-      <main className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pt-32 pb-24">
-        {/* Back Link */}
+      <main className="max-w-xl mx-auto px-4 pt-28 pb-20">
         <div className="mb-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--text-secondary,#94a3b8)] hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Home</span>
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Back to Home
           </Link>
         </div>
 
-        {submitted ? (
-          /* Celebratory Success State */
-          <div className="p-8 sm:p-12 rounded-3xl border border-emerald-500/30 bg-black/60 backdrop-blur-xl shadow-2xl text-center flex flex-col items-center animate-in fade-in zoom-in duration-300">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-6 shadow-lg shadow-emerald-500/20">
-              <CheckCircle2 className="w-8 h-8" />
-            </div>
-
-            <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">
-              Inquiry Received
-            </span>
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 text-white">
-              We&apos;re On It, {name.split(" ")[0]}!
-            </h1>
-            <p className="max-w-md text-sm sm:text-base text-[var(--text-secondary,#94a3b8)] leading-relaxed mb-8">
-              We received your request for <strong>{service}</strong> (
-              <em>{inquiryType}</em>). Our team will connect with you via{" "}
-              <strong>
-                {contactChannel}: {contactValue}
-              </strong>{" "}
-              within a few hours with full details.
-            </p>
-
-            {service === "Landing page" && activeTemplate.demoUrl && (
-              <div className="w-full max-w-md p-4 rounded-2xl border border-white/10 bg-white/5 mb-8 text-left flex items-center justify-between">
-                <div>
-                  <p className="text-xs text-slate-400 font-medium">Selected Template</p>
-                  <p className="text-sm font-semibold text-white">{activeTemplate.name}</p>
-                </div>
-                <a
-                  href={activeTemplate.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-white/90 transition-all shadow"
-                >
-                  <span>View Demo</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            )}
-
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/"
-                className="px-7 py-3 rounded-full text-sm font-bold bg-white text-black hover:bg-slate-200 transition-all shadow-md hover:scale-105"
-              >
-                Back to Homepage
-              </Link>
-              <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setContactValue("");
-                  setDescription("");
-                }}
-                className="px-6 py-3 rounded-full text-sm font-semibold border border-white/20 hover:bg-white/10 text-white transition-all"
-              >
-                Submit Another Request
-              </button>
-            </div>
-          </div>
-        ) : (
-          /* Clean 4-5 Field Form */
-          <div className="rounded-3xl border border-white/15 bg-black/60 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-[11px] font-bold uppercase tracking-wider text-indigo-400 mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Turn Brands Into Apps & Websites</span>
-              </div>
-              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-2">
-                Let&apos;s Build Your Digital Experience
-              </h1>
-              <p className="text-xs sm:text-sm text-[var(--text-secondary,#94a3b8)]">
-                Fill this short form to get an instant quotation or start your build.
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/90 p-6 sm:p-8 shadow-xl">
+          {submitted ? (
+            <div className="text-center py-6 space-y-4">
+              <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+              <h1 className="text-2xl font-bold text-white">Form Submitted</h1>
+              <p className="text-sm text-zinc-400 max-w-sm mx-auto">
+                Thank you, <span className="text-white font-medium">{name}</span>. We received your request for{" "}
+                <span className="text-white font-medium">{service}</span> and will reach out via{" "}
+                <span className="text-white font-medium">{contactChannel}</span> ({contactValue}).
               </p>
+              <div className="pt-4 flex justify-center gap-3">
+                <Link
+                  href="/"
+                  className="px-5 py-2 rounded-lg text-xs font-semibold bg-white text-black hover:bg-zinc-200 transition-colors"
+                >
+                  Return to Home
+                </Link>
+                <button
+                  onClick={() => {
+                    setSubmitted(false);
+                    setContactValue("");
+                    setDescription("");
+                  }}
+                  className="px-5 py-2 rounded-lg text-xs font-semibold border border-zinc-700 hover:bg-zinc-800 text-zinc-300 transition-colors"
+                >
+                  Submit Another
+                </button>
+              </div>
             </div>
-
-            {error && (
-              <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs sm:text-sm">
-                {error}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-7">
-              {/* Field 1: Name */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  1. Your Name / Brand Name <span className="text-rose-400">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Acme Studio / Alex Rivera"
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
-                />
+          ) : (
+            <div>
+              <div className="mb-6 border-b border-zinc-800 pb-4">
+                <h1 className="text-xl font-bold text-white">Get Started</h1>
+                <p className="text-xs text-zinc-400 mt-1">
+                  Fill out this quick form and we&apos;ll get back to you immediately.
+                </p>
               </div>
 
-              {/* Field 2: Contact Details */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  2. Preferred Contact Details <span className="text-rose-400">*</span>
-                </label>
-
-                {/* Channel Pill Selectors */}
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-3">
-                  {CONTACT_CHANNELS.map((ch) => {
-                    const isSelected = contactChannel === ch.id;
-                    const IconComp = ch.icon;
-                    return (
-                      <button
-                        type="button"
-                        key={ch.id}
-                        onClick={() => setContactChannel(ch.id)}
-                        className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
-                          isSelected
-                            ? "bg-indigo-600 text-white border-indigo-400 shadow-md shadow-indigo-600/30 scale-[1.02]"
-                            : "bg-white/5 text-slate-400 border-white/10 hover:bg-white/10 hover:text-white"
-                        }`}
-                      >
-                        <IconComp className="w-3.5 h-3.5" />
-                        <span className="truncate">{ch.label.split(" ")[0]}</span>
-                      </button>
-                    );
-                  })}
+              {error && (
+                <div className="mb-4 p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs">
+                  {error}
                 </div>
+              )}
 
-                {/* Context-aware input */}
-                <div className="relative">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* 1. Name */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-zinc-300">
+                    Name <span className="text-rose-400">*</span>
+                  </label>
                   <input
-                    type={activeChannel.type}
+                    type="text"
                     required
-                    value={contactValue}
-                    onChange={(e) => setContactValue(e.target.value)}
-                    placeholder={`Enter your ${activeChannel.label}: ${activeChannel.placeholder}`}
-                    className="w-full pl-4 pr-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name or business name"
+                    className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 transition-colors placeholder:text-zinc-600"
                   />
                 </div>
-              </div>
 
-              {/* Field 3: Service */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  3. Service Needed <span className="text-rose-400">*</span>
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {SERVICES.map((s) => {
-                    const isSelected = service === s.id;
-                    const SIcon = s.icon;
-                    return (
-                      <div
-                        key={s.id}
-                        onClick={() => setService(s.id)}
-                        className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 ${
-                          isSelected
-                            ? "bg-indigo-950/40 border-indigo-500 ring-1 ring-indigo-500 shadow-lg shadow-indigo-500/15"
-                            : "bg-white/5 border-white/10 hover:border-white/25 hover:bg-white/10"
-                        }`}
-                      >
-                        <div
-                          className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
-                            isSelected
-                              ? "bg-indigo-600 text-white"
-                              : "bg-white/10 text-slate-400"
-                          }`}
-                        >
-                          <SIcon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-bold text-white leading-tight">
-                            {s.title}
-                          </p>
-                          <p className="text-[11px] text-slate-400 mt-0.5 leading-snug">
-                            {s.desc}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
+                {/* 2. Contact Details */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-zinc-300">
+                    Contact Details <span className="text-rose-400">*</span>
+                  </label>
+                  <div className="grid grid-cols-2 gap-2 mb-1">
+                    <select
+                      value={contactChannel}
+                      onChange={(e) => setContactChannel(e.target.value)}
+                      className="px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs focus:outline-none focus:border-zinc-500"
+                    >
+                      {CONTACT_TYPES.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {c.id}
+                        </option>
+                      ))}
+                    </select>
+
+                    <input
+                      type="text"
+                      required
+                      value={contactValue}
+                      onChange={(e) => setContactValue(e.target.value)}
+                      placeholder={activeContactType.placeholder}
+                      className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 text-xs focus:outline-none focus:border-zinc-500 placeholder:text-zinc-600"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              {/* Field 4: Select Template (if Landing Page) OR Description (for other services) */}
-              <div>
+                {/* 3. Service */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-zinc-300">
+                    Service <span className="text-rose-400">*</span>
+                  </label>
+                  <select
+                    value={service}
+                    onChange={(e) => setService(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 text-xs focus:outline-none focus:border-zinc-500"
+                  >
+                    <option value="Landing page">Landing page</option>
+                    <option value="Ecommerce">E-commerce</option>
+                    <option value="Admin panel">Admin panel</option>
+                    <option value="Android & iOS apps">Android & iOS apps</option>
+                  </select>
+                </div>
+
+                {/* 4. Select Template (or Description) */}
                 {service === "Landing page" ? (
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-bold uppercase tracking-wider text-slate-300">
-                        4. Select Landing Page Template
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-semibold text-zinc-300">
+                        Select Template
                       </label>
-                      <span className="text-[11px] text-indigo-400">
-                        Select a style to preview live
-                      </span>
+                      {activeTemplate.demoUrl && (
+                        <a
+                          href={activeTemplate.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[11px] text-indigo-400 hover:underline font-medium"
+                        >
+                          View Live Demo <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                     </div>
-
-                    <div className="space-y-2.5">
-                      {TEMPLATES.map((tpl) => {
-                        const isSelected = selectedTemplateId === tpl.id;
-                        return (
-                          <div
-                            key={tpl.id}
-                            onClick={() => setSelectedTemplateId(tpl.id)}
-                            className={`p-3 rounded-2xl border cursor-pointer transition-all flex items-center justify-between gap-3 ${
-                              isSelected
-                                ? "bg-indigo-950/50 border-indigo-500 ring-1 ring-indigo-500 shadow-md"
-                                : "bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/10"
-                            }`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div
-                                className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                                  isSelected
-                                    ? "border-indigo-500 bg-indigo-600"
-                                    : "border-slate-500"
-                                }`}
-                              >
-                                {isSelected && (
-                                  <div className="w-2 h-2 rounded-full bg-white" />
-                                )}
-                              </div>
-                              <div>
-                                <p className="text-xs sm:text-sm font-bold text-white">
-                                  {tpl.name}
-                                </p>
-                                <p className="text-[10px] sm:text-xs text-slate-400">
-                                  {tpl.desc}
-                                </p>
-                              </div>
-                            </div>
-
-                            {tpl.demoUrl && (
-                              <a
-                                href={tpl.demoUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-white text-black hover:bg-white/90 shadow transition-all hover:scale-105 shrink-0"
-                              >
-                                <span>View Live Demo</span>
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
+                    <select
+                      value={selectedTemplateId}
+                      onChange={(e) => setSelectedTemplateId(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 text-xs focus:outline-none focus:border-zinc-500"
+                    >
+                      {TEMPLATES.map((t) => (
+                        <option key={t.id} value={t.id}>
+                          {t.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 ) : (
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                      4. Project Description & Requirements
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-semibold text-zinc-300">
+                      Description
                     </label>
                     <textarea
                       rows={3}
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      placeholder={`Tell us about your ${service} requirements (features, target audience, references)...`}
-                      className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none"
+                      placeholder="Brief details or requirements..."
+                      className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 text-xs focus:outline-none focus:border-zinc-500 resize-none placeholder:text-zinc-600"
                     />
                   </div>
                 )}
-              </div>
 
-              {/* Field 5: Type */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  5. Request Type <span className="text-rose-400">*</span>
-                </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {INQUIRY_TYPES.map((t) => {
-                    const isSelected = inquiryType === t.id;
-                    return (
-                      <button
-                        type="button"
-                        key={t.id}
-                        onClick={() => setInquiryType(t.id)}
-                        className={`py-2.5 px-3 rounded-xl text-xs font-bold border text-center transition-all cursor-pointer ${
-                          isSelected
-                            ? "bg-indigo-600 text-white border-indigo-400 shadow-md shadow-indigo-600/30"
-                            : "bg-white/5 text-slate-400 border-white/10 hover:bg-white/10 hover:text-white"
-                        }`}
-                      >
-                        {t.label}
-                      </button>
-                    );
-                  })}
+                {/* 5. Type */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-zinc-300">
+                    Type <span className="text-rose-400">*</span>
+                  </label>
+                  <select
+                    value={inquiryType}
+                    onChange={(e) => setInquiryType(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 text-xs focus:outline-none focus:border-zinc-500"
+                  >
+                    <option value="To know quotation">To know quotation</option>
+                    <option value="To purchase">To purchase</option>
+                    <option value="Consultation">Consultation</option>
+                    <option value="General inquiry">General inquiry</option>
+                  </select>
                 </div>
-              </div>
 
-              {/* Simple Submit Button */}
-              <div className="pt-2">
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm uppercase tracking-wider shadow-lg shadow-indigo-600/30 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 rounded-lg bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 mt-2"
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Submitting Request...</span>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      Submitting...
                     </>
                   ) : (
-                    <>
-                      <span>Submit Request</span>
-                      <Send className="w-4 h-4" />
-                    </>
+                    "Submit"
                   )}
                 </button>
-                <p className="text-center text-[11px] text-slate-500 mt-2.5">
-                  Direct connection with Appify Brands management. Fast response guaranteed.
-                </p>
-              </div>
-            </form>
-          </div>
-        )}
+              </form>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );
