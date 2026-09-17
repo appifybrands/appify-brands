@@ -71,7 +71,7 @@ export default function VideoPopOver({
   onClose: () => void;
 }) {
   return (
-    <div className="fixed left-0 top-0 z-[101] flex h-screen w-screen items-center justify-center p-4 sm:p-6 md:p-10">
+    <div className="fixed left-0 top-0 z-[9999] flex h-screen w-screen items-center justify-center p-4 sm:p-6 md:p-10">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
