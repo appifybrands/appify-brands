@@ -23,9 +23,6 @@ function resolveSplinePath(): string {
 }
 
 const nextConfig: NextConfig = {
-  // Fix monorepo workspace root tracing
-  outputFileTracingRoot: path.resolve(__dirname, ".."),
-
   // Compress responses with gzip/brotli
   compress: true,
 
