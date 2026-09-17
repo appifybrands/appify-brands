@@ -1,10 +1,11 @@
-import { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import LegalLayout from "@/app/my_components/LegalLayout";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | AppifyBrands",
-  description: "Learn how AppifyBrands collects, uses, and protects your personal information.",
-};
+export const metadata = buildMetadata({
+  title: "Privacy Policy",
+  description: "Learn how Appify Brands collects, uses, and protects your personal information.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicy() {
   const lastUpdated = "May 9, 2026";

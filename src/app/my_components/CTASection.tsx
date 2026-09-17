@@ -73,7 +73,7 @@ export default function CTASection() {
             </h2>
           </div>
           
-          <MailCTA helperText="Ready to build a high-converting website? Mail us to get started." />
+          <MailCTA helperText="Ready to build a high-converting website? Get started today." />
         </motion.div>
       </div>
     </section>

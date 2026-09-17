@@ -23,8 +23,49 @@ function resolveSplinePath(): string {
 }
 
 const nextConfig: NextConfig = {
-  // @splinetool/runtime still needs transpiling (ESM package)
+  // Fix monorepo workspace root tracing
+  outputFileTracingRoot: path.resolve(__dirname, ".."),
+
+  // Compress responses with gzip/brotli
+  compress: true,
+
+  // Transpile ESM packages
   transpilePackages: ["@splinetool/runtime"],
+
+  // Optimize modern image formats
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+  },
+
+  // Tree-shake large client libraries for smaller bundle size
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
+
+  // Caching headers for high-performance repeat loads
+  async headers() {
+    return [
+      {
+        source: "/:all*(svg|jpg|png|webp|avif|mp4|webm|riv)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
 
   webpack: (config) => {
     config.resolve.alias = {

@@ -18,6 +18,11 @@ const pillars = [
   },
   {
     num: "03",
+    title: "Web & Mobile Apps",
+    desc: "Scalable, high-performance iOS, Android, and Web applications tailored for your business.",
+  },
+  {
+    num: "04",
     title: "Premium Branding",
     desc: "Polished, distinctive design that makes your brand look world-class and memorable.",
   },
@@ -81,8 +86,8 @@ export default function AboutSection() {
           </h2>
         </motion.div>
 
-        {/* Three pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0">
+        {/* Four pillars */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
           {pillars.map((pillar, i) => (
             <motion.div
               key={pillar.num}
@@ -93,7 +98,7 @@ export default function AboutSection() {
               className="relative py-10 sm:py-14 group"
               style={{
                 borderLeft: i === 0 ? "none" : undefined,
-                paddingRight: "2rem",
+                paddingRight: "1.5rem",
               }}
             >
               {/* Left border only visible on sm+ for non-first items */}
@@ -104,7 +109,7 @@ export default function AboutSection() {
                 />
               )}
               {/* Add left padding on sm+ for non-first items */}
-              <div className={i === 0 ? "" : "sm:pl-8"}>
+              <div className={i === 0 ? "" : "sm:pl-6 lg:pl-8"}>
                 <span
                   className="text-xs font-mono block mb-6"
                   style={{ color: "var(--text-secondary)", opacity: 0.4 }}
@@ -170,7 +175,7 @@ export default function AboutSection() {
 
         <MailCTA
           className="mt-12"
-          helperText="Want fast delivery, better conversions, and premium branding? Mail us to get started."
+          helperText="Want fast delivery, better conversions, custom apps, and premium branding? Mail us to get started."
         />
       </div>
     </section>

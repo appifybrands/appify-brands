@@ -6,15 +6,15 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon, CheckCircle2, ChevronDown } from "lucide-react";
 import { MAIL_HREF } from "./MailCTA";
+import ConvertButton from "@/components/ui/convert-button";
 
 type SubItem = { label: string; icon: React.ElementType; href: string };
 type NavLink = { label: string; href: string; subItems?: SubItem[] };
 
 const navLinks: NavLink[] = [
   { label: "Pricing", href: "/pricing" },
-  { label: "Works", href: "/#works" },
+  { label: "Showcase", href: "/#demos" },
   { label: "Services", href: "/#services" },
-  { label: "Testimonials", href: "/#testimonials" },
   { label: "About", href: "/#about" },
 ];
 
@@ -57,6 +57,7 @@ export default function Navbar() {
           "services-landing": 0,
           "services-ecommerce": 1,
           "services-admin": 2,
+          "services-apps": 3,
         };
         if (hash in serviceTabMap) {
           const target = document.querySelector("#services");
@@ -243,26 +244,12 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Mail CTA — desktop only */}
-            <a
-              href={MAIL_HREF}
-              aria-label="Mail Appify Brands"
-              className="hidden md:inline-flex relative items-center justify-center px-4 py-2 transition-all duration-300 rounded-full hover:scale-105"
-              style={{
-                background: "#ffffff",
-                border: "1px solid rgba(0,0,0,0.08)",
-                boxShadow:
-                  "0 10px 20px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.8)",
-              }}
-            >
-              <Image
-                src="/gmail_logo_png.png"
-                alt="Gmail"
-                width={180}
-                height={50}
-                className="h-6 w-auto"
-              />
-            </a>
+            {/* Convert CTA — desktop */}
+            <div className="hidden md:inline-flex">
+              <ConvertButton size="sm" href="/get-started">
+                Convert Now
+              </ConvertButton>
+            </div>
 
             {/* Hamburger — mobile */}
             <button
@@ -345,24 +332,14 @@ export default function Navbar() {
             </div>
           ))}
         </nav>
-        <a
-          href={MAIL_HREF}
-          onClick={() => setMenuOpen(false)}
-          aria-label="Mail Appify Brands"
-          className="mt-10 inline-flex w-fit items-center justify-center rounded-full px-5 py-3 shadow-lg"
-          style={{
-            background: "#ffffff",
-            border: "1px solid rgba(0,0,0,0.08)",
-          }}
-        >
-          <Image
-            src="/gmail_logo_png.png"
-            alt="Gmail"
-            width={180}
-            height={50}
-            className="h-9 w-auto"
-          />
-        </a>
+        <div className="mt-10">
+          <ConvertButton
+            href="/get-started"
+            onClick={() => setMenuOpen(false)}
+          >
+            Convert Now
+          </ConvertButton>
+        </div>
         <p
           className="mt-16 text-xs tracking-widest uppercase"
           style={{ color: "var(--text-secondary)", opacity: 0.5 }}

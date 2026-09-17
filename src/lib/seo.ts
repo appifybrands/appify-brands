@@ -1,40 +1,51 @@
 import type { Metadata } from "next";
 
 /**
- * Central SEO configuration for AppifyBrands.
- * Keep all site-wide constants here so metadata, sitemap, robots and
- * structured data stay consistent across the app.
+ * Central SEO configuration for AppifyBrands main website.
+ * Environment-aware domain setup with safe fallback to https://appifybrands.com.
  */
+const RAW_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://appifybrands.com";
+// Strip trailing slash for consistency
+export const SITE_URL = RAW_SITE_URL.replace(/\/+$/, "");
+
 export const SITE = {
-  name: "AppifyBrands",
-  url: "https://www.appifybrands.com",
-  // Default social/share image (1200x630 recommended). Falls back to the hero banner.
+  name: "Appify Brands",
+  url: SITE_URL,
   ogImage: "/hero banners.jpg",
   logo: "/new_logos/appifybrands_dark_logo_circular.png",
   email: "appifybrands@gmail.com",
   twitter: "@appifybrands",
   description:
-    "AppifyBrands engineers premium, high-converting websites and web apps — landing pages, e-commerce, dashboards and bespoke digital experiences built with Next.js, React & TypeScript.",
+    "Appify Brands turns ambitious business ideas into high-converting websites, web apps, custom dashboards, e-commerce stores, and digital experiences.",
   keywords: [
-    "web design agency",
+    "digital product studio",
     "high-converting websites",
-    "landing page design",
-    "Next.js development",
-    "React development",
-    "UI/UX design",
-    "e-commerce websites",
+    "landing page design agency",
+    "Next.js web development",
+    "React digital studio",
     "custom web applications",
-    "premium web design",
-    "conversion rate optimization",
+    "e-commerce websites",
+    "dashboard design",
+    "UI UX design studio",
   ],
 } as const;
 
+/** Subdomain links for cross-domain internal linking */
+export const SUBDOMAINS = {
+  homestays: "https://homestays.appifybrands.com",
+  cafes: "https://cafes.appifybrands.com",
+  realestate: "https://realestate.appifybrands.com",
+  restaurants: "https://restaurant.appifybrands.com",
+} as const;
+
 /** Absolute URL helper for canonical links and structured data. */
-export const absoluteUrl = (path = "/") => new URL(path, SITE.url).toString();
+export const absoluteUrl = (path = "/") => {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return `${SITE.url}${cleanPath}`;
+};
 
 /**
  * Build a page-level Metadata object with sensible SEO + Open Graph defaults.
- * Pass a route-relative `path` (e.g. "/services") to generate the canonical URL.
  */
 export function buildMetadata({
   title,
@@ -50,24 +61,28 @@ export function buildMetadata({
   ogImage?: string;
 }): Metadata {
   const canonical = absoluteUrl(path);
+  const formattedTitle = title ? `${title} | Appify Brands` : "Appify Brands | Websites, Apps & Digital Experiences";
+  const imageObj = ogImage.startsWith("http") ? ogImage : absoluteUrl(ogImage);
+
   return {
-    title,
+    title: formattedTitle,
     description,
     alternates: { canonical },
     openGraph: {
-      title: title ?? SITE.name,
+      title: formattedTitle,
       description,
       url: canonical,
       siteName: SITE.name,
       type: "website",
       locale: "en_US",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: SITE.name }],
+      images: [{ url: imageObj, width: 1200, height: 630, alt: formattedTitle }],
     },
     twitter: {
       card: "summary_large_image",
-      title: title ?? SITE.name,
+      title: formattedTitle,
       description,
-      images: [ogImage],
+      images: [imageObj],
+      creator: SITE.twitter,
     },
     robots: noIndex
       ? { index: false, follow: false }
@@ -84,3 +99,4 @@ export function buildMetadata({
         },
   };
 }
+

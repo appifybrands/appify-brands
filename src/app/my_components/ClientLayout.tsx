@@ -82,15 +82,9 @@ export default function ClientLayout({
     */
   }, []);
 
-  useEffect(() => {
-    setLoading(true);
-    const timeout = setTimeout(() => setLoading(false), 700); // adjust timing
-    return () => clearTimeout(timeout);
-  }, [pathname]);
-
+  // Removed artificial 700ms blocking loader for instant page paint
   return (
     <div className="select-none pointer-events-auto">
-      {loading && <LogoLoader />}
       {children}
     </div>
   );

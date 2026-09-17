@@ -1,11 +1,59 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import MailCTA from "./MailCTA";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+function LazyCarouselVideo({ videoSrc, priority = false }: { videoSrc: string; priority?: boolean }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(priority);
+
+  useEffect(() => {
+    if (priority) return;
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [priority]);
+
+  return (
+    <div 
+      ref={containerRef}
+      className="relative min-w-[85vw] sm:min-w-[70vw] md:min-w-[60vw] lg:min-w-[900px] snap-center shrink-0 overflow-hidden rounded-xl sm:rounded-2xl border transition-transform duration-500 hover:scale-[1.01]"
+      style={{ borderColor: "var(--border-subtle)", aspectRatio: "16/9", background: "var(--bg-secondary)" }}
+    >
+      {isInView ? (
+        <video 
+          src={videoSrc}
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-contain"
+        />
+      ) : (
+        <div className="absolute inset-0 h-full w-full bg-[var(--bg-secondary)] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white/60 animate-spin" />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function SelectedWorkSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -106,20 +154,7 @@ export default function SelectedWorkSection() {
           className="w-full flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-8 px-6 sm:px-10 pb-8 hide-scrollbar scroll-smooth"
         >
           {videos.map((videoSrc, idx) => (
-            <div 
-              key={idx} 
-              className="relative min-w-[85vw] sm:min-w-[70vw] md:min-w-[60vw] lg:min-w-[900px] snap-center shrink-0 overflow-hidden rounded-xl sm:rounded-2xl border transition-transform duration-500 hover:scale-[1.01]"
-              style={{ borderColor: "var(--border-subtle)", aspectRatio: "16/9", background: "var(--bg-secondary)" }}
-            >
-              <video 
-                src={videoSrc}
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                className="absolute inset-0 h-full w-full object-contain"
-              />
-            </div>
+            <LazyCarouselVideo key={idx} videoSrc={videoSrc} priority={idx === 0} />
           ))}
         </motion.div>
 

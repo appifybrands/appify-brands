@@ -8,14 +8,22 @@ import Lenis from "lenis";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
+import Link from "next/link";
 import Navbar from "./my_components/Navbar";
 import MailCTA, { MAIL_HREF } from "./my_components/MailCTA";
 import WrapButton from "@/components/ui/wrap-button";
+import ConvertButton from "@/components/ui/convert-button";
+import BrandTransformationFunnel from "./my_components/BrandTransformationFunnel";
 
 // ── Lazy-load below-the-fold sections so the hero paints fast ──
-const SelectedWorkSection = dynamic(
-  () => import("@/app/my_components/SelectedWorkSection"),
+// Kept for reference (do not delete):
+// const SelectedWorkSection = dynamic(
+//   () => import("@/app/my_components/SelectedWorkSection"),
+// );
+const IndustrializedShowcaseSection = dynamic(
+  () => import("@/app/my_components/IndustrializedShowcaseSection"),
 );
+// Kept for reference (do not delete):
 const PremiumShowcaseSection = dynamic(
   () => import("@/app/my_components/PremiumShowcaseSection"),
 );
@@ -165,22 +173,23 @@ export default function Home() {
             >
               Explore
             </WrapButton>
-            <a
-              href={MAIL_HREF}
-              aria-label="Mail Appify Brands"
-              className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-              style={{ border: "1px solid rgba(0,0,0,0.08)" }}
-            >
-              <Image
-                src="/gmail_logo_png.png"
-                alt="Gmail"
-                width={200}
-                height={55}
-                className="h-9 w-auto sm:h-10"
-              />
-            </a>
+            <ConvertButton href="/get-started">
+              Convert Now
+            </ConvertButton>
           </motion.div>
 
+          {/* ── Brand Logo Horizontal Transformation Funnel ── */}
+          <motion.div
+            style={{
+              y: heroY,
+              opacity: heroOpacity,
+            }}
+            className="w-full"
+          >
+            <BrandTransformationFunnel />
+          </motion.div>
+
+          {/* Kept for reference: Free hero banner hidden as requested
           <motion.div
             style={{
               y: heroY,
@@ -189,9 +198,13 @@ export default function Home() {
             }}
             className="group relative md:max-h-[40vh] overflow-hidden rounded-3xl border bg-black/70 backdrop-blur-xl"
           >
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-              style={{ backgroundImage: "url('/hero banners.jpg')" }}
+            <Image
+              src="/hero banners.jpg"
+              alt="Hero banner"
+              fill
+              priority
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              className="object-cover transition-transform duration-1000 group-hover:scale-105"
             />
             <div
               className="absolute inset-0 opacity-70 transition-transform duration-1000 group-hover:scale-105"
@@ -229,13 +242,18 @@ export default function Home() {
               <MailCTA className="md:shrink-0" />
             </div>
           </motion.div>
+          */}
         </div>
       </section>
 
       {/* ── All sections ── */}
       <div id="explore" className="relative z-10">
-        <SelectedWorkSection />
-        <PremiumShowcaseSection />
+        <div id="works" />
+        {/* Proven Client Wins / Selected Work hidden (do not delete) */}
+        {/* <SelectedWorkSection /> */}
+        {/* Premium showcase hidden (not deleted), industrialized showcase is the sole showcase */}
+        {/* <PremiumShowcaseSection /> */}
+        <IndustrializedShowcaseSection />
         <FeatureCardsSection />
         <TestimonialsSection />
         <AboutSection />

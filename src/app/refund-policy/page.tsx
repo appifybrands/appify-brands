@@ -1,10 +1,11 @@
-import { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import LegalLayout from "@/app/my_components/LegalLayout";
 
-export const metadata: Metadata = {
-  title: "Refund Policy | AppifyBrands",
-  description: "Review the refund and cancellation policy for digital services at AppifyBrands.",
-};
+export const metadata = buildMetadata({
+  title: "Refund Policy",
+  description: "Review the refund and cancellation policy for digital services at Appify Brands.",
+  path: "/refund-policy",
+});
 
 export default function RefundPolicy() {
   const lastUpdated = "May 9, 2026";

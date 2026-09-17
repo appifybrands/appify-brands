@@ -30,7 +30,7 @@ export default function FeatureCardsSection() {
       setProgress((prev) => {
         if (prev >= 100) {
           if (mountedRef.current) {
-            setActiveCard((current) => (current + 1) % 3);
+            setActiveCard((current) => (current + 1) % 4);
           }
           return 0;
         }
@@ -150,6 +150,23 @@ export default function FeatureCardsSection() {
                       sizes="(max-width: 1024px) 100vw, 1024px"
                     />
                   </div>
+
+                  <div
+                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out ${
+                      activeCard === 3
+                        ? "scale-100 opacity-100 z-10"
+                        : "scale-110 opacity-0 z-0"
+                    }`}
+                  >
+                    <Image
+                      src="/services/4_mobile_web_apps.jpg"
+                      alt="Custom Mobile & Web Apps"
+                      fill
+                      className="object-contain rounded-2xl border shadow-2xl"
+                      style={{ borderColor: "var(--border-medium)" }}
+                      sizes="(max-width: 1024px) 100vw, 1024px"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -194,6 +211,13 @@ export default function FeatureCardsSection() {
               progress={activeCard === 2 ? progress : 0}
               onClick={() => handleCardClick(2)}
             />
+            <FeatureCard
+              title="Custom Mobile & Web Apps"
+              description="Feature-rich iOS, Android, and cross-platform applications built with seamless user experiences, real-time sync, and scalable backends."
+              isActive={activeCard === 3}
+              progress={activeCard === 3 ? progress : 0}
+              onClick={() => handleCardClick(3)}
+            />
           </div>
 
           <div className="relative w-4 self-stretch overflow-hidden sm:w-6 md:w-8 lg:w-12">
@@ -211,7 +235,7 @@ export default function FeatureCardsSection() {
 
         <MailCTA
           className="mt-12"
-          helperText="Need a landing page, storefront, or dashboard that converts? Mail us to get started."
+          helperText="Need a landing page, storefront, dashboard, or custom app? Mail us to get started."
         />
       </div>
     </section>

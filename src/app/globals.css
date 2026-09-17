@@ -303,4 +303,12 @@ img {
     transform:          translateY(calc(-100% - var(--gap)));
     }
   }
-}
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 40;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}

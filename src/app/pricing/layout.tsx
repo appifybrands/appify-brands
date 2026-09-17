@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Pricing — Premium Websites & Web Apps",
+export const metadata = buildMetadata({
+  title: "Transparent Web Design & Development Pricing",
   description:
-    "Transparent pricing for AppifyBrands. Strategic landing pages, corporate digital ecosystems, and custom product engineering built to convert and scale.",
+    "Predictable, transparent investment packages for strategic landing pages, corporate digital ecosystems, and custom software product engineering.",
   path: "/pricing",
 });
 

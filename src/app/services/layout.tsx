@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Services — Web Design, Development & UI/UX",
+export const metadata = buildMetadata({
+  title: "High-Converting Web Design & Studio Services",
   description:
-    "From high-converting landing pages and e-commerce stores to LMS platforms and custom web apps — explore AppifyBrands' premium web design and development services.",
+    "Explore Appify Brands' full-service digital design and development offerings: high-converting landing pages, custom websites, e-commerce, LMS platforms, and UI overhauls.",
   path: "/services",
 });
 

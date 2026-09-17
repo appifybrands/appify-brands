@@ -1,10 +1,11 @@
-import { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import LegalLayout from "@/app/my_components/LegalLayout";
 
-export const metadata: Metadata = {
-  title: "Terms of Service | AppifyBrands",
-  description: "Read the Terms of Service for AppifyBrands, a premier web design and landing page agency.",
-};
+export const metadata = buildMetadata({
+  title: "Terms of Service",
+  description: "Read the Terms of Service for Appify Brands studio, detailing project scope, agreements, and policies.",
+  path: "/terms",
+});
 
 export default function TermsOfService() {
   const lastUpdated = "May 9, 2026";
