@@ -44,7 +44,7 @@ const services = [
     title: "App Development",
     subtitle: "Web & Mobile Apps",
     description: "Full-stack application development. We architect scalable, production-ready apps — dashboards, SaaS platforms, and cross-platform mobile apps.",
-    image: "/hover_images/5.jpg",
+    image: "/services/4_android_ios_apps.jpg",
     tags: ["React Native", "Node.js", "APIs"],
   },
   {

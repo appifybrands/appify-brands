@@ -58,7 +58,7 @@ const NicheShowreelItem = ({
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }, // Start loading slightly before it scrolls into view
+      { rootMargin: "400px" }, // Start loading well before it scrolls into view
     );
 
     observer.observe(el);
@@ -97,7 +97,9 @@ const NicheShowreelItem = ({
             muted
             playsInline
             loop
-            preload="metadata"
+            preload="auto"
+            disablePictureInPicture
+            disableRemotePlayback
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
@@ -126,20 +128,26 @@ export const niches = [
   {
     id: "real-estate",
     title: "Real Estate",
-    video: "/showreel/real%20estate%20showreel.mp4",
+    video: "/showreel/real_estate_showreel.mp4",
     href: "https://realestate.appifybrands.com",
   },
   {
     id: "homestays",
     title: "Homestays & Resorts",
-    video: "/showreel/homestay%20showreel.mp4",
+    video: "/showreel/homestay_showreel.mp4",
     href: "https://homestays.appifybrands.com",
   },
   {
     id: "cafes",
     title: "Cafes & Dining",
-    video: "/showreel/cafe%20showreel.mp4",
+    video: "/showreel/cafe_showreel.mp4",
     href: "https://cafes.appifybrands.com",
+  },
+  {
+    id: "travel-agency",
+    title: "Travel Agency",
+    video: "/showreel/travel_agency_showreel.mp4",
+    href: "https://travel.appifybrands.com",
   },
 ];
 
@@ -166,8 +174,8 @@ export default function IndustrializedShowcaseSection() {
           Landing Page Showcase
         </h2>
 
-        {/* 3 in a row side by side */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-4xl mx-auto justify-items-center items-start">
+        {/* 4 in a row side by side */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto justify-items-center items-start">
           {niches.map((niche) => (
             <NicheShowreelItem
               key={niche.id}

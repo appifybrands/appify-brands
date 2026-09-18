@@ -257,8 +257,10 @@ export default function Home() {
         <FeatureCardsSection />
         <TestimonialsSection />
         <AboutSection />
-        <FAQSection />
-        <CTASection />
+        {/* FAQSection hidden */}
+        {/* <FAQSection /> */}
+        {/* CTASection hidden */}
+        {/* <CTASection /> */}
 
         {/* ── Simple footer CTA ── */}
         <section
@@ -275,7 +277,7 @@ export default function Home() {
             className="max-w-md text-sm sm:text-base font-light leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            Book a free 30-minute strategy call or drop us a mail — let&apos;s
+            Book a free 30-minute strategy call or reach out and let&apos;s
             build something remarkable together.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
