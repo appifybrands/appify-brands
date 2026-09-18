@@ -187,14 +187,14 @@ function GetStartedContent() {
             href={`mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(
               "Project Inquiry - Appify Brands"
             )}`}
-            className="group flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 hover:border-[#fe7500]/50 hover:shadow-lg hover:shadow-[#fe7500]/10"
+            className="group flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10"
             style={{
               background: "var(--bg-card)",
               borderColor: "var(--border-medium)",
             }}
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#fe7500]/15 border border-[#fe7500]/30 flex items-center justify-center text-[#fe7500] group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-105 transition-transform">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
@@ -209,7 +209,7 @@ function GetStartedContent() {
                 </div>
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-[#fe7500] opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+            <ExternalLink className="w-4 h-4 text-sky-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
           </a>
         </div>
 
@@ -232,12 +232,23 @@ function GetStartedContent() {
 
         {/* 2. Small Simple Form Card */}
         <div
-          className="rounded-3xl p-6 sm:p-8 border shadow-xl relative overflow-hidden"
+          className="rounded-3xl p-6 sm:p-8 border shadow-xl relative overflow-hidden backdrop-blur-xl"
           style={{
             background: "var(--bg-card)",
             borderColor: "var(--border-medium)",
+            boxShadow: "0 20px 40px -15px rgba(2, 132, 199, 0.08)",
           }}
         >
+          {/* Subtle Ambient Blue Glows */}
+          <div
+            className="absolute -top-20 -right-20 w-44 h-44 rounded-full blur-3xl pointer-events-none opacity-20"
+            style={{ background: "#38bdf8" }}
+          />
+          <div
+            className="absolute -bottom-20 -left-20 w-44 h-44 rounded-full blur-3xl pointer-events-none opacity-20"
+            style={{ background: "#2563eb" }}
+          />
+
           <AnimatePresence mode="wait">
             {submitted ? (
               <motion.div
@@ -273,8 +284,7 @@ function GetStartedContent() {
                       setContactValue("");
                       setMessage("");
                     }}
-                    className="text-xs font-semibold underline cursor-pointer"
-                    style={{ color: "var(--text-secondary)" }}
+                    className="text-xs font-semibold underline cursor-pointer text-sky-400 hover:text-sky-300"
                   >
                     Send another message
                   </button>
@@ -310,7 +320,7 @@ function GetStartedContent() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your Name"
-                    className="w-full px-3.5 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#fe7500]/30 focus:border-[#fe7500] transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-400 transition-all"
                     style={{
                       background: "var(--bg-primary)",
                       border: "1px solid var(--border-medium)",
@@ -345,7 +355,7 @@ function GetStartedContent() {
                         onClick={() => setContactType("Email")}
                         className={`text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                           contactType === "Email"
-                            ? "border-[#fe7500] bg-[#fe7500]/15 text-[#fe7500]"
+                            ? "border-sky-500 bg-sky-500/15 text-sky-400"
                             : "border-[var(--border-subtle)] opacity-60"
                         }`}
                       >
@@ -364,7 +374,7 @@ function GetStartedContent() {
                         ? "+91 98765 43210 (WhatsApp number)"
                         : "name@company.com"
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#fe7500]/30 focus:border-[#fe7500] transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-400 transition-all"
                     style={{
                       background: "var(--bg-primary)",
                       border: "1px solid var(--border-medium)",
@@ -391,7 +401,7 @@ function GetStartedContent() {
                           onClick={() => setService(s)}
                           className={`text-xs font-semibold px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
                             isSelected
-                              ? "border-[#fe7500] bg-[#fe7500]/15 text-[#fe7500]"
+                              ? "border-sky-400 bg-sky-500/15 text-sky-300 shadow-sm shadow-sky-500/20"
                               : "border-[var(--border-subtle)] bg-[var(--bg-primary)] opacity-70 hover:opacity-100"
                           }`}
                         >
@@ -418,7 +428,7 @@ function GetStartedContent() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell us briefly about what you need..."
-                    className="w-full px-3.5 py-2.5 rounded-xl text-xs font-medium resize-none focus:outline-none focus:ring-2 focus:ring-[#fe7500]/30 focus:border-[#fe7500] transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl text-xs font-medium resize-none focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-400 transition-all"
                     style={{
                       background: "var(--bg-primary)",
                       border: "1px solid var(--border-medium)",
@@ -432,7 +442,7 @@ function GetStartedContent() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3 rounded-xl font-bold text-xs bg-gradient-to-r from-[#fe7500] to-[#ff9100] text-white hover:opacity-95 active:scale-[0.99] transition-all duration-200 shadow-md shadow-[#fe7500]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="w-full py-3 rounded-xl font-bold text-xs bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 text-white hover:opacity-95 active:scale-[0.99] transition-all duration-200 shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {loading ? (
                       <>
@@ -464,7 +474,7 @@ export default function GetStartedPage() {
           className="min-h-screen flex items-center justify-center"
           style={{ background: "var(--bg-primary)" }}
         >
-          <Loader2 className="w-6 h-6 animate-spin text-[#fe7500]" />
+          <Loader2 className="w-6 h-6 animate-spin text-sky-400" />
         </div>
       }
     >
