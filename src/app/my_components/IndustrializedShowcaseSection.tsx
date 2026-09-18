@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useSpring } from "framer-motion";
 import { Play, ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 // Lazy load VideoPopOver + media-chrome only when the user opens the popover
 const VideoPopOver = dynamic(() => import("./VideoPopOver"), {
@@ -153,13 +154,19 @@ export const niches = [
 
 export default function IndustrializedShowcaseSection() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
-    <section
-      id="demos"
-      className="relative z-10 py-16 sm:py-24 overflow-hidden transition-colors duration-500"
-      style={{ borderTop: "1px solid var(--border-subtle)" }}
-    >
+    <>
+      <section
+        id="demos"
+        className="relative z-10 py-16 sm:py-24 transition-colors duration-500"
+        style={{ borderTop: "1px solid var(--border-subtle)" }}
+      >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-8">
         {/* Just one showcase title */}
         <h2
@@ -187,7 +194,11 @@ export default function IndustrializedShowcaseSection() {
           ))}
         </div>
 
-        {/* Expandable Video Popover Modal (Loaded on demand) */}
+        {/* Expandable Video Popover Modal (portalled to body to escape overflow-hidden) */}
+      </div>
+    </section>
+
+      {isMounted && createPortal(
         <AnimatePresence>
           {activeVideo && (
             <VideoPopOver
@@ -195,8 +206,9 @@ export default function IndustrializedShowcaseSection() {
               onClose={() => setActiveVideo(null)}
             />
           )}
-        </AnimatePresence>
-      </div>
-    </section>
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 }
