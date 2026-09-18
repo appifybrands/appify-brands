@@ -159,7 +159,7 @@ export default function FeatureCardsSection() {
                     }`}
                   >
                     <Image
-                      src="/services/4_mobile_web_apps.jpg"
+                      src="/services/4_android_ios_apps.jpg"
                       alt="Custom Mobile & Web Apps"
                       fill
                       className="object-contain rounded-2xl border shadow-2xl"
